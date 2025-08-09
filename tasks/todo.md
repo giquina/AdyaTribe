@@ -1,143 +1,90 @@
-# 📋 AdyaTribe - Task Tracker
+# AdyaTribe Onboarding Step 4: ProfilePictureStep Implementation
 
-*Central todo list for tracking development progress*
+## Analysis
+- ✅ Analyzed existing onboarding steps (FirstNameStep, DateOfBirthStep, EmailStep)
+- ✅ Understood established patterns and component structure  
+- ✅ Confirmed available dependencies (expo-camera: ~16.0.0, expo-image-picker: ~16.0.0)
+- ✅ Reviewed design system and styling patterns from Styles.js
+- 🎯 Goal: Implement Step 4 (ProfilePictureStep) with camera/gallery selection, image editing, and proper integration
 
----
+## Todo Items
 
-## 🔄 **Current Tasks - Final Steps Plan**
+### Phase 1: Component Structure & Basic UI
+- [ ] Create ProfilePictureStep.js component file following established patterns
+- [ ] Implement basic component structure (header, step number "4 of 7", title, subtitle)
+- [ ] Add photo selection options (Camera & Gallery buttons)
+- [ ] Implement proper styling following design system patterns
+- [ ] Add proper prop handling (onNext, onBack, profilePicture, setProfilePicture)
 
-### **STEP 6 - Claude Context Memory File**
-- [ ] Generate `claude/context.json` with file structure mapping
-- [ ] Document key functions and modules across the project
-- [ ] Include programming languages and frameworks used
-- [ ] Add component relationships and dependencies
-- [ ] Test context file loads correctly for future sessions
+### Phase 2: Camera & Gallery Functionality
+- [ ] Import and configure expo-image-picker for camera access
+- [ ] Import and configure expo-image-picker for gallery access
+- [ ] Implement permission handling for camera and media library
+- [ ] Add camera capture functionality with proper error handling
+- [ ] Add gallery selection functionality with proper error handling
+- [ ] Add image quality/compression settings for optimal performance
 
-### **STEP 7 - /project-health Slash Command**
-- [ ] Create project health monitoring script
-- [ ] Count remaining tasks in `todo.md`
-- [ ] Track number of commits made
-- [ ] Monitor files changed today
-- [ ] Create `errors/debug.log` and track unresolved bugs
-- [ ] Generate Claude summary of current repo state
-- [ ] Implement as executable slash command
+### Phase 3: Image Preview & Editing
+- [ ] Implement image preview component showing selected photo
+- [ ] Add basic image editing options (crop, rotate if needed)
+- [ ] Add photo guidelines display (recommended size, format, etc.)
+- [ ] Implement photo validation (file size, format, dimensions)
+- [ ] Add retake/reselect functionality
 
-### **STEP 8 - Vercel CLI Integration & Landing Page**
-- [ ] Install and configure Vercel CLI MCP with provided token
-- [ ] Research modern landing page designs for women's communities
-- [ ] Create beautiful home page UI/UX design
-- [ ] Implement responsive landing page with amazing design
-- [ ] Integrate community features showcase
-- [ ] Deploy to Vercel automatically
-- [ ] Connect custom domain if needed
+### Phase 4: User Experience & Validation
+- [ ] Add loading states during image processing
+- [ ] Implement proper error handling and user feedback
+- [ ] Add accessibility features (screen reader support)
+- [ ] Add photo guidelines and best practices display
+- [ ] Implement validation before allowing Continue button activation
 
-### **STEP 9 - Final GitHub Commit**
-- [ ] Verify all subagents are ready and documented
-- [ ] Confirm hooks and slash commands are implemented
-- [ ] Validate CLAUDE.md and todo.md are fully updated
-- [ ] Run final project health check
-- [ ] Execute comprehensive final commit to GitHub
-- [ ] Update project status to "Phase 1 Complete"
+### Phase 5: Integration & Testing
+- [ ] Update OnboardingFlow.js to include ProfilePictureStep in case 4
+- [ ] Add import statement for ProfilePictureStep in OnboardingFlow.js
+- [ ] Test step navigation (back to Step 3, forward to Step 5)
+- [ ] Verify userData state management for profilePicture field
+- [ ] Test on mobile devices for proper camera/gallery access
 
----
+## Technical Requirements
 
-## ✅ **Completed Tasks**
+### Component Props Structure
+```javascript
+const ProfilePictureStep = ({ 
+  onNext, 
+  onBack, 
+  profilePicture, 
+  setProfilePicture 
+}) => {
+  // Implementation
+}
+```
 
-### **Foundation & Automation (Recently Completed)**
-- ✅ **Project Bootstrap**: Created clean directory structure
-- ✅ **CLAUDE.md Operating Rules**: 9-point methodology implemented
-- ✅ **File Consistency**: Single source of truth established
-- ✅ **Documentation Automation**: `/update-docs` command implemented
-- ✅ **GitHub Auto-Commit Hook**: Smart validation system created
-- ✅ **Duplicate Cleanup**: Consolidated all documentation files
+### Key Features to Implement
+- **Photo Selection Options**: Camera capture and gallery selection buttons
+- **Image Preview**: Show selected image with editing options
+- **Validation**: File size, format, and quality checks
+- **Guidelines**: Photo tips for best results
+- **Accessibility**: Screen reader support and keyboard navigation
+- **Error Handling**: Graceful failures with helpful messages
 
-### **Claude Code Agents (6 Total):**
-- ✅ `onboarding-flow-expert` - 7-step signup workflow specialist
-- ✅ `react-native-debugger` - Mobile debugging and troubleshooting
-- ✅ `design-system-guardian` - UI consistency and accessibility
-- ✅ `feature-planner` - Complex feature breakdown for beginners
-- ✅ `vercel-deployment-specialist` - Web deployment and hosting
-- ✅ `file-consistency-manager` - Project organization and duplicate prevention
+### Design System Compliance
+- Follow exact styling patterns from existing steps
+- Use Colors, Spacing, Typography from Styles.js
+- Maintain consistent button and input styling
+- Use CommonStyles.centerContainer for layout
 
-### **Mobile App Development:**
-- ✅ **Onboarding Step 1**: First name collection with validation
-- ✅ **Onboarding Step 2**: Date of birth with 30+ age verification
-- ✅ **Onboarding Step 3**: Email validation with real-time feedback
+## Success Criteria
+- ✅ Component follows exact same structure as existing steps
+- ✅ Camera and gallery selection work properly
+- ✅ Image preview and basic editing functionality
+- ✅ Proper validation and error handling
+- ✅ Integrated into OnboardingFlow.js navigation
+- ✅ Accessibility features implemented
+- ✅ Step progress shows "4 of 7" correctly
+- ✅ Smooth navigation between steps 3, 4, and 5
 
----
-
-## 🎯 **Session Goals & Research Plan**
-
-### **Landing Page Design Research:**
-1. **Target Audience**: 30+ single & childfree women seeking community
-2. **Design Inspiration**: Modern, welcoming, professional platforms
-3. **Key Elements**: Trust signals, community showcase, clear value proposition
-4. **Color Psychology**: Warm corals, calming teals (matching brand)
-5. **Typography**: Clean, readable, approachable fonts
-6. **Imagery**: Diverse women, community activities, friendship moments
-
-### **Technical Implementation:**
-- **Framework**: Next.js for optimal performance and SEO
-- **Styling**: Tailwind CSS for rapid, consistent styling
-- **Components**: Reusable, accessible UI components
-- **Responsive**: Mobile-first design approach
-- **Performance**: Optimized images, fast loading times
-- **SEO**: Meta tags, structured data, social sharing
-
-### **Vercel Deployment Strategy:**
-- **Domain**: Custom domain setup for professional appearance
-- **Environment**: Production environment configuration
-- **Analytics**: Built-in Vercel analytics integration
-- **Performance**: Edge functions and CDN optimization
-- **Monitoring**: Error tracking and performance monitoring
-
----
-
-## 📊 **Expected Final State**
-
-### **Project Completion Metrics:**
-- **Agents**: 6 specialized Claude Code agents
-- **Automation**: Full documentation sync and commit validation
-- **Landing Page**: Beautiful, deployed marketing site
-- **Mobile App**: 3/7 onboarding steps complete
-- **Infrastructure**: Complete CI/CD pipeline to Vercel
-- **Documentation**: Comprehensive, auto-synced documentation
-
-### **Deliverables:**
-1. **`claude/context.json`** - Complete project context for future sessions
-2. **`/project-health`** - Real-time project monitoring command
-3. **Landing Page** - Professional marketing site deployed to Vercel
-4. **Final Commit** - All changes captured in GitHub with proper documentation
-
----
-
-## 📝 **Notes & Context**
-
-### **Design Philosophy:**
-- **Community-First**: Emphasize connection, friendship, shared experiences
-- **Trust & Safety**: Highlight verification, moderation, safe environment
-- **Inclusive**: Welcoming to all 30+ single & childfree women
-- **Professional**: Credible, well-designed, trustworthy platform
-
-### **Technical Standards:**
-- **Performance**: Sub-3-second load times
-- **Accessibility**: WCAG 2.1 compliance
-- **Mobile**: Responsive design, thumb-friendly navigation
-- **SEO**: Optimized for search engine discovery
-
----
-
-## 🚨 **Pre-Execution Checklist**
-
-Before starting implementation:
-- [ ] Verify Vercel token is correctly configured
-- [ ] Confirm landing page design approach and content strategy
-- [ ] Validate all automation systems are working
-- [ ] Ensure clean git state for final commit
-- [ ] Review all component designs match brand guidelines
-
----
-
-**🎯 Ready for approval to proceed with final implementation phase!**
-
-*This plan follows CLAUDE.md operating rules and will complete the project foundation with professional deployment and comprehensive automation.*
+## Notes
+- Must maintain consistency with existing FirstNameStep, DateOfBirthStep, EmailStep patterns
+- Focus on 30+ women user experience - welcoming and confidence-building
+- Use established prop patterns and state management
+- Ensure mobile-first approach with proper responsive design

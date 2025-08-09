@@ -9,23 +9,23 @@ import {
 } from 'react-native';
 import { Colors, Spacing, Typography, CommonStyles } from '../../constants/Styles';
 
-// Interest categories perfect for 30+ women
+// Interest categories perfect for 30+ women in London/UK
 const INTEREST_CATEGORIES = {
   'Fitness & Wellness': [
-    { id: 'hiking', name: 'Hiking', icon: '🥾' },
+    { id: 'london-walks', name: 'London Walks', icon: '🚶‍♀️' },
     { id: 'yoga', name: 'Yoga', icon: '🧘‍♀️' },
-    { id: 'running', name: 'Running', icon: '🏃‍♀️' },
+    { id: 'running', name: 'Park Runs', icon: '🏃‍♀️' },
     { id: 'pilates', name: 'Pilates', icon: '💪' },
-    { id: 'cycling', name: 'Cycling', icon: '🚴‍♀️' },
+    { id: 'cycling', name: 'London Cycling', icon: '🚴‍♀️' },
     { id: 'swimming', name: 'Swimming', icon: '🏊‍♀️' },
-    { id: 'rock-climbing', name: 'Rock Climbing', icon: '🧗‍♀️' },
+    { id: 'climbing', name: 'Climbing', icon: '🧗‍♀️' },
     { id: 'meditation', name: 'Meditation', icon: '🕯️' },
   ],
   'Arts & Culture': [
-    { id: 'museums', name: 'Museums', icon: '🏛️' },
-    { id: 'theater', name: 'Theater', icon: '🎭' },
-    { id: 'concerts', name: 'Concerts', icon: '🎵' },
-    { id: 'art-galleries', name: 'Art Galleries', icon: '🎨' },
+    { id: 'museums', name: 'London Museums', icon: '🏛️' },
+    { id: 'west-end', name: 'West End Shows', icon: '🎭' },
+    { id: 'concerts', name: 'Live Music', icon: '🎵' },
+    { id: 'galleries', name: 'Art Galleries', icon: '🎨' },
     { id: 'photography', name: 'Photography', icon: '📸' },
     { id: 'painting', name: 'Painting', icon: '🎨' },
     { id: 'crafting', name: 'Crafting', icon: '✂️' },
@@ -35,11 +35,11 @@ const INTEREST_CATEGORIES = {
     { id: 'wine-tasting', name: 'Wine Tasting', icon: '🍷' },
     { id: 'cooking', name: 'Cooking', icon: '👩‍🍳' },
     { id: 'baking', name: 'Baking', icon: '🧁' },
-    { id: 'restaurants', name: 'Dining Out', icon: '🍽️' },
-    { id: 'coffee-shops', name: 'Coffee Shops', icon: '☕' },
-    { id: 'farmers-markets', name: 'Farmers Markets', icon: '🥕' },
-    { id: 'food-festivals', name: 'Food Festivals', icon: '🎪' },
-    { id: 'cocktails', name: 'Cocktails', icon: '🍸' },
+    { id: 'london-dining', name: 'London Dining', icon: '🍽️' },
+    { id: 'coffee-culture', name: 'Coffee Culture', icon: '☕' },
+    { id: 'borough-market', name: 'Food Markets', icon: '🥕' },
+    { id: 'pub-culture', name: 'Pub Culture', icon: '🍺' },
+    { id: 'cocktails', name: 'Cocktail Bars', icon: '🍸' },
   ],
   'Learning & Growth': [
     { id: 'book-clubs', name: 'Book Clubs', icon: '📚' },
@@ -52,14 +52,14 @@ const INTEREST_CATEGORIES = {
     { id: 'mentoring', name: 'Mentoring', icon: '👥' },
   ],
   'Travel & Adventure': [
-    { id: 'travel', name: 'Travel', icon: '✈️' },
-    { id: 'weekend-trips', name: 'Weekend Trips', icon: '🎒' },
-    { id: 'road-trips', name: 'Road Trips', icon: '🚗' },
-    { id: 'camping', name: 'Camping', icon: '⛺' },
-    { id: 'national-parks', name: 'National Parks', icon: '🏔️' },
-    { id: 'beach', name: 'Beach Activities', icon: '🏖️' },
-    { id: 'city-exploration', name: 'City Exploration', icon: '🏙️' },
-    { id: 'cultural-tours', name: 'Cultural Tours', icon: '🗺️' },
+    { id: 'uk-travel', name: 'UK Travel', icon: '✈️' },
+    { id: 'weekend-getaways', name: 'Weekend Getaways', icon: '🎒' },
+    { id: 'countryside', name: 'Countryside Trips', icon: '🌿' },
+    { id: 'coastal-walks', name: 'Coastal Walks', icon: '🌊' },
+    { id: 'historic-sites', name: 'Historic Sites', icon: '🏰' },
+    { id: 'seaside-trips', name: 'Seaside Trips', icon: '🏖️' },
+    { id: 'city-breaks', name: 'UK City Breaks', icon: '🏙️' },
+    { id: 'heritage-tours', name: 'Heritage Tours', icon: '🗺️' },
   ],
   'Social & Entertainment': [
     { id: 'game-nights', name: 'Game Nights', icon: '🎲' },

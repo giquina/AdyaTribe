@@ -4,10 +4,10 @@ import { motion } from 'framer-motion'
 import { ArrowRightIcon, CheckIcon, SparklesIcon } from '@heroicons/react/24/outline'
 
 const benefits = [
-  "Join 1,000+ verified women 30+",
-  "Access to 40+ interest-based groups", 
-  "Attend exclusive events & meetups",
-  "Connect with local & global friends",
+  "Join 1,000+ verified UK women 30+",
+  "Access to 40+ London & UK groups", 
+  "Attend exclusive London events & meetups",
+  "Connect across London & the UK",
   "Safe, moderated environment",
   "Free to start, premium features available"
 ]
@@ -110,7 +110,7 @@ export default function CTA() {
               23 women joined in the last 24 hours
             </p>
             <p className="text-white/80">
-              Join now and get matched with compatible friends in your area within 48 hours
+              Join now and get matched with compatible friends in London within 48 hours
             </p>
           </motion.div>
 

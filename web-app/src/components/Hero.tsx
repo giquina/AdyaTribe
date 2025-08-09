@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 
 export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [currentUser, setCurrentUser] = useState({ name: 'Amazing Woman', location: 'Your City' })
+  const [currentUser, setCurrentUser] = useState({ name: 'Amazing Woman', location: 'London' })
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -118,7 +118,7 @@ export default function Hero() {
                 </span>
               </h1>
               <p className="text-xl sm:text-2xl text-gray-700 leading-relaxed max-w-2xl font-medium">
-                Join the <span className="font-bold text-pink-600">premier AI-powered community</span> for 30+ single & childfree women. Find your tribe, make meaningful friendships, and discover shared adventures through <span className="font-bold text-purple-600">intelligent matching</span>.
+                Join the <span className="font-bold text-pink-600">premier AI-powered community</span> for 30+ single & childfree women in the UK. Find your tribe, make meaningful friendships, and discover shared adventures across <span className="font-bold text-purple-600">London and beyond</span>.
               </p>
             </motion.div>
 
@@ -244,7 +244,7 @@ export default function Hero() {
                       <div className="w-8 h-8 bg-primary-200 rounded-full"></div>
                       <div className="flex-1">
                         <p className="text-sm text-gray-700">
-                          <span className="font-semibold">Emma</span> joined the Book Club group
+                          <span className="font-semibold">Emma</span> joined the London Book Club
                         </p>
                         <p className="text-xs text-gray-500">2 minutes ago</p>
                       </div>
@@ -253,7 +253,7 @@ export default function Hero() {
                       <div className="w-8 h-8 bg-secondary-200 rounded-full"></div>
                       <div className="flex-1">
                         <p className="text-sm text-gray-700">
-                          <span className="font-semibold">Maya</span> is organizing a hiking trip
+                          <span className="font-semibold">Maya</span> is organizing Hampstead Heath walk
                         </p>
                         <p className="text-xs text-gray-500">5 minutes ago</p>
                       </div>
@@ -262,7 +262,7 @@ export default function Hero() {
                       <div className="w-8 h-8 bg-primary-300 rounded-full"></div>
                       <div className="flex-1">
                         <p className="text-sm text-gray-700">
-                          <span className="font-semibold">Sarah</span> shared a recipe in Foodies
+                          <span className="font-semibold">Sarah</span> shared Borough Market finds
                         </p>
                         <p className="text-xs text-gray-500">12 minutes ago</p>
                       </div>

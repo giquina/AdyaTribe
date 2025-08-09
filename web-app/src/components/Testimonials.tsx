@@ -8,56 +8,56 @@ const testimonials = [
   {
     name: "Sarah Chen",
     age: "34",
-    location: "San Francisco, CA",
+    location: "Clapham, London",
     image: "bg-gradient-to-br from-pink-300 to-rose-400",
-    quote: "I moved to a new city at 32 and felt so isolated. AdyaTribe helped me find my book club girls and now we're planning a trip to Italy together! It's like finding your chosen family.",
+    quote: "I moved to London at 32 for work and felt so isolated. AdyaTribe helped me find my book club girls and now we're planning a trip to Scotland together! It's like finding your chosen family.",
     rating: 5,
-    relationship: "Found her book club tribe"
+    relationship: "Found her London book club tribe"
   },
   {
     name: "Maya Patel",
     age: "38", 
-    location: "Austin, TX",
+    location: "Shoreditch, London",
     image: "bg-gradient-to-br from-purple-300 to-indigo-400",
-    quote: "The hiking group I joined through AdyaTribe has become my weekend sanctuary. These women push me to be adventurous while providing the emotional support I never knew I needed.",
+    quote: "The walking group I joined through AdyaTribe has become my weekend sanctuary. From Hampstead Heath to Richmond Park, these women push me to explore London while providing incredible support.",
     rating: 5,
     relationship: "Adventure buddy for life"
   },
   {
-    name: "Jessica Rodriguez",
+    name: "Jessica Williams",
     age: "31",
-    location: "Miami, FL", 
+    location: "Notting Hill, London", 
     image: "bg-gradient-to-br from-emerald-300 to-teal-400",
-    quote: "As a childfree woman, I often felt judged. Here, I found women who celebrate my choices and share similar life goals. We support each other's career ambitions and travel dreams.",
+    quote: "As a childfree woman in London, I often felt judged. Here, I found women who celebrate my choices and share similar life goals. We support each other's careers and UK travel dreams.",
     rating: 5,
     relationship: "Career and travel support system"
   },
   {
     name: "Emma Johnson",
     age: "41",
-    location: "Seattle, WA",
+    location: "Greenwich, London",
     image: "bg-gradient-to-br from-amber-300 to-orange-400",
-    quote: "After my divorce, I thought making new friends would be impossible. The women I met through AdyaTribe helped me rediscover myself and showed me that your 40s can be your most empowering decade.",
+    quote: "After my divorce, I thought making new friends in London would be impossible. The women I met through AdyaTribe helped me rediscover myself and showed me that your 40s can be empowering.",
     rating: 5,
     relationship: "Post-divorce support network"
   },
   {
     name: "Priya Sharma",
     age: "35",
-    location: "Chicago, IL",
+    location: "Canary Wharf, London",
     image: "bg-gradient-to-br from-violet-300 to-purple-400", 
-    quote: "The cooking group introduced me to women from different cultures who've enriched my life immeasurably. We share recipes, stories, and now we're each other's chosen family.",
+    quote: "The cooking group introduced me to British and international women who've enriched my London experience immeasurably. We explore Borough Market together and share our cultural recipes.",
     rating: 5,
     relationship: "Cultural exchange and friendship"
   },
   {
     name: "Lisa Thompson",
     age: "39",
-    location: "Denver, CO",
+    location: "Richmond, London",
     image: "bg-gradient-to-br from-cyan-300 to-blue-400",
-    quote: "I was skeptical about online friendships, but these connections are the most genuine I've experienced. The verification process ensures everyone is real and serious about friendship.",
+    quote: "I was skeptical about online friendships, but these London connections are the most genuine I've experienced. The verification process ensures everyone is real and serious about friendship.",
     rating: 5,
-    relationship: "Genuine online-to-offline friendships"
+    relationship: "Genuine London friendships"
   }
 ]
 

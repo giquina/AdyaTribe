@@ -16,29 +16,30 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: 'AdyaTribe - Where Amazing Women Connect',
-  description: 'Join the premier community for 30+ single & childfree women. Find your tribe, make meaningful friendships, and discover shared adventures.',
+  title: 'AdyaTribe - Where Amazing Women Connect in London & UK',
+  description: 'Join the premier UK community for 30+ single & childfree women. Find your tribe in London, make meaningful friendships, and discover shared adventures across the UK.',
   keywords: [
-    'women community',
-    '30+ women',
-    'childfree women', 
-    'single women',
-    'friendship',
-    'community',
-    'social network',
-    'female friendships',
-    'women over 30',
-    'tribe'
+    'women community UK',
+    'London women',
+    '30+ women London',
+    'childfree women UK', 
+    'single women London',
+    'friendship London',
+    'UK women community',
+    'London social network',
+    'female friendships UK',
+    'women over 30 London',
+    'British women tribe'
   ],
   authors: [{ name: 'AdyaTribe' }],
   creator: 'AdyaTribe',
   publisher: 'AdyaTribe',
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'en_GB',
     url: 'https://adyatribe.com',
-    title: 'AdyaTribe - Where Amazing Women Connect',
-    description: 'Join the premier community for 30+ single & childfree women. Find your tribe, make meaningful friendships, and discover shared adventures.',
+    title: 'AdyaTribe - Where Amazing Women Connect in London & UK',
+    description: 'Join the premier UK community for 30+ single & childfree women. Find your tribe in London, make meaningful friendships, and discover shared adventures across the UK.',
     siteName: 'AdyaTribe',
     images: [
       {
@@ -51,8 +52,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AdyaTribe - Where Amazing Women Connect',
-    description: 'Join the premier community for 30+ single & childfree women.',
+    title: 'AdyaTribe - Where Amazing Women Connect in London & UK',
+    description: 'Join the premier UK community for 30+ single & childfree women in London.',
     images: ['/og-image.jpg'],
   },
   viewport: {

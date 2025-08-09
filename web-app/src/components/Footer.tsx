@@ -45,13 +45,13 @@ export default function Footer() {
             </div>
             
             <p className="text-gray-300 leading-relaxed">
-              Where amazing women connect, grow, and build lasting friendships. Join our community of 30+ single & childfree women creating meaningful bonds worldwide.
+              Where amazing women connect, grow, and build lasting friendships. Join our community of 30+ single & childfree women creating meaningful bonds across London and the UK.
             </p>
             
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-gray-300">
                 <MapPinIcon className="h-5 w-5 text-primary-400" />
-                <span>Global Community</span>
+                <span>London & UK Community</span>
               </div>
               <div className="flex items-center gap-3 text-gray-300">
                 <EnvelopeIcon className="h-5 w-5 text-primary-400" />

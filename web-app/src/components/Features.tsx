@@ -23,14 +23,14 @@ const features = [
   {
     icon: UserGroupIcon,
     title: "Interest-Based Groups",
-    description: "Join 30+ specialized groups from hiking and books to cooking and travel adventures.",
+    description: "Join 30+ specialized groups from London walks and book clubs to cooking and UK travel adventures.",
     color: "text-primary-500",
     bgColor: "bg-primary-50"
   },
   {
     icon: CalendarIcon,
     title: "Events & Meetups",
-    description: "Discover local events, organize gatherings, and RSVP to exciting activities in your area.",
+    description: "Discover London events, organize meetups, and RSVP to exciting activities across the UK.",
     color: "text-secondary-500",
     bgColor: "bg-secondary-50"
   },
@@ -51,7 +51,7 @@ const features = [
   {
     icon: MapPinIcon,
     title: "Local & Global",
-    description: "Find nearby friends for coffee dates or connect with women worldwide who share your passions.",
+    description: "Find nearby friends for London coffee dates or connect with women across the UK who share your passions.",
     color: "text-blue-500",
     bgColor: "bg-blue-50"
   }

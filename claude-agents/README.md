@@ -24,10 +24,10 @@
 **Use for:** Technical implementation, performance optimization, debugging
 **Prompt:** "I'm having trouble with [technical issue] in React Native..."
 
-### **05 - 🔥 Firebase Architect**
-**Expertise:** Backend services, database design, security rules
-**Use for:** Data modeling, authentication, real-time features, cloud functions
-**Prompt:** "I need to implement [backend feature] with Firebase..."
+### **05 - 🚀 Vercel Deployment Specialist**
+**Expertise:** Web deployment, serverless functions, performance optimization
+**Use for:** Deploying admin dashboard, landing pages, API routes, hosting setup
+**Prompt:** "I need to deploy [web component] with Vercel..."
 
 ### **06 - 🛡️ Security Consultant**
 **Expertise:** User safety, privacy protection, community moderation
@@ -118,3 +118,8 @@ Constraints: [any limitations]
 **🤖 Remember: Each agent has deep expertise in their domain and full context about AdyaTribe. Use them like you would consult specialists on a real development team!**
 
 *Your AI team is here to guide you from beginner to expert - don't hesitate to ask for help! 🌟*
+
+
+---
+
+*Last Updated: 2025-08-09*

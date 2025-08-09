@@ -78,7 +78,7 @@ AdyaTribe/
 ## 🎯 Development Phases
 
 - ✅ **Phase 1:** Project setup & structure
-- 🔄 **Phase 2:** Mobile onboarding flow (Steps 1-2 complete)  
+- 🔄 **Phase 2:** Mobile onboarding flow (Steps 1-3 complete)  
 - 📋 **Phase 3:** Core community features
 - 💰 **Phase 4:** Payments & premium features
 - 🌐 **Phase 5:** Web dashboard
@@ -145,3 +145,8 @@ Building a safe, inclusive space for 30+ single & childfree women to:
 **Created with ❤️ for building amazing communities**
 
 *Join us in creating a platform that brings women together and builds lasting connections!*
+
+
+---
+
+*Last Updated: 2025-08-09*

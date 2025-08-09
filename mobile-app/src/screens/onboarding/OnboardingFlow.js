@@ -7,7 +7,9 @@ import FirstNameStep from './FirstNameStep';
 import DateOfBirthStep from './DateOfBirthStep';
 import EmailStep from './EmailStep';
 import ProfilePictureStep from './ProfilePictureStep';
-// TODO: Add other steps (SelfieVerification, InterestTags, Welcome)
+import SelfieVerificationStep from './SelfieVerificationStep';
+import InterestTagsStep from './InterestTagsStep';
+import WelcomeStep from './WelcomeStep';
 
 import { CommonStyles } from '../../constants/Styles';
 
@@ -92,8 +94,34 @@ const OnboardingFlow = ({ onComplete }) => {
             setProfilePicture={(value) => updateUserData('profilePicture', value)}
           />
         );
-      
-      // TODO: Add cases for steps 5-7
+
+      case 5:
+        return (
+          <SelfieVerificationStep
+            onNext={handleNext}
+            onBack={handleBack}
+            selfieVerification={userData.selfieVerification}
+            setSelfieVerification={(value) => updateUserData('selfieVerification', value)}
+          />
+        );
+
+      case 6:
+        return (
+          <InterestTagsStep
+            onNext={handleNext}
+            onBack={handleBack}
+            selectedInterests={userData.selectedInterests}
+            setSelectedInterests={(value) => updateUserData('selectedInterests', value)}
+          />
+        );
+
+      case 7:
+        return (
+          <WelcomeStep
+            onComplete={onComplete}
+            userData={userData}
+          />
+        );
       default:
         return (
           <View style={CommonStyles.centerContainer}>

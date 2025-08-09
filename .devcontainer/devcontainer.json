@@ -52,7 +52,7 @@
     }
   },
   
-  "postCreateCommand": "cd mobile-app && npm install && echo '🎉 AdyaTribe development environment is ready!'",
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && cd mobile-app && npm install && echo '🎉 AdyaTribe development environment with Claude Code is ready!'",
   
   "remoteUser": "node",
   

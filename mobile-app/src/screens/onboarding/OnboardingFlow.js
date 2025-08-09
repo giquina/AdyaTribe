@@ -6,7 +6,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import FirstNameStep from './FirstNameStep';
 import DateOfBirthStep from './DateOfBirthStep';
 import EmailStep from './EmailStep';
-// TODO: Add other steps (ProfilePicture, SelfieVerification, InterestTags, Welcome)
+import ProfilePictureStep from './ProfilePictureStep';
+// TODO: Add other steps (SelfieVerification, InterestTags, Welcome)
 
 import { CommonStyles } from '../../constants/Styles';
 
@@ -81,8 +82,18 @@ const OnboardingFlow = ({ onComplete }) => {
             setEmail={(value) => updateUserData('email', value)}
           />
         );
+
+      case 4:
+        return (
+          <ProfilePictureStep
+            onNext={handleNext}
+            onBack={handleBack}
+            profilePicture={userData.profilePicture}
+            setProfilePicture={(value) => updateUserData('profilePicture', value)}
+          />
+        );
       
-      // TODO: Add cases for steps 4-7
+      // TODO: Add cases for steps 5-7
       default:
         return (
           <View style={CommonStyles.centerContainer}>

@@ -1,16 +1,77 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRightIcon, SparklesIcon, HeartIcon, UsersIcon } from '@heroicons/react/24/outline'
+import { ArrowRightIcon, SparklesIcon, HeartIcon, UsersIcon, StarIcon, CheckBadgeIcon } from '@heroicons/react/24/outline'
+import { useState, useEffect } from 'react'
 
 export default function Hero() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [currentUser, setCurrentUser] = useState({ name: 'Amazing Woman', location: 'Your City' })
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY })
+    }
+    window.addEventListener('mousemove', handleMouseMove)
+    return () => window.removeEventListener('mousemove', handleMouseMove)
+  }, [])
+
   return (
-    <section className="relative min-h-screen flex items-center gradient-bg overflow-hidden">
-      {/* Background decorative elements */}
+    <section className="relative min-h-screen flex items-center overflow-hidden" style={{
+      background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,182,193,0.15), transparent 40%), linear-gradient(135deg, #fefefe 0%, #f8f9fa 50%, #f0f4f8 100%)`
+    }}>
+      {/* Background decorative elements with 3D effect */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-200 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-secondary-200 rounded-full opacity-20 animate-pulse animation-delay-400"></div>
-        <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-gradient-to-r from-primary-100 to-secondary-100 rounded-full opacity-30 transform -translate-x-1/2 -translate-y-1/2 animate-pulse animation-delay-200"></div>
+        <motion.div 
+          animate={{ 
+            rotateX: [0, 5, 0],
+            rotateY: [0, 5, 0],
+            scale: [1, 1.05, 1]
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-pink-200 via-purple-100 to-blue-100 rounded-full opacity-30"
+          style={{ transform: 'preserve-3d' }}
+        />
+        <motion.div 
+          animate={{ 
+            rotateX: [0, -5, 0],
+            rotateY: [0, -5, 0],
+            scale: [1, 1.1, 1]
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute -bottom-32 -left-32 w-64 h-64 bg-gradient-to-tr from-orange-200 via-pink-100 to-purple-100 rounded-full opacity-25"
+          style={{ transform: 'preserve-3d' }}
+        />
+        <motion.div
+          animate={{ 
+            rotate: [0, 360],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute top-1/3 right-1/4 w-32 h-32 bg-gradient-to-r from-yellow-200 to-pink-200 rounded-full opacity-20"
+        />
+        {/* Floating particles */}
+        {Array.from({ length: 15 }).map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-gradient-to-r from-primary-300 to-secondary-300 rounded-full opacity-40"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.4, 0.8, 0.4],
+              scale: [1, 1.5, 1]
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: Math.random() * 2
+            }}
+          />
+        ))}
       </div>
 
       <div className="container-width relative z-10 section-padding">
@@ -22,15 +83,22 @@ export default function Hero() {
             transition={{ duration: 0.8 }}
             className="space-y-8"
           >
-            {/* Trust Badge */}
+            {/* AI-Personalized Welcome Badge */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-gray-600 shadow-lg border border-white/20"
+              initial={{ opacity: 0, scale: 0.9, y: -20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5, type: "spring", bounce: 0.4 }}
+              className="inline-flex items-center gap-3 bg-gradient-to-r from-white/90 to-gray-50/90 backdrop-blur-md rounded-2xl px-6 py-3 text-sm font-semibold text-gray-700 shadow-xl border border-white/30 hover:shadow-2xl transition-all duration-300 hover:scale-105 cursor-pointer group"
             >
-              <SparklesIcon className="h-4 w-4 text-primary-400" />
-              Trusted by 1,000+ amazing women
+              <div className="flex items-center gap-2">
+                <CheckBadgeIcon className="h-5 w-5 text-green-500" />
+                <span className="text-green-600 font-bold">VERIFIED</span>
+              </div>
+              <div className="w-px h-6 bg-gray-300"></div>
+              <div className="flex items-center gap-1">
+                <SparklesIcon className="h-4 w-4 text-yellow-500 group-hover:animate-pulse" />
+                <span>Perfect match for {currentUser.name} in {currentUser.location}</span>
+              </div>
             </motion.div>
 
             {/* Main Headline */}
@@ -40,51 +108,86 @@ export default function Hero() {
               transition={{ delay: 0.3, duration: 0.8 }}
               className="space-y-4"
             >
-              <h1 className="text-5xl sm:text-6xl lg:text-display font-bold text-gray-900 leading-tight">
-                Where Amazing{' '}
-                <span className="gradient-text">Women</span>{' '}
-                Connect
+              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black text-gray-900 leading-none tracking-tight">
+                WHERE{' '}
+                <span className="block text-7xl sm:text-8xl lg:text-9xl bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent animate-pulse font-extrabold">
+                  AMAZING
+                </span>
+                <span className="block text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-800">
+                  WOMEN CONNECT
+                </span>
               </h1>
-              <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed max-w-2xl">
-                Join the premier community for 30+ single & childfree women. Find your tribe, make meaningful friendships, and discover shared adventures.
+              <p className="text-xl sm:text-2xl text-gray-700 leading-relaxed max-w-2xl font-medium">
+                Join the <span className="font-bold text-pink-600">premier AI-powered community</span> for 30+ single & childfree women. Find your tribe, make meaningful friendships, and discover shared adventures through <span className="font-bold text-purple-600">intelligent matching</span>.
               </p>
             </motion.div>
 
-            {/* Key Benefits */}
+            {/* Enhanced Key Benefits with 3D hover effects */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="grid sm:grid-cols-3 gap-4"
+              className="grid sm:grid-cols-3 gap-6"
             >
-              <div className="flex items-center gap-3 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/30">
-                <HeartIcon className="h-6 w-6 text-primary-400 flex-shrink-0" />
-                <span className="text-sm font-medium text-gray-700">Safe & Verified</span>
-              </div>
-              <div className="flex items-center gap-3 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/30">
-                <UsersIcon className="h-6 w-6 text-secondary-400 flex-shrink-0" />
-                <span className="text-sm font-medium text-gray-700">30+ Only</span>
-              </div>
-              <div className="flex items-center gap-3 bg-white/60 backdrop-blur-sm rounded-xl p-4 border border-white/30">
-                <SparklesIcon className="h-6 w-6 text-primary-400 flex-shrink-0" />
-                <span className="text-sm font-medium text-gray-700">Real Connections</span>
-              </div>
+              {[
+                { icon: HeartIcon, text: "AI-VERIFIED SAFETY", color: "from-red-400 to-pink-400", bgColor: "from-red-50 to-pink-50" },
+                { icon: UsersIcon, text: "EXCLUSIVE 30+ CLUB", color: "from-blue-400 to-purple-400", bgColor: "from-blue-50 to-purple-50" },
+                { icon: SparklesIcon, text: "REAL CONNECTIONS", color: "from-yellow-400 to-orange-400", bgColor: "from-yellow-50 to-orange-50" }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ 
+                    scale: 1.05, 
+                    rotateY: 5,
+                    rotateX: 5,
+                    z: 50
+                  }}
+                  className="flex items-center gap-4 bg-gradient-to-br from-white/80 to-gray-50/80 backdrop-blur-lg rounded-2xl p-5 border border-white/40 shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer group"
+                  style={{ transformStyle: 'preserve-3d' }}
+                >
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${item.bgColor} flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                    <item.icon className={`h-6 w-6 bg-gradient-to-r ${item.color} text-transparent bg-clip-text group-hover:animate-pulse`} style={{WebkitBackgroundClip: 'text', filter: 'none'}} />
+                  </div>
+                  <span className="text-sm font-bold text-gray-800 tracking-wide">{item.text}</span>
+                </motion.div>
+              ))}
             </motion.div>
 
-            {/* CTA Buttons */}
+            {/* Enhanced CTA Buttons with modern effects */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-6"
             >
-              <button className="btn-primary group text-lg px-8 py-4 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200">
-                Join the Tribe
-                <ArrowRightIcon className="h-5 w-5 ml-2 group-hover:translate-x-1 transition-transform duration-200" />
-              </button>
-              <button className="btn-outline text-lg px-8 py-4 hover:shadow-lg transform hover:-translate-y-1 transition-all duration-200">
-                Learn More
-              </button>
+              <motion.button
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 20px 40px rgba(0,0,0,0.15)"
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="relative group text-xl font-bold px-10 py-5 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white rounded-2xl shadow-2xl hover:shadow-3xl transform transition-all duration-300 overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10 flex items-center justify-center gap-3">
+                  JOIN THE TRIBE
+                  <ArrowRightIcon className="h-6 w-6 group-hover:translate-x-2 transition-transform duration-300" />
+                </span>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
+                </div>
+              </motion.button>
+              
+              <motion.button
+                whileHover={{ 
+                  scale: 1.05,
+                  backgroundColor: "rgba(255,255,255,0.9)"
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="text-xl font-bold px-10 py-5 bg-white/70 backdrop-blur-lg text-gray-800 border-2 border-gray-200 rounded-2xl shadow-lg hover:shadow-xl transform transition-all duration-300 hover:border-purple-300"
+              >
+                WATCH DEMO
+              </motion.button>
             </motion.div>
 
             {/* Social Proof */}

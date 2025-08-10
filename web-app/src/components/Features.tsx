@@ -100,11 +100,11 @@ export default function Features() {
             <SparklesIcon className="h-4 w-4" />
             Why Choose AdyaTribe
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             Everything You Need for{' '}
             <span className="gradient-text">Authentic Connections</span>
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
             We've thoughtfully designed every feature to help 30+ women build genuine, lasting friendships in a safe and supportive environment.
           </p>
         </motion.div>
@@ -115,7 +115,7 @@ export default function Features() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
           {features.map((feature, index) => (
             <motion.div

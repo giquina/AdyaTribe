@@ -4,28 +4,28 @@ import { HeartIcon, MapPinIcon, EnvelopeIcon } from '@heroicons/react/24/outline
 
 const footerLinks = {
   community: [
-    { name: 'How It Works', href: '#' },
-    { name: 'Success Stories', href: '#' },
-    { name: 'Community Guidelines', href: '#' },
-    { name: 'Safety Center', href: '#' },
+    { name: 'How It Works', href: '/how-it-works' },
+    { name: 'Success Stories', href: '/success-stories' },
+    { name: 'Community Guidelines', href: '/community' },
+    { name: 'Safety Center', href: '/safety' },
   ],
   support: [
-    { name: 'Help Center', href: '#' },
-    { name: 'Contact Us', href: '#' },
-    { name: 'Report Issue', href: '#' },
-    { name: 'Feedback', href: '#' },
+    { name: 'Help Center', href: '/help' },
+    { name: 'Contact Us', href: '/contact' },
+    { name: 'Report Issue', href: '/contact' },
+    { name: 'Feedback', href: '/contact' },
   ],
   company: [
-    { name: 'About Us', href: '#' },
-    { name: 'Careers', href: '#' },
-    { name: 'Press', href: '#' },
-    { name: 'Blog', href: '#' },
+    { name: 'About Us', href: '/about' },
+    { name: 'Careers', href: '/careers' },
+    { name: 'Press', href: '/press' },
+    { name: 'Blog', href: '/blog' },
   ],
   legal: [
-    { name: 'Privacy Policy', href: '#' },
-    { name: 'Terms of Service', href: '#' },
-    { name: 'Cookie Policy', href: '#' },
-    { name: 'Data Protection', href: '#' },
+    { name: 'Privacy Policy', href: '/privacy' },
+    { name: 'Terms of Service', href: '/terms' },
+    { name: 'Cookie Policy', href: '/cookies' },
+    { name: 'Data Protection', href: '/data-protection' },
   ],
 }
 
@@ -34,7 +34,7 @@ export default function Footer() {
     <footer className="bg-gray-900 text-white">
       {/* Main Footer Content */}
       <div className="container-width px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid lg:grid-cols-4 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-1 space-y-6">
             <div className="flex items-center gap-3">
@@ -61,7 +61,7 @@ export default function Footer() {
           </div>
 
           {/* Links Columns */}
-          <div className="lg:col-span-3 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {/* Community */}
             <div>
               <h3 className="text-lg font-semibold mb-6 text-primary-300">Community</h3>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, Poppins } from 'next/font/google'
 import './globals.css'
+import WhatsAppWidget from '@/components/WhatsAppWidget'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -89,6 +90,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} antialiased`}>
         {children}
+        <WhatsAppWidget />
       </body>
     </html>
   )

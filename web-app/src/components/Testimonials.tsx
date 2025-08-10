@@ -106,11 +106,11 @@ export default function Testimonials() {
             <StarIcon className="h-4 w-4 text-yellow-400" />
             Real Stories, Real Friendships
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             Hear from Our{' '}
             <span className="gradient-text">Amazing Community</span>
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
             Discover how thousands of women have transformed their social lives and built meaningful connections through AdyaTribe.
           </p>
         </motion.div>
@@ -121,7 +121,7 @@ export default function Testimonials() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
           {testimonials.map((testimonial, index) => (
             <motion.div
@@ -209,9 +209,9 @@ export default function Testimonials() {
           <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
             Join thousands of women who've found their tribe. Your perfect friendship match is just a click away.
           </p>
-          <button className="btn-primary text-lg px-10 py-4 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200">
+          <a href="/signup" className="btn-primary text-lg px-10 py-4 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 inline-block">
             Start Your Journey Today
-          </button>
+          </a>
         </motion.div>
       </div>
     </section>

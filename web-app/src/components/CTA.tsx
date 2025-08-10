@@ -36,10 +36,10 @@ export default function CTA() {
               <SparklesIcon className="h-4 w-4" />
               Limited Time - Join Today
             </div>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
               Your Tribe is Waiting
             </h2>
-            <p className="text-xl text-white/90 leading-relaxed max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-white/90 leading-relaxed max-w-2xl mx-auto">
               Don't spend another weekend alone. Join AdyaTribe today and discover the friendships you've been searching for.
             </p>
           </motion.div>
@@ -50,7 +50,7 @@ export default function CTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="grid sm:grid-cols-2 gap-4 mb-12 max-w-3xl mx-auto"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12 max-w-3xl mx-auto"
           >
             {benefits.map((benefit, index) => (
               <motion.div
@@ -75,10 +75,10 @@ export default function CTA() {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="space-y-6"
           >
-            <button className="bg-white text-primary-600 hover:bg-gray-50 font-bold text-lg px-12 py-5 rounded-xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 transition-all duration-300 group">
+            <a href="/signup" className="bg-white text-primary-600 hover:bg-gray-50 font-bold text-base sm:text-lg px-8 sm:px-12 py-4 sm:py-5 rounded-xl shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 transition-all duration-300 group inline-flex items-center">
               Join AdyaTribe Free
-              <ArrowRightIcon className="h-5 w-5 ml-3 group-hover:translate-x-1 transition-transform duration-200 inline" />
-            </button>
+              <ArrowRightIcon className="h-5 w-5 ml-3 group-hover:translate-x-1 transition-transform duration-200" />
+            </a>
             
             <p className="text-white/80 text-sm">
               No commitment required • Start connecting immediately • Cancel anytime
@@ -120,7 +120,7 @@ export default function CTA() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.8, duration: 0.8 }}
-            className="mt-12 grid sm:grid-cols-3 gap-8 text-white/80"
+            className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-white/80"
           >
             <div className="text-center">
               <div className="text-2xl font-bold text-white mb-1">100%</div>

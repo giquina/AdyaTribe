@@ -55,7 +55,7 @@ const WhatsAppWidget: React.FC = () => {
     }
   ]
 
-  // Auto-open widget after 1 minute
+  // Auto-open widget after 5 minutes
   useEffect(() => {
     const timer = setTimeout(() => {
       if (!hasInteracted) {
@@ -68,28 +68,10 @@ const WhatsAppWidget: React.FC = () => {
           }, 800)
         }, 200)
       }
-    }, 60000) // 1 minute = 60000ms
+    }, 300000) // 5 minutes = 300000ms
 
     return () => clearTimeout(timer)
   }, [hasInteracted])
-
-  // Show widget immediately for demo purposes (remove in production)
-  useEffect(() => {
-    // Remove this useEffect in production - it's just for testing
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.key === 'w') {
-        setShowWidget(true)
-        setIsOpen(true)
-        if (messages.length === 0) {
-          setTimeout(() => {
-            addBotMessage(conversationFlow[0])
-          }, 500)
-        }
-      }
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [messages.length])
 
   const addBotMessage = (step: typeof conversationFlow[0]) => {
     const newMessage: Message = {

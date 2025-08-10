@@ -32,6 +32,12 @@ npm run export      # Build and export static site
 ### Testing
 No testing framework is currently configured. When implementing tests, update this section.
 
+### Type Checking (Web App)
+```bash
+cd web-app
+npx tsc --noEmit  # Type check without emitting files
+```
+
 ## Architecture Overview
 
 ### Project Structure
@@ -86,15 +92,15 @@ AdyaTribe/
 ### Web App Architecture
 
 **Current State:**
-- **Next.js 14** with app router
-- **Tailwind CSS** for styling
-- **TypeScript** for type safety
-- **Static export** configured for deployment
+- **Next.js 14** with app router and TypeScript
+- **Tailwind CSS** with custom design system matching mobile app colors
+- **Static export** configured for deployment (output: 'export' in next.config.js)
 - **SEO optimized** with metadata and Open Graph tags
 - **Complete Landing Page:** Hero, Features, Testimonials, CTA, Footer
-- **Authentication Pages:** Login & Signup forms
-- **Information Pages:** About, Contact, How It Works
-- **Community Page:** Platform overview and features
+- **Authentication Pages:** Login & Signup forms with social login options
+- **Information Pages:** About, Contact, How It Works, Community, Pricing
+- **Core Platform Features:** Dashboard, Chat, Directory, Events, Forums, Profiles
+- **Advanced Components:** Profile management, messaging system, event creation
 
 ## Development Workflow
 
@@ -159,6 +165,20 @@ npm install          # Ensure dependencies are current
 - **Firebase** (Authentication, Firestore, Storage, Functions)
 - **Stripe** for payment processing
 
+## Utility Libraries (Web App)
+
+The web app includes several utility libraries in `src/lib/`:
+
+- **`auth.ts`**: Authentication service and user management
+- **`connections.ts`**: User connections and networking features
+- **`directory.ts`**: Member directory and search functionality
+- **`events.ts`**: Event management and RSVP system
+- **`forums.ts`**: Discussion forums and topic management
+- **`messaging.ts`**: Chat rooms and messaging system
+- **`profile.ts`**: User profile management and completion tracking
+
+These libraries provide TypeScript interfaces and mock data for development, ready to be connected to Firebase backend.
+
 ## Key Files to Understand
 
 ### Mobile App Critical Files
@@ -178,15 +198,51 @@ npm install          # Ensure dependencies are current
 - `web-app/src/components/CTA.tsx`: Call-to-action sections
 - `web-app/src/components/Footer.tsx`: Site footer with links
 - `web-app/next.config.js`: Next.js configuration for static export
-- `web-app/tailwind.config.js`: Tailwind CSS configuration
+- `web-app/tailwind.config.js`: Tailwind CSS configuration with AdyaTribe brand colors
+- `web-app/tsconfig.json`: TypeScript configuration with path aliases (@/)
 
 ### Web App Page Structure
+**Landing & Information Pages:**
+- `web-app/src/app/page.tsx`: Main landing page with hero, features, testimonials
 - `web-app/src/app/about/page.tsx`: About the platform
 - `web-app/src/app/how-it-works/page.tsx`: Platform usage guide
 - `web-app/src/app/community/page.tsx`: Community overview
+- `web-app/src/app/contact/page.tsx`: Contact information
+- `web-app/src/app/pricing/page.tsx`: Membership tiers and pricing
+
+**Authentication Pages:**
 - `web-app/src/app/login/page.tsx`: User login form
 - `web-app/src/app/signup/page.tsx`: User registration form
-- `web-app/src/app/contact/page.tsx`: Contact information
+
+**Platform Features (Phase 2):**
+- `web-app/src/app/dashboard/page.tsx`: User dashboard and activity feed
+- `web-app/src/app/chat/page.tsx`: Chat room directory
+- `web-app/src/app/chat/[id]/page.tsx`: Individual chat room interface
+- `web-app/src/app/directory/page.tsx`: Member directory
+- `web-app/src/app/directory/member/[id]/page.tsx`: Individual member profile view
+- `web-app/src/app/events/page.tsx`: Events directory
+- `web-app/src/app/events/[id]/page.tsx`: Individual event details
+- `web-app/src/app/events/create/page.tsx`: Event creation form
+- `web-app/src/app/forums/page.tsx`: Discussion forums
+- `web-app/src/app/forums/topic/[id]/page.tsx`: Individual forum topic
+- `web-app/src/app/profiles/page.tsx`: Profile browsing
+- `web-app/src/app/profile/[id]/page.tsx`: Public profile view
+- `web-app/src/app/profile/edit/page.tsx`: Profile editing interface
+- `web-app/src/app/admin/page.tsx`: Admin dashboard (restricted)
+
+### Advanced Profile Components
+The web app includes sophisticated profile management components in `src/components/profile/`:
+
+- **`ProfileCard.tsx`**: Member profile card display
+- **`ProfileHeader.tsx`**: Profile header with avatar and basic info
+- **`ProfileEditForm.tsx`**: Comprehensive profile editing interface
+- **`ProfileCompletion.tsx`**: Profile completion progress and gamification
+- **`ProfileGallery.tsx`**: Photo gallery management
+- **`ProfileBadges.tsx`**: Achievement and verification badges
+- **`ProfileVerification.tsx`**: Identity verification status and controls
+- **`ProfilePrivacy.tsx`**: Privacy settings and visibility controls
+- **`ProfilePhotoManager.tsx`**: Photo upload and management system
+- **`ConnectionButton.tsx`**: Connect/follow button with state management
 
 ## Design System
 
@@ -215,10 +271,19 @@ When implementing Firebase:
 
 ## Development Status
 
-**Current Phase:** Phase 2 - Membership Platform Development 🚧
+**Current Phase:** Phase 2 - Membership Platform Development (Advanced Implementation) 🚧
 **Previous Milestone:** Phase 1 - Foundation Complete ✅
-**Current Focus:** Building membership-driven community features
-**Key Features Implemented:** Complete onboarding flow, landing page, authentication pages
+
+**Recently Completed:**
+- Core platform pages (Dashboard, Chat, Directory, Events, Forums)
+- Advanced profile management system with 10 specialized components
+- Utility libraries for all major platform features
+- Enhanced authentication with social login
+- Membership pricing page
+- Admin dashboard structure
+
+**Current Focus:** Backend integration and real-time functionality
+**Next Priority:** Firebase integration for authentication and data persistence
 
 ## Upcoming Platform Features
 
@@ -257,3 +322,25 @@ When implementing Firebase:
 - **Navigation issues:** Check step numbers and navigation logic
 - **Styling issues:** Verify imports from Styles.js
 - **Git sync issues:** Ensure you're in correct directory for commands
+
+### Web App Development Notes
+- **Path Aliases:** Use `@/` for imports from `src/` directory (configured in tsconfig.json)
+- **Static Export:** App is configured for static export - avoid server-side features
+- **TypeScript:** All new components should be TypeScript with proper interfaces
+- **Design System:** Use Tailwind classes that match the mobile app color scheme
+- **Component Structure:** Follow existing patterns in profile components for consistency
+
+### Deployment Configuration
+- **Next.js Config:** Static export with `output: 'export'` in next.config.js
+- **Build Output:** Static files generated in `/out` directory
+- **Asset Optimization:** Images set to unoptimized for static hosting
+- **Base Path:** Currently empty, can be configured for subdomain deployment
+## 📊 **Current Project Metrics** 
+*(Auto-updated: 2025-08-10)*
+
+- **Claude Code Agents**: 6 specialized agents
+- **Onboarding Steps**: 7/7 completed
+- **Documentation Files**: Auto-synced with codebase
+- **Git Status**: 24 pending changes
+- **Last Activity**: 517103c 🔧 Fix CrownIcon import error in pricing p...
+

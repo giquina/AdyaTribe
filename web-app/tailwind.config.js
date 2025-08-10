@@ -10,16 +10,16 @@ module.exports = {
       colors: {
         // AdyaTribe brand colors
         primary: {
-          50: '#fff5f5',
-          100: '#ffe3e3',
-          200: '#ffb3ba',
-          300: '#ff8a92',
+          50: '#fef2f2',
+          100: '#fee2e2',
+          200: '#fecaca',
+          300: '#fca5a5',
           400: '#ff6b6b', // Main brand color
-          500: '#ff5252',
-          600: '#e53e3e',
-          700: '#c53030',
-          800: '#9b2c2c',
-          900: '#742a2a',
+          500: '#ef4444',
+          600: '#dc2626',
+          700: '#b91c1c',
+          800: '#991b1b',
+          900: '#7f1d1d',
         },
         secondary: {
           50: '#f0fdfa',

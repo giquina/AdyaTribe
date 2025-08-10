@@ -18,7 +18,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden" style={{
+    <section className="relative min-h-screen flex items-center overflow-hidden w-full" style={{
       background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,182,193,0.15), transparent 40%), linear-gradient(135deg, #fefefe 0%, #f8f9fa 50%, #f0f4f8 100%)`
     }}>
       {/* Background decorative elements */}
@@ -99,16 +99,16 @@ export default function Hero() {
               transition={{ delay: 0.3, duration: 0.8 }}
               className="space-y-4"
             >
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 leading-tight tracking-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-gray-900 leading-tight tracking-tight break-words">
                 WHERE{' '}
-                <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-8xl bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent animate-pulse font-extrabold">
+                <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent animate-pulse font-extrabold">
                   AMAZING
                 </span>
-                <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800">
+                <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800">
                   WOMEN CONNECT
                 </span>
               </h1>
-              <p className="text-lg sm:text-xl md:text-2xl text-gray-700 leading-relaxed max-w-2xl font-medium">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 leading-relaxed max-w-2xl font-medium break-words">
                 Join the <span className="font-bold text-pink-600">premier verified community</span> for 30+ single & childfree women in the UK. Find your tribe, make meaningful friendships, and discover shared adventures across <span className="font-bold text-purple-600">London and beyond</span>.
               </p>
             </motion.div>

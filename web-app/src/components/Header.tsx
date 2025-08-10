@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Bars3Icon, XMarkIcon, HeartIcon, UserCircleIcon, ShieldCheckIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon, HeartIcon, UserCircleIcon, ShieldCheckIcon, UserIcon } from '@heroicons/react/24/outline'
 import { Crown, LogOut } from 'lucide-react'
 import { authService, User } from '@/lib/auth'
 import { useRouter } from 'next/navigation'
 
 const publicNavigationLinks = [
+  { name: 'Events', href: '/events' },
   { name: 'How It Works', href: '/how-it-works' },
   { name: 'Community', href: '/community' },
   { name: 'Pricing', href: '/pricing' },
@@ -17,6 +18,9 @@ const publicNavigationLinks = [
 
 const authenticatedNavigationLinks = [
   { name: 'Dashboard', href: '/dashboard' },
+  { name: 'Profiles', href: '/profiles' },
+  { name: 'Events', href: '/events' },
+  { name: 'Chat', href: '/chat' },
   { name: 'Community', href: '/community' },
   { name: 'Pricing', href: '/pricing' },
 ]
@@ -109,6 +113,14 @@ export default function Header() {
                       className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1"
                     >
                       <a
+                        href={`/profile/${user.id}`}
+                        className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => setShowUserMenu(false)}
+                      >
+                        <UserIcon className="w-4 h-4" />
+                        <span>My Profile</span>
+                      </a>
+                      <a
                         href="/dashboard"
                         className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                         onClick={() => setShowUserMenu(false)}
@@ -154,17 +166,19 @@ export default function Header() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden relative z-50">
             <button
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
+              className="inline-flex items-center justify-center p-3 rounded-md text-gray-700 hover:text-primary-600 hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-400 transition-colors duration-200 min-h-[44px] min-w-[44px]"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-expanded={mobileMenuOpen}
+              aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             >
-              <span className="sr-only">Open main menu</span>
+              <span className="sr-only">{mobileMenuOpen ? 'Close menu' : 'Open main menu'}</span>
               {mobileMenuOpen ? (
-                <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                <XMarkIcon className="block h-7 w-7" aria-hidden="true" />
               ) : (
-                <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                <Bars3Icon className="block h-7 w-7" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -173,14 +187,26 @@ export default function Header() {
         {/* Mobile Navigation */}
         <AnimatePresence>
           {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2, ease: 'easeInOut' }}
-              className="md:hidden overflow-hidden"
-            >
-              <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
+            <>
+              {/* Mobile menu backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 md:hidden"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+              
+              {/* Mobile menu content */}
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.2, ease: 'easeInOut' }}
+                className="md:hidden overflow-hidden relative z-40"
+              >
+                <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200 shadow-lg">
                 {navigationLinks.map((link) => (
                   <a
                     key={link.name}
@@ -209,6 +235,15 @@ export default function Header() {
                           </div>
                         </div>
                       </div>
+                      
+                      <a
+                        href={`/profile/${user.id}`}
+                        className="flex items-center space-x-2 text-gray-600 hover:text-primary-600 hover:bg-gray-50 px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        <UserIcon className="w-5 h-5" />
+                        <span>My Profile</span>
+                      </a>
                       
                       <a
                         href="/dashboard"
@@ -264,6 +299,7 @@ export default function Header() {
                 </div>
               </div>
             </motion.div>
+            </>
           )}
         </AnimatePresence>
       </nav>

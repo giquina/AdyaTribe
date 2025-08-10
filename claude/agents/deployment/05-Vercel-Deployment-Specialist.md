@@ -567,29 +567,410 @@ jobs:
           vercel-project-id: ${{ secrets.PROJECT_ID }}
 ```
 
-### **Deployment Commands:**
+## 🛠️ **Vercel CLI Comprehensive Guide**
+
+### **Installation & Updates**
 ```bash
-# Install Vercel CLI
+# Install Vercel CLI (using pnpm for better performance)
+pnpm i -g vercel
+
+# Alternative installations
 npm i -g vercel
+yarn global add vercel
 
-# Initial setup
-vercel init
+# Update to latest version
+pnpm i -g vercel@latest
+npm i -g vercel@latest
 
-# Deploy to staging
+# Check current version
+vercel --version
+```
+
+### **CI/CD Authentication**
+```bash
+# For automated environments, create token at: https://vercel.com/account/tokens
+# Use --token option to authenticate without manual input
+vercel --token <your-token> --prod
+
+# Set up environment variable for CI/CD
+export VERCEL_TOKEN=<your-token>
+vercel --prod
+```
+
+### **Essential Deployment Commands**
+
+#### **Core Deployment**
+```bash
+# Deploy to preview (default)
 vercel
+
+# Alternative deployment command
+vercel deploy
 
 # Deploy to production
 vercel --prod
 
-# Check deployment status
-vercel ls
+# Build project locally (test before deploy)
+vercel build
 
-# View deployment logs
-vercel logs [deployment-url]
-
-# Force redeploy
-vercel --force
+# Run local development server with Vercel environment
+vercel dev
 ```
+
+#### **Troubleshooting Commands**
+```bash
+# Retrieve deployment logs
+vercel logs
+
+# Get logs for specific deployment
+vercel logs <deployment-url>
+
+# Inspect specific deployment details
+vercel inspect <deployment-url>
+
+# Inspect deployment with detailed logs
+vercel inspect <deployment-url> --logs
+
+# List all deployments
+vercel list
+
+# Remove specific deployment
+vercel remove <deployment-id>
+
+# Find problematic deployment (bisect)
+vercel bisect
+
+# Redeploy existing deployment
+vercel redeploy <deployment-id>
+
+# Rollback to previous deployment
+vercel rollback
+```
+
+#### **Configuration Commands**
+```bash
+# Link local project to Vercel project
+vercel link
+
+# Manage environment variables
+vercel env
+
+# Add new environment variable
+vercel env add
+
+# List environment variables
+vercel env ls
+
+# Remove environment variable
+vercel env rm <name>
+
+# Pull latest environment variables and project settings
+vercel pull
+
+# Pull specific environment (production/preview/development)
+vercel pull --environment=production
+```
+
+#### **Domain & SSL Management**
+```bash
+# Manage custom domains
+vercel domains
+
+# List all domains
+vercel domains ls
+
+# Add domain to project
+vercel domains add <domain>
+
+# Remove domain from project
+vercel domains rm <domain>
+
+# Manage SSL certificates
+vercel certs
+
+# List SSL certificates
+vercel certs ls
+
+# Issue new certificate
+vercel certs issue <domain>
+```
+
+#### **Project Management**
+```bash
+# Manage project settings
+vercel project
+
+# List projects
+vercel project ls
+
+# Remove project
+vercel project rm <project-name>
+
+# Promote deployment to production
+vercel promote <deployment-url>
+
+# Switch between Vercel accounts/teams
+vercel switch
+
+# Get project information
+vercel project info
+```
+
+### **AdyaTribe-Specific Usage Patterns**
+
+#### **Quick Deploy Workflow for Web App**
+```bash
+# Navigate to web app directory
+cd web-app
+
+# Test build locally first (ALWAYS do this!)
+npm run build
+
+# Check for any TypeScript errors
+npx tsc --noEmit
+
+# Deploy to preview for testing
+vercel
+
+# If preview looks good, deploy to production
+vercel --prod
+
+# Monitor deployment logs
+vercel logs --since=10m
+```
+
+#### **Troubleshooting Failed Deployments**
+```bash
+# Get recent deployment logs
+vercel logs --since=1h
+
+# Inspect specific failed deployment
+vercel inspect <failed-deployment-url> --logs
+
+# Check recent deployments
+vercel list --limit=10
+
+# Redeploy if needed
+vercel redeploy <deployment-id>
+
+# Force redeploy with fresh build
+vercel --force
+
+# Check build output locally
+vercel build --debug
+```
+
+#### **Environment Management Workflow**
+```bash
+# Pull latest environment variables from Vercel
+vercel pull
+
+# Check what environment variables are set
+vercel env ls
+
+# Add new environment variable for production
+vercel env add NODE_ENV production
+
+# Add development-specific variables
+vercel env add DATABASE_URL development
+
+# Pull environment variables to local .env file
+vercel env pull .env.local
+```
+
+#### **Domain Setup for AdyaTribe**
+```bash
+# Add custom domain
+vercel domains add adyatribe.com
+
+# Add subdomain for admin dashboard
+vercel domains add admin.adyatribe.com
+
+# Check domain status
+vercel domains ls
+
+# Verify SSL certificate
+vercel certs ls adyatribe.com
+```
+
+### **Advanced CLI Usage**
+
+#### **Team and Organization Management**
+```bash
+# Switch to team account
+vercel switch
+
+# Deploy to team project
+vercel --prod --scope=<team-name>
+
+# List team projects
+vercel project ls --scope=<team-name>
+```
+
+#### **Function and API Route Management**
+```bash
+# View function logs
+vercel logs --function=api/users
+
+# Monitor function performance
+vercel logs --since=1h --function=api/*
+
+# Check function cold starts
+vercel logs --filter="cold start"
+```
+
+#### **Analytics and Monitoring**
+```bash
+# View deployment analytics (use web dashboard)
+# https://vercel.com/<username>/<project>/analytics
+
+# Monitor real-time logs
+vercel logs --follow
+
+# Check specific error patterns
+vercel logs --filter="error" --since=24h
+```
+
+### **Integration with AdyaTribe Development Workflow**
+
+#### **1. Pre-deployment Checklist**
+```bash
+# Always run these before deployment:
+
+# 1. Check TypeScript compilation
+npx tsc --noEmit
+
+# 2. Test build locally
+npm run build
+
+# 3. Run linter
+npm run lint
+
+# 4. Check for security vulnerabilities
+npm audit
+
+# 5. Test critical paths locally
+npm run dev  # Test key user flows
+```
+
+#### **2. Deployment Process**
+```bash
+# Stage 1: Deploy to preview
+cd web-app
+vercel  # Creates preview deployment
+
+# Stage 2: Test preview deployment
+# Visit preview URL and test functionality
+
+# Stage 3: Deploy to production
+vercel --prod
+
+# Stage 4: Monitor deployment
+vercel logs --since=5m
+```
+
+#### **3. Rollback Strategy**
+```bash
+# If production deployment has issues:
+
+# Option 1: Quick rollback to previous deployment
+vercel rollback
+
+# Option 2: Promote specific known-good deployment
+vercel promote <good-deployment-url>
+
+# Option 3: Fix and redeploy
+git revert <problematic-commit>
+vercel --prod
+```
+
+#### **4. Environment-Specific Configurations**
+```bash
+# Development setup
+vercel link  # Link to project
+vercel pull  # Pull env vars
+vercel dev   # Start dev server with Vercel functions
+
+# Staging/Preview workflow
+vercel --prod=false  # Deploy to preview
+# Test preview URL thoroughly
+
+# Production deployment
+vercel --prod  # Deploy to production domain
+vercel logs   # Monitor for issues
+```
+
+### **Performance Monitoring with CLI**
+```bash
+# Check deployment performance
+vercel inspect <deployment-url>
+
+# Monitor function execution times
+vercel logs --function=api/* --since=1h
+
+# Check for build optimization opportunities
+vercel build --debug
+
+# Analyze bundle size (use with @next/bundle-analyzer)
+ANALYZE=true vercel build
+```
+
+### **Security and Best Practices**
+```bash
+# Never commit tokens to git
+echo "VERCEL_TOKEN" >> .gitignore
+
+# Use environment-specific deployments
+vercel --prod --token=$VERCEL_PROD_TOKEN
+
+# Rotate tokens regularly
+# Create new token at: https://vercel.com/account/tokens
+# Update CI/CD with new token
+
+# Monitor for unauthorized access
+vercel logs --filter="401\|403" --since=24h
+```
+
+### **Common CLI Error Solutions**
+
+#### **Authentication Errors**
+```bash
+# Error: "No existing credentials found"
+vercel login  # Login to Vercel account
+
+# Error: "Invalid token"
+vercel logout
+vercel login  # Re-authenticate
+
+# For CI/CD: Use --token flag
+vercel --token <new-token> --prod
+```
+
+#### **Project Linking Issues**
+```bash
+# Error: "Project not found"
+vercel link  # Re-link project
+
+# Link to specific project
+vercel link --project=<project-id>
+
+# Check linked project
+vercel project info
+```
+
+#### **Build Failures**
+```bash
+# Check build logs
+vercel build --debug
+
+# Test build locally first
+npm run build
+
+# Clear build cache
+vercel --force  # Force fresh build
+```
+
+### **Deployment Commands Summary**
 
 ## 🔧 **Quick Troubleshooting Commands**
 

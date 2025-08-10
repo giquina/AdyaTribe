@@ -55,7 +55,7 @@ export default function Header() {
   const navigationLinks = user ? authenticatedNavigationLinks : publicNavigationLinks
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 min-h-[64px]">
       <nav className="container-width px-4 sm:px-6 lg:px-8" aria-label="Top">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -166,19 +166,19 @@ export default function Header() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden relative z-50">
+          <div className="flex md:hidden relative z-50">
             <button
               type="button"
-              className="inline-flex items-center justify-center p-3 rounded-md text-gray-700 hover:text-primary-600 hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-400 transition-colors duration-200 min-h-[44px] min-w-[44px]"
+              className="inline-flex items-center justify-center p-3 rounded-md text-gray-900 hover:text-primary-600 hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 transition-colors duration-200 min-h-[44px] min-w-[44px] bg-white border border-gray-300 shadow-md active:bg-gray-50"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             >
               <span className="sr-only">{mobileMenuOpen ? 'Close menu' : 'Open main menu'}</span>
               {mobileMenuOpen ? (
-                <XMarkIcon className="block h-7 w-7" aria-hidden="true" />
+                <XMarkIcon className="block h-6 w-6 text-gray-900 stroke-2" aria-hidden="true" />
               ) : (
-                <Bars3Icon className="block h-7 w-7" aria-hidden="true" />
+                <Bars3Icon className="block h-6 w-6 text-gray-900 stroke-2" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -194,7 +194,7 @@ export default function Header() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 md:hidden"
+                className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 md:hidden"
                 onClick={() => setMobileMenuOpen(false)}
               />
               
@@ -204,9 +204,9 @@ export default function Header() {
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.2, ease: 'easeInOut' }}
-                className="md:hidden overflow-hidden relative z-40"
+                className="md:hidden overflow-hidden relative z-50 bg-white border-t border-gray-200 shadow-xl"
               >
-                <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200 shadow-lg">
+                <div className="px-4 pt-4 pb-3 space-y-1">
                 {navigationLinks.map((link) => (
                   <a
                     key={link.name}

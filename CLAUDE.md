@@ -335,12 +335,38 @@ When implementing Firebase:
 - **Build Output:** Static files generated in `/out` directory
 - **Asset Optimization:** Images set to unoptimized for static hosting
 - **Base Path:** Currently empty, can be configured for subdomain deployment
+
+## Claude AI Agent System
+
+AdyaTribe uses a specialized AI agent system organized in `/claude/agents/` with category-based structure:
+
+### Agent Categories
+
+**💻 Development Team** (`/claude/agents/development/`)
+- **UI Specialist** - Visual design and component interface expertise
+- **UX Designer** - User experience and flow optimization  
+- **React Native Expert** - Mobile development and Expo technical implementation
+- **Testing Engineer** - Quality assurance and testing strategy
+
+**🚀 Deployment Team** (`/claude/agents/deployment/`)
+- **Vercel Deployment Specialist** - Web deployment with comprehensive issue resolution knowledge
+- **DevOps Engineer** - Production deployment and infrastructure management
+
+**📋 Management Team** (`/claude/agents/management/`)
+- **Project Manager** - Timeline management and project coordination
+
+**🛡️ Security Team** (`/claude/agents/security/`)
+- **Security Consultant** - User safety, GDPR compliance, and security expertise
+
+### Usage
+Agents can be invoked using the `subagent_type` parameter in Claude Code's Task tool. Each agent contains specialized knowledge for their domain and can be used proactively when working on related features.
+
 ## 📊 **Current Project Metrics** 
 *(Auto-updated: 2025-08-10)*
 
-- **Claude Code Agents**: 6 specialized agents
+- **Claude Code Agents**: 8 specialized agents (organized by category)
 - **Onboarding Steps**: 7/7 completed
 - **Documentation Files**: Auto-synced with codebase
-- **Git Status**: 24 pending changes
-- **Last Activity**: 517103c 🔧 Fix CrownIcon import error in pricing p...
+- **Git Status**: Clean (deployed to production)
+- **Last Activity**: Comprehensive platform infrastructure deployment
 

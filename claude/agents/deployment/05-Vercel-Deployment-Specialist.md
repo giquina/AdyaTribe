@@ -317,9 +317,215 @@ export function ErrorBoundary({ children }) {
 }
 ```
 
-## 🚀 **Deployment Workflow**
+## 🛠️ **Common Deployment Issues & Solutions**
 
-### **CI/CD Pipeline:**
+### **1. TypeScript Build Errors**
+**Issue**: `Element implicitly has an 'any' type because expression of type 'any' can't be used to index type`
+
+**Solutions**:
+```typescript
+// ❌ Problematic code
+const level = tierLevels[tier]; // TypeScript error
+
+// ✅ Solution 1: Use proper type assertions
+const level = tierLevels[tier as keyof typeof tierLevels];
+
+// ✅ Solution 2: Define explicit index signatures
+const tierLevels: { [key in 'free' | 'core' | 'premium']: number } = {
+  free: 0,
+  core: 1,
+  premium: 2
+};
+
+// ✅ Solution 3: Use type guards
+function isValidTier(tier: string): tier is keyof typeof tierLevels {
+  return tier in tierLevels;
+}
+
+if (isValidTier(tier)) {
+  const level = tierLevels[tier]; // Type-safe access
+}
+```
+
+### **2. Missing Dependencies**
+**Issue**: `Module not found: Can't resolve 'react-hot-toast'`
+
+**Solutions**:
+```bash
+# Check what's missing
+npm ls --depth=0
+
+# Install missing dependencies
+npm install react-hot-toast
+npm install @types/react-hot-toast # For TypeScript
+
+# Verify installation
+npm run build # Test locally first
+```
+
+**Prevention Checklist**:
+- Always run `npm run build` locally before deployment
+- Check all imports in new components
+- Keep package.json updated with all dependencies
+
+### **3. Function Signature Mismatches**
+**Issue**: `Type '(photo: any, index: number) => void' is not assignable to type '() => void'`
+
+**Solutions**:
+```typescript
+// ❌ Problematic code
+<button onClick={handlePhotoClick(photo, index)}>
+
+// ✅ Solution: Wrap with arrow function
+<button onClick={() => handlePhotoClick(photo, index)}>
+
+// ✅ Alternative: Use bind
+<button onClick={handlePhotoClick.bind(null, photo, index)}>
+
+// ✅ Best practice: Define handler inline
+<button onClick={(e) => {
+  e.preventDefault();
+  handlePhotoClick(photo, index);
+}}>
+```
+
+### **4. Dynamic Routes with Static Export**
+**Issue**: `Page "/chat/[id]" is missing "generateStaticParams()" so it cannot be used with "output: export"`
+
+**Solutions**:
+```typescript
+// ✅ Solution 1: Add generateStaticParams (for static export)
+export async function generateStaticParams() {
+  // For client components, this won't work
+  return []; // Return empty array for client-side routing
+}
+
+// ✅ Solution 2: Remove static export for dynamic apps
+// next.config.js
+const nextConfig = {
+  // output: 'export', // Remove this line for dynamic apps
+  // ... other config
+};
+
+// ✅ Solution 3: Convert to static routes if possible
+// Rename [id].tsx to specific static routes
+```
+
+**Decision Matrix**:
+- **Static site**: Add `generateStaticParams()` to all dynamic routes
+- **Dynamic app**: Remove `output: 'export'` from next.config.js
+- **Hybrid**: Use different build configurations per environment
+
+### **5. useSearchParams() Suspense Boundary**
+**Issue**: `useSearchParams() should be wrapped in a suspense boundary`
+
+**Solutions**:
+```typescript
+// ✅ Solution 1: Wrap component in Suspense
+import { Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+
+function SearchComponent() {
+  const searchParams = useSearchParams();
+  return <div>{/* component content */}</div>;
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SearchComponent />
+    </Suspense>
+  );
+}
+
+// ✅ Solution 2: Convert to Server Component (when possible)
+// Remove 'use client' directive and use server-side props
+```
+
+### **6. Metadata Viewport Warnings**
+**Issue**: `Unsupported metadata viewport is configured in metadata export`
+
+**Solutions**:
+```typescript
+// ❌ Old way (causes warning)
+export const metadata = {
+  viewport: 'width=device-width, initial-scale=1',
+  // other metadata
+};
+
+// ✅ New way: Separate viewport export
+export const metadata = {
+  title: 'AdyaTribe',
+  description: 'Community for 30+ women',
+  // other metadata (no viewport here)
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
+```
+
+## 🚀 **Deployment Workflow & Pre-Flight Checklist**
+
+### **Pre-Deployment Checklist**:
+```bash
+# 1. TypeScript Check
+npx tsc --noEmit
+
+# 2. Build Test
+npm run build
+
+# 3. Dependency Check
+npm ls --depth=0
+
+# 4. Lint Check
+npm run lint
+
+# 5. Test Dynamic Routes (if applicable)
+# Navigate to all dynamic routes in dev mode
+```
+
+### **Error Resolution Priority**:
+1. **Fix TypeScript errors first** - They block the build
+2. **Install missing dependencies** - Check imports vs package.json
+3. **Resolve function signature mismatches** - Review event handlers
+4. **Handle dynamic routing issues** - Decide static vs dynamic approach
+5. **Wrap Suspense boundaries** - Fix useSearchParams warnings
+6. **Update metadata configuration** - Use new viewport export pattern
+
+### **Build Configuration Decision Tree**:
+```typescript
+// next.config.js decision matrix
+
+// For STATIC sites (marketing pages, blogs)
+const staticConfig = {
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true, // Required for static export
+  },
+  // All dynamic routes MUST have generateStaticParams
+};
+
+// For DYNAMIC apps (dashboards, chat, user content)
+const dynamicConfig = {
+  // No output: 'export'
+  images: {
+    domains: ['adyatribe.com'],
+    formats: ['image/webp', 'image/avif'],
+  },
+  // Dynamic routes work without generateStaticParams
+};
+
+// Use environment variable to switch
+const nextConfig = process.env.BUILD_MODE === 'static' 
+  ? staticConfig 
+  : dynamicConfig;
+```
+
+### **CI/CD Pipeline with Error Prevention**:
 ```yaml
 # .github/workflows/deploy.yml
 name: Deploy to Vercel
@@ -337,9 +543,23 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '18'
+      
+      # Install dependencies
       - run: npm ci
+      
+      # TypeScript check (prevents build failures)
+      - run: npx tsc --noEmit
+      
+      # Lint check
+      - run: npm run lint
+      
+      # Build test (catches missing deps)
       - run: npm run build
+      
+      # Optional: Run tests
       - run: npm test
+      
+      # Deploy to Vercel
       - uses: amondnet/vercel-action@v20
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
@@ -363,6 +583,74 @@ vercel --prod
 
 # Check deployment status
 vercel ls
+
+# View deployment logs
+vercel logs [deployment-url]
+
+# Force redeploy
+vercel --force
+```
+
+## 🔧 **Quick Troubleshooting Commands**
+
+### **Local Development Debugging**:
+```bash
+# Clean build
+rm -rf .next
+npm run build
+
+# Check TypeScript issues
+npx tsc --noEmit --pretty
+
+# Analyze bundle size
+npm install -g @next/bundle-analyzer
+ANALYZE=true npm run build
+
+# Check for unused dependencies
+npm install -g depcheck
+depcheck
+
+# Clear Node modules and reinstall
+rm -rf node_modules package-lock.json
+npm install
+```
+
+### **Production Deployment Debugging**:
+```bash
+# Check build output
+vercel build
+
+# Test production build locally
+npm run build && npm run start
+
+# Check environment variables
+vercel env ls
+
+# Pull environment variables locally
+vercel env pull .env.local
+
+# Check domain configuration
+vercel domains ls
+
+# View function logs
+vercel logs --since=1h
+```
+
+### **Performance Monitoring Commands**:
+```bash
+# Lighthouse CI
+npm install -g @lhci/cli
+lhci autorun --upload.target=temporary-public-storage
+
+# Bundle analyzer
+npm run build
+npx @next/bundle-analyzer
+
+# Check Core Web Vitals
+# Use Chrome DevTools -> Lighthouse tab
+
+# Monitor real user metrics
+# Check Vercel Analytics dashboard
 ```
 
 ## 📈 **Scaling Strategy**

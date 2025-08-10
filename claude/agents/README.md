@@ -1,58 +1,81 @@
 # 🤖 AdyaTribe AI Development Team
 
-*Specialized Claude agents for expert guidance throughout your development journey*
+*Specialized Claude agents organized by expertise areas for streamlined development guidance*
 
-## 👥 **Meet Your AI Team**
+## 📁 **Agent Organization Structure**
 
-### **01 - 🎨 UI Specialist**
+Our AI team is organized into specialized categories for better navigation and focused expertise:
+
+### **💻 Development Team** (`/development/`)
+Core development specialists for UI/UX and technical implementation
+
+#### **01 - 🎨 UI Specialist**
 **Expertise:** Visual design, component creation, accessibility
 **Use for:** Creating beautiful interfaces, design system consistency, layout optimization
 **Prompt:** "I need help with [UI element] design for AdyaTribe..."
 
-### **02 - 🧠 UX Designer** 
+#### **02 - 🧠 UX Designer** 
 **Expertise:** User experience, flow optimization, behavioral psychology
 **Use for:** User journey mapping, onboarding flow improvements, usability testing
 **Prompt:** "I want to improve the user experience for [feature]..."
 
-### **03 - 📋 Project Manager**
-**Expertise:** Timeline management, task coordination, progress tracking
-**Use for:** Sprint planning, milestone tracking, scope management
-**Prompt:** "I need help planning [feature/sprint/timeline]..."
-
-### **04 - 📱 React Native Expert**
+#### **04 - 📱 React Native Expert**
 **Expertise:** Mobile development, Expo, cross-platform optimization
 **Use for:** Technical implementation, performance optimization, debugging
 **Prompt:** "I'm having trouble with [technical issue] in React Native..."
 
-### **05 - 🚀 Vercel Deployment Specialist**
-**Expertise:** Web deployment, serverless functions, performance optimization
-**Use for:** Deploying admin dashboard, landing pages, API routes, hosting setup
-**Prompt:** "I need to deploy [web component] with Vercel..."
-
-### **06 - 🛡️ Security Consultant**
-**Expertise:** User safety, privacy protection, community moderation
-**Use for:** Verification systems, data protection, safety features
-**Prompt:** "How can I make [feature] more secure for users..."
-
-### **07 - 🧪 Testing Engineer**
+#### **07 - 🧪 Testing Engineer**
 **Expertise:** Quality assurance, automated testing, bug prevention
 **Use for:** Test strategy, debugging, quality improvement
 **Prompt:** "I need to test [feature] thoroughly..."
 
-### **08 - 🚀 DevOps Engineer**
+### **🚀 Deployment Team** (`/deployment/`)
+Specialists for production deployment and infrastructure management
+
+#### **05 - 🌐 Vercel Deployment Specialist**
+**Expertise:** Web deployment, serverless functions, performance optimization
+**Use for:** Deploying admin dashboard, landing pages, API routes, hosting setup
+**Prompt:** "I need to deploy [web component] with Vercel..."
+
+#### **08 - ⚙️ DevOps Engineer**
 **Expertise:** Deployment, CI/CD, infrastructure management
 **Use for:** App store submission, deployment automation, monitoring
 **Prompt:** "I'm ready to deploy [component] to production..."
 
+### **📋 Management Team** (`/management/`)
+Project coordination and strategic planning specialists
+
+#### **03 - 📊 Project Manager**
+**Expertise:** Timeline management, task coordination, progress tracking
+**Use for:** Sprint planning, milestone tracking, scope management
+**Prompt:** "I need help planning [feature/sprint/timeline]..."
+
+### **🛡️ Security Team** (`/security/`)
+Safety and security specialists for user protection
+
+#### **06 - 🔒 Security Consultant**
+**Expertise:** User safety, privacy protection, community moderation
+**Use for:** Verification systems, data protection, safety features
+**Prompt:** "How can I make [feature] more secure for users..."
+
 ## 🎯 **How to Use Your AI Team**
 
-### **1. Choose the Right Specialist**
+### **1. Choose the Right Specialist by Category**
+
+#### **💻 Development Team** (`/development/`)
 - **Design questions** → UI Specialist or UX Designer
-- **Technical problems** → React Native Expert or Firebase Architect
-- **Planning needs** → Project Manager
-- **Security concerns** → Security Consultant
+- **Technical problems** → React Native Expert
 - **Quality issues** → Testing Engineer
-- **Deployment help** → DevOps Engineer
+
+#### **🚀 Deployment Team** (`/deployment/`)
+- **Web deployment** → Vercel Deployment Specialist
+- **Production deployment** → DevOps Engineer
+
+#### **📋 Management Team** (`/management/`)
+- **Planning needs** → Project Manager
+
+#### **🛡️ Security Team** (`/security/`)
+- **Security concerns** → Security Consultant
 
 ### **2. Provide Context**
 Always include:

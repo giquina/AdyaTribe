@@ -61,6 +61,7 @@ AdyaTribe/
 - **Navigation:** Step-by-step flow managed in `OnboardingFlow.js`
 - **Data Collection:** User data accumulated in parent component state
 - **User Journey:** Complete signup to community entry flow
+- **Authentication:** Selfie verification system for safety & authenticity
 
 **Key Components:**
 - `OnboardingFlow.js`: Main navigation controller for 7-step onboarding
@@ -90,6 +91,10 @@ AdyaTribe/
 - **TypeScript** for type safety
 - **Static export** configured for deployment
 - **SEO optimized** with metadata and Open Graph tags
+- **Complete Landing Page:** Hero, Features, Testimonials, CTA, Footer
+- **Authentication Pages:** Login & Signup forms
+- **Information Pages:** About, Contact, How It Works
+- **Community Page:** Platform overview and features
 
 ## Development Workflow
 
@@ -124,12 +129,14 @@ npm install          # Ensure dependencies are current
 
 ### Current Development Priority
 
-**Next Immediate Steps:**
-1. Complete Profile Picture Upload (Step 4 of onboarding)
-2. Implement Live Selfie Verification (Step 5)
-3. Add Interest Tags Selection (Step 6)
-4. Create Welcome Screen (Step 7)
-5. Set up Firebase backend integration
+**Phase 2 - Membership Platform (Current Focus):**
+1. **Dashboard Design:** User engagement features and activity feeds
+2. **Membership Tiers:** Free, Core, and Premium subscription models  
+3. **Community Chat:** Group-based messaging with moderation
+4. **Safety Features:** Advanced moderation and reporting systems
+5. **User Verification:** Enhanced selfie verification for authenticity
+6. **GDPR Compliance:** UK regulatory framework implementation
+7. **Payment Integration:** Stripe subscription management
 
 ## Technology Stack
 
@@ -164,8 +171,22 @@ npm install          # Ensure dependencies are current
 ### Web App Critical Files  
 - `web-app/src/app/layout.tsx`: Root layout with metadata and font configuration
 - `web-app/src/app/page.tsx`: Main landing page
+- `web-app/src/components/Header.tsx`: Navigation with authentication links
+- `web-app/src/components/Hero.tsx`: Landing page hero section
+- `web-app/src/components/Features.tsx`: Platform features showcase
+- `web-app/src/components/Testimonials.tsx`: User testimonials
+- `web-app/src/components/CTA.tsx`: Call-to-action sections
+- `web-app/src/components/Footer.tsx`: Site footer with links
 - `web-app/next.config.js`: Next.js configuration for static export
 - `web-app/tailwind.config.js`: Tailwind CSS configuration
+
+### Web App Page Structure
+- `web-app/src/app/about/page.tsx`: About the platform
+- `web-app/src/app/how-it-works/page.tsx`: Platform usage guide
+- `web-app/src/app/community/page.tsx`: Community overview
+- `web-app/src/app/login/page.tsx`: User login form
+- `web-app/src/app/signup/page.tsx`: User registration form
+- `web-app/src/app/contact/page.tsx`: Contact information
 
 ## Design System
 
@@ -194,9 +215,27 @@ When implementing Firebase:
 
 ## Development Status
 
-**Current Phase:** Phase 1 - Foundation Complete ✅
-**Next Milestone:** Complete Onboarding Flow (Steps 4-7)
-**Progress:** 3/7 onboarding steps implemented
+**Current Phase:** Phase 2 - Membership Platform Development 🚧
+**Previous Milestone:** Phase 1 - Foundation Complete ✅
+**Current Focus:** Building membership-driven community features
+**Key Features Implemented:** Complete onboarding flow, landing page, authentication pages
+
+## Upcoming Platform Features
+
+### Membership & Community System
+- **Membership Tiers:** Free (limited), Core (full access), Premium (exclusive features)
+- **Community Chat:** Group-based messaging without 1:1 matching
+- **Safety First:** Selfie verification, moderation system, women-only spaces
+- **Engagement Hub:** User dashboard with activity feeds and group recommendations
+- **Local & Interest Groups:** Location-based and topic-based communities
+- **Event System:** Community events and expert sessions
+
+### Technical Architecture Priorities
+- **Real-time Chat:** WebSocket-based group messaging
+- **Subscription Management:** Stripe integration with webhook handling
+- **Content Moderation:** Automated filtering + human review queues
+- **GDPR Compliance:** Data minimization and user rights management
+- **Privacy by Design:** On-device verification, encrypted data storage
 
 ## Common Development Tasks
 

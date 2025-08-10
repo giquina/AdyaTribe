@@ -7,7 +7,6 @@ import {
   XMarkIcon, 
   HeartIcon,
   StarIcon,
-  CrownIcon,
   UserIcon,
   CalendarIcon,
   ChatBubbleLeftRightIcon,
@@ -18,9 +17,9 @@ import {
 } from '@heroicons/react/24/outline'
 import { 
   CheckIcon as CheckIconSolid,
-  StarIcon as StarIconSolid,
-  CrownIcon as CrownIconSolid
+  StarIcon as StarIconSolid
 } from '@heroicons/react/24/solid'
+import { Crown } from 'lucide-react'
 
 interface PricingTier {
   name: string
@@ -94,8 +93,8 @@ const pricingTiers: PricingTier[] = [
     price: 39,
     originalPrice: 49,
     description: 'Elite community experience with exclusive perks and access',
-    icon: <CrownIcon className="w-6 h-6" />,
-    solidIcon: <CrownIconSolid className="w-6 h-6" />,
+    icon: <Crown className="w-6 h-6" />,
+    solidIcon: <Crown className="w-6 h-6" />,
     features: [
       'Everything in Core, plus:',
       'Exclusive premium-only events',

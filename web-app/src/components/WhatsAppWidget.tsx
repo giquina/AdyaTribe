@@ -36,7 +36,7 @@ const WhatsAppWidget: React.FC = () => {
     {
       message: "Absolutely! Safety is our top priority. Here's what sets us apart:\n\n🛡️ Selfie verification for all members\n✅ Women-only verified spaces\n👥 Professional community moderation\n🎯 Age-verified (30+) community",
       options: ["That sounds perfect!", "What about interests & hobbies?", "How do I get verified?", "Any success stories?"],
-      icon: <Shield className="w-4 h-4 text-green-600" />
+      icon: <Shield className="w-4 h-4 text-[#4ECDC4]" />
     },
     {
       message: "We have 48 interest categories to help you find your perfect tribe! 🎨\n\n✨ Arts & Culture\n🍷 Food & Wine Experiences\n🏃‍♀️ Fitness & Wellness\n📚 Books & Learning\n🌍 Travel & Adventures\n💼 Career & Networking\n\nAnd so much more!",
@@ -51,7 +51,7 @@ const WhatsAppWidget: React.FC = () => {
     {
       message: "Wonderful! 💫 Getting started is super simple:\n\n1️⃣ Quick 2-minute signup\n2️⃣ Choose your interests from 48 categories\n3️⃣ Quick selfie verification (takes 30 seconds)\n4️⃣ Start connecting with your tribe!\n\nReady to begin your journey?",
       options: ["Yes, let's do this!", "I have more questions", "Maybe later", "Take me to signup"],
-      icon: <ArrowRight className="w-4 h-4 text-green-600" />
+      icon: <ArrowRight className="w-4 h-4 text-[#FF6B6B]" />
     }
   ]
 
@@ -205,7 +205,7 @@ const WhatsAppWidget: React.FC = () => {
       {isOpen && !isMinimized && (
         <div className="mb-4 bg-white rounded-2xl shadow-2xl border border-gray-200 w-80 sm:w-96 max-h-[32rem] flex flex-col animate-scale-in">
           {/* Header */}
-          <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#25D366] to-[#4ECDC4] text-white rounded-t-2xl">
+          <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#FF6B6B] to-[#4ECDC4] text-white rounded-t-2xl">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shadow-sm">
                 <Heart className="w-5 h-5 text-[#FF6B6B]" />
@@ -255,7 +255,7 @@ const WhatsAppWidget: React.FC = () => {
                         <button
                           key={index}
                           onClick={() => handleOptionClick(option)}
-                          className="block w-full text-left p-2.5 text-xs bg-gradient-to-r from-[#4ECDC4] to-[#25D366] text-white rounded-xl hover:from-[#3BA99C] hover:to-[#1FAD4E] transition-all duration-200 font-medium shadow-sm hover:shadow-md transform hover:scale-[1.02]"
+                          className="block w-full text-left p-2.5 text-xs bg-gradient-to-r from-[#FF6B6B] to-[#4ECDC4] text-white rounded-xl hover:from-[#E85A5A] hover:to-[#3BA99C] transition-all duration-200 font-medium shadow-sm hover:shadow-md transform hover:scale-[1.02]"
                         >
                           {option}
                         </button>
@@ -281,13 +281,13 @@ const WhatsAppWidget: React.FC = () => {
       {/* Floating Button */}
       <button
         onClick={toggleWidget}
-        className={`w-16 h-16 bg-gradient-to-r from-[#25D366] via-[#2DD55B] to-[#4ECDC4] rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative overflow-hidden ${
+        className={`w-16 h-16 bg-gradient-to-r from-[#FF6B6B] via-[#FF7F7F] to-[#4ECDC4] rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center group relative overflow-hidden ${
           isOpen && !isMinimized ? 'scale-90' : 'scale-100 hover:scale-105'
         }`}
         aria-label="Open chat"
       >
         {/* Animated background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#25D366] to-[#4ECDC4] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FF6B6B] to-[#4ECDC4] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         
         {isOpen && !isMinimized ? (
           <div className="w-6 h-1 bg-white rounded relative z-10"></div>
@@ -304,7 +304,7 @@ const WhatsAppWidget: React.FC = () => {
 
         {/* Pulse animation ring */}
         {!hasInteracted && !isOpen && (
-          <div className="absolute inset-0 rounded-full border-4 border-[#25D366] animate-ping opacity-20"></div>
+          <div className="absolute inset-0 rounded-full border-4 border-[#FF6B6B] animate-ping opacity-20"></div>
         )}
       </button>
 
@@ -317,10 +317,10 @@ const WhatsAppWidget: React.FC = () => {
               <strong className="text-[#FF6B6B]">Welcome to AdyaTribe!</strong>
             </div>
             <p className="text-gray-600 leading-relaxed">
-              Looking for authentic connections in London's vibrant women's community? I'm here to help you find your perfect tribe! 💕
+              Find your tribe in London! Chat with me to get started 💕
             </p>
             <div className="mt-2 text-xs text-[#4ECDC4] font-medium">
-              Click to start chatting →
+              Click to start →
             </div>
           </div>
           {/* Arrow pointing to button */}

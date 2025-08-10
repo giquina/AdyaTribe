@@ -15,6 +15,7 @@ type ConnectionStatus = 'none' | 'pending_sent' | 'pending_received' | 'connecte
 
 export default function ConnectionButton({ profileId, currentUserId, className = '' }: ConnectionButtonProps) {
   const [status, setStatus] = useState<ConnectionStatus>('loading')
+  const [isLoading, setIsLoading] = useState(false)
   const [showMessageForm, setShowMessageForm] = useState(false)
   const [message, setMessage] = useState('')
 
@@ -23,7 +24,7 @@ export default function ConnectionButton({ profileId, currentUserId, className =
   }, [profileId, currentUserId])
 
   const checkConnectionStatus = async () => {
-    setStatus('loading')
+    setIsLoading(true)
     
     try {
       // Check if already connected
@@ -61,7 +62,7 @@ export default function ConnectionButton({ profileId, currentUserId, className =
       return
     }
     
-    setStatus('loading')
+    setIsLoading(true)
     
     try {
       const result = await connectionService.sendConnectionRequest(
@@ -83,11 +84,13 @@ export default function ConnectionButton({ profileId, currentUserId, className =
     } catch (error) {
       toast.error('Failed to send connection request')
       setStatus('none')
+    } finally {
+      setIsLoading(false)
     }
   }
 
   const handleAcceptConnection = async () => {
-    setStatus('loading')
+    setIsLoading(true)
     
     try {
       // Find the request ID
@@ -112,11 +115,13 @@ export default function ConnectionButton({ profileId, currentUserId, className =
     } catch (error) {
       toast.error('Failed to accept connection')
       setStatus('pending_received')
+    } finally {
+      setIsLoading(false)
     }
   }
 
   const handleDeclineConnection = async () => {
-    setStatus('loading')
+    setIsLoading(true)
     
     try {
       // Find the request ID
@@ -141,6 +146,8 @@ export default function ConnectionButton({ profileId, currentUserId, className =
     } catch (error) {
       toast.error('Failed to decline connection')
       setStatus('pending_received')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -229,7 +236,7 @@ export default function ConnectionButton({ profileId, currentUserId, className =
       <div className="flex items-center gap-2">
         <button
           onClick={handleAcceptConnection}
-          disabled={status === 'loading'}
+          disabled={isLoading}
           className="flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
         >
           <CheckIcon className="w-4 h-4" />
@@ -237,7 +244,7 @@ export default function ConnectionButton({ profileId, currentUserId, className =
         </button>
         <button
           onClick={handleDeclineConnection}
-          disabled={status === 'loading'}
+          disabled={isLoading}
           className="flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
         >
           <XMarkIcon className="w-4 h-4" />

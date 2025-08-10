@@ -561,9 +561,9 @@ export class ForumsService {
     }
 
     // Check membership requirements
-    const tierLevels = { free: 0, core: 1, premium: 2 }
-    const userLevel = tierLevels[authorData.membershipTier || 'free']
-    const requiredLevel = tierLevels[category.membershipRequired]
+    const tierLevels: { [key in 'free' | 'core' | 'premium']: number } = { free: 0, core: 1, premium: 2 }
+    const userLevel = tierLevels[(authorData.membershipTier || 'free') as keyof typeof tierLevels]
+    const requiredLevel = tierLevels[category.membershipRequired as keyof typeof tierLevels]
     
     if (userLevel < requiredLevel) {
       return { success: false, error: 'Membership upgrade required' }

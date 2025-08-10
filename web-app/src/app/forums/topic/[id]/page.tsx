@@ -96,9 +96,9 @@ const PostComponent: React.FC<PostComponentProps> = ({
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-start space-x-3">
           <div className="w-10 h-10 bg-gradient-to-r from-[#FF6B6B] to-[#4ECDC4] rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
-            {post.author.profileImage ? (
+            {post.author.avatar ? (
               <img 
-                src={post.author.profileImage} 
+                src={post.author.avatar} 
                 alt={post.author.name}
                 className="w-full h-full rounded-full object-cover"
               />

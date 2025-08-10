@@ -529,23 +529,11 @@ export default function EventDetailsPage() {
                 </div>
 
                 {/* What to Expect / Bring */}
-                {(event.whatToExpected || event.whatToBring) && (
+                {event.whatToBring && (
                   <div className="bg-white rounded-2xl p-6 shadow-lg">
                     <h2 className="text-xl font-bold text-gray-900 mb-4">Event Details</h2>
                     
-                    {event.whatToExpected && (
-                      <div className="mb-6">
-                        <h3 className="font-semibold text-gray-900 mb-2">What to Expect</h3>
-                        <ul className="space-y-1">
-                          {event.whatToExpected.map((item, index) => (
-                            <li key={index} className="flex items-start gap-2 text-gray-700">
-                              <CheckCircleIcon className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
+                    {/* What to Expect section can be added if needed in the Event interface */}
 
                     {event.whatToBring && (
                       <div>

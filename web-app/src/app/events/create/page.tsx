@@ -123,8 +123,16 @@ export default function CreateEventPage() {
     setIsSubmitting(true)
     
     try {
+      // Transform recurringPattern from string to proper object format
+      const { recurringPattern: patternString, ...otherFormData } = formData
+      const recurringPattern = formData.isRecurring ? {
+        frequency: patternString === 'biweekly' ? 'weekly' : patternString as 'weekly' | 'monthly',
+        interval: patternString === 'biweekly' ? 2 : 1,
+      } : undefined
+
       const eventData: Partial<Event> = {
-        ...formData,
+        ...otherFormData,
+        recurringPattern,
         hostName: currentUser.name,
         hostImage: currentUser.profileImage,
         hostBio: `Event organized by ${currentUser.name}`,

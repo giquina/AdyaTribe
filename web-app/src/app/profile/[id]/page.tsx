@@ -217,7 +217,7 @@ export default function ProfilePage() {
                 currentUser={currentUser}
                 isOwnProfile={isOwnProfile}
                 onEditClick={handleEditProfile}
-                onPhotoClick={handlePhotoClick}
+                onPhotoClick={() => handlePhotoClick(profile.photos[0], 0)}
                 onMessageClick={handleMessageClick}
               />
             </motion.div>

@@ -414,9 +414,9 @@ export class MessagingService {
     }
 
     // Check membership requirements
-    const tierLevels = { free: 0, core: 1, premium: 2 }
-    const userLevel = tierLevels[userData.membershipTier || 'free']
-    const requiredLevel = tierLevels[room.membershipRequired]
+    const tierLevels: { [key in 'free' | 'core' | 'premium']: number } = { free: 0, core: 1, premium: 2 }
+    const userLevel = tierLevels[(userData.membershipTier || 'free') as keyof typeof tierLevels]
+    const requiredLevel = tierLevels[room.membershipRequired as keyof typeof tierLevels]
     
     if (userLevel < requiredLevel) {
       return { success: false, message: 'Membership upgrade required' }

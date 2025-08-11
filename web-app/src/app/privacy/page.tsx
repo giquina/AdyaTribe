@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { 
@@ -10,6 +11,32 @@ import {
   GlobeAltIcon,
   EnvelopeIcon
 } from '@heroicons/react/24/outline'
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy | AdyaTribe - GDPR Compliant Data Protection',
+  description: 'Learn how AdyaTribe protects your privacy and personal data. Our GDPR-compliant privacy policy for the UK\'s premier 30+ women\'s community platform.',
+  keywords: [
+    'privacy policy',
+    'GDPR compliance',
+    'data protection',
+    'UK privacy',
+    'women community privacy',
+    'personal data protection',
+    'privacy rights UK',
+    'data security',
+    'privacy policy women',
+    'UK GDPR'
+  ],
+  openGraph: {
+    title: 'Privacy Policy | AdyaTribe',
+    description: 'Learn how AdyaTribe protects your privacy and personal data with our GDPR-compliant privacy policy.',
+    type: 'website',
+    url: '/privacy',
+  },
+  alternates: {
+    canonical: '/privacy'
+  }
+}
 
 export default function PrivacyPolicy() {
   return (

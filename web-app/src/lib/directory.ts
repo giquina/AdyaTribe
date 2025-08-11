@@ -1,6 +1,7 @@
 'use client'
 
 import { UserProfile, connectionService } from '@/lib/connections'
+import { getImageWithFallback } from '@/lib/profileImages'
 
 export interface DirectoryFilters {
   search?: string
@@ -33,12 +34,12 @@ export interface MemberStats {
 export const mockDirectoryProfiles: UserProfile[] = [
   {
     id: 'user-001',
-    name: 'Emma Thompson',
+    name: 'Rachel Green',
     age: 34,
     location: 'Chelsea, London',
     bio: 'Marketing professional who loves wine tasting, book clubs, and exploring London\'s hidden gems. Always up for trying new restaurants and making genuine connections!',
     interests: ['Wine Tasting', 'Books', 'Marketing', 'Food', 'Travel', 'Photography'],
-    profileImage: 'https://images.unsplash.com/photo-1494790108755-2616b9c3e1a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+    profileImage: getImageWithFallback('rachel-green'),
     membershipTier: 'core',
     joinedAt: '2024-01-15T10:00:00Z',
     lastActive: '2024-01-26T14:30:00Z',
@@ -74,12 +75,12 @@ export const mockDirectoryProfiles: UserProfile[] = [
   },
   {
     id: 'user-002',
-    name: 'Sarah Mitchell',
+    name: 'Emma Wilson',
     age: 31,
     location: 'Kensington, London',
     bio: 'Yoga instructor and wellness coach passionate about mindful living, hiking, and connecting with like-minded women. Love organizing outdoor adventures and cozy coffee chats.',
     interests: ['Yoga', 'Wellness', 'Hiking', 'Mindfulness', 'Coffee', 'Nature'],
-    profileImage: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+    profileImage: getImageWithFallback('emma-wilson'),
     membershipTier: 'premium',
     joinedAt: '2024-01-08T09:00:00Z',
     lastActive: '2024-01-26T16:45:00Z',
@@ -115,12 +116,12 @@ export const mockDirectoryProfiles: UserProfile[] = [
   },
   {
     id: 'user-003',
-    name: 'Lisa Chen',
+    name: 'Sophia Martinez',
     age: 36,
     location: 'Canary Wharf, London',
     bio: 'Tech consultant who enjoys fitness classes, art galleries, and weekend getaways. Looking to expand my social circle with ambitious, fun-loving women.',
     interests: ['Technology', 'Fitness', 'Art', 'Travel', 'Business', 'Museums'],
-    profileImage: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+    profileImage: getImageWithFallback('sophia-martinez'),
     membershipTier: 'core',
     joinedAt: '2024-01-12T14:00:00Z',
     lastActive: '2024-01-26T12:20:00Z',
@@ -154,12 +155,12 @@ export const mockDirectoryProfiles: UserProfile[] = [
   },
   {
     id: 'user-004',
-    name: 'Rachel Davis',
+    name: 'Olivia Taylor',
     age: 33,
     location: 'Shoreditch, London',
     bio: 'Creative director with a passion for photography, indie music, and discovering London\'s best brunch spots. Always ready for spontaneous adventures!',
     interests: ['Photography', 'Music', 'Brunch', 'Design', 'Art', 'Culture'],
-    profileImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+    profileImage: getImageWithFallback('olivia-taylor'),
     membershipTier: 'premium',
     joinedAt: '2024-01-10T11:00:00Z',
     lastActive: '2024-01-26T15:10:00Z',
@@ -195,12 +196,12 @@ export const mockDirectoryProfiles: UserProfile[] = [
   },
   {
     id: 'user-005',
-    name: 'Amanda Foster',
+    name: 'Ava Davis',
     age: 29,
     location: 'Clapham, London',
     bio: 'Recently moved to London from Manchester! Love dancing, trying new cuisines, and weekend farmers markets. Excited to build a new community here.',
     interests: ['Dancing', 'Food', 'Markets', 'Fitness', 'Socializing', 'Exploring'],
-    profileImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+    profileImage: getImageWithFallback('ava-davis'),
     membershipTier: 'free',
     joinedAt: '2024-01-24T16:00:00Z',
     lastActive: '2024-01-26T18:20:00Z',
@@ -234,12 +235,12 @@ export const mockDirectoryProfiles: UserProfile[] = [
   },
   {
     id: 'user-006',
-    name: 'Jessica Williams',
+    name: 'Chloe Brown',
     age: 38,
     location: 'Hampstead, London',
-    bio: 'Psychologist and mother of two teenagers. Love book clubs, theater, and quiet coffees. Looking for meaningful friendships with other women juggling careers and family.',
-    interests: ['Psychology', 'Books', 'Theater', 'Coffee', 'Parenting', 'Mental Health'],
-    profileImage: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+    bio: 'Environmental consultant and sustainability advocate. Love book clubs, theater, and quiet coffees. Looking for meaningful friendships with other women who care about making a difference.',
+    interests: ['Environment', 'Books', 'Theater', 'Coffee', 'Sustainability', 'Mental Health'],
+    profileImage: getImageWithFallback('chloe-brown'),
     membershipTier: 'core',
     joinedAt: '2024-01-20T12:00:00Z',
     lastActive: '2024-01-26T09:30:00Z',

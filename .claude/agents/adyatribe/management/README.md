@@ -1,21 +1,22 @@
 # 📋 Management Team
 
-*Project coordination and strategic planning specialists*
+*Executable Claude Code agents for project coordination*
 
-## Team Members
+## Available Agents
 
-### **03 - 📋 Project Manager**
-**Focus:** Timeline management, task coordination, progress tracking
-**Best for:** Sprint planning, milestone tracking, scope management, feature prioritization
-
-### **10 - 📋 Feature Planner**
+### **📋 Feature Planner** (`feature-planner`)
 **Focus:** Task decomposition, development planning, beginner-friendly implementation strategies
 **Best for:** Breaking down complex features, creating implementation roadmaps, planning development sprints
 
+## Usage
+Use this agent with Claude Code's Task tool:
+```
+Task(subagent_type="feature-planner", ...)
+```
+
 ## Quick Access
-- Planning needs? → Project Manager or Feature Planner
-- Timeline questions? → Project Manager
-- Scope management? → Project Manager
-- Complex feature breakdown? → Feature Planner
+- Complex feature breakdown? → `feature-planner`
+- Development planning? → `feature-planner`
+- Task organization? → `feature-planner`
 
 *Navigate back to [main agent directory](../README.md)*

@@ -4,7 +4,7 @@ A modern, scalable community platform for 30+ single & childfree women with inte
 
 ## 📍 **Project Links**
 - **GitHub Repository:** https://github.com/giquina/AdyaTribe
-- **Local Development:** D:\AdyaTribe (External Drive)
+- **Web Platform:** [AdyaTribe.com](https://adyatribe.com) (deployment ready)
 - **Codespaces:** [Create Cloud Environment](https://github.com/giquina/AdyaTribe) → Code → Codespaces
 
 ## 🚀 Quick Start
@@ -19,8 +19,8 @@ cd mobile-app
 npm install
 npm start
 
-# Setup web dashboard (React.js) - Coming Soon
-cd ../web-dashboard  
+# Setup web app (Next.js)
+cd ../web-app
 npm install
 npm run dev
 ```
@@ -36,53 +36,68 @@ npm run dev
 - 🔔 Push notifications
 - 🛡️ Safety features & reporting
 
-### **Web Dashboard Features:**
-- 👥 Member management & verification
-- 🏷️ Group creation & moderation
-- 📊 Analytics & engagement metrics
-- 💰 Revenue tracking
-- ⚡ Content moderation tools
+### **Web Platform Features:**
+- 🌐 Complete landing page with hero, features, testimonials
+- 🔐 Authentication with social login (Google, Apple, Facebook)
+- 📖 Success stories and community showcase
+- 🛡️ Safety Center with guidelines and reporting
+- ⚖️ Legal compliance (Privacy Policy, Terms, Help Center)
+- 👥 Community pages and member directory
+- 📅 Events system with RSVP functionality
+- 💬 Forums and discussion boards
+- 👤 Advanced profile management system
+- 📱 Admin dashboard for moderation
 
 ## 🏗️ Architecture
 
 ```
-📱 Mobile (React Native + Expo)
+📱 Mobile App (React Native + Expo)
     ↕️
-🔥 Firebase Backend
+🗄️ Supabase Backend (PostgreSQL + Auth + Storage)
     ↕️  
-🌐 Web Dashboard (React.js)
+🌐 Web Platform (Next.js + TypeScript)
     ↕️
-💳 Stripe Payments
+💳 Stripe Payments (planned)
 ```
 
 ## 🛠️ Tech Stack
 
-- **Mobile:** React Native + Expo
-- **Backend:** Firebase (Auth, Firestore, Storage, Functions)
-- **Web:** React.js + Vite
-- **Payments:** Stripe API
-- **Hosting:** Expo (mobile) + Vercel (web)
+- **Mobile:** React Native 0.76.1 + Expo 52.0.0
+- **Backend:** Supabase (PostgreSQL, Auth, Storage, Edge Functions)
+- **Web:** Next.js 14 + TypeScript + Tailwind CSS
+- **UI Components:** Lucide Icons, Heroicons, Headless UI
+- **Payments:** Stripe API (integration ready)
+- **Hosting:** Expo (mobile) + Vercel/Static Export (web)
 
 ## 📂 Project Structure
 
 ```
 AdyaTribe/
-├── mobile-app/        # React Native mobile app
-├── web-dashboard/     # Admin web dashboard
-├── shared/           # Shared configs & utilities
-├── claude-agents/    # AI Assistant configurations
-├── docs/             # Documentation & guides
-└── deployment/       # CI/CD & deployment configs
+├── mobile-app/           # React Native + Expo mobile application
+│   ├── src/
+│   │   ├── screens/      # Onboarding flow (7 complete steps)
+│   │   ├── constants/    # Design system and styles
+│   │   └── lib/          # Supabase client integration
+├── web-app/              # Next.js web platform
+│   ├── src/
+│   │   ├── app/          # 25+ pages (landing, legal, platform)
+│   │   ├── components/   # 20+ specialized components
+│   │   └── lib/          # Utility libraries and Supabase client
+├── .claude/              # Claude Code agents and configuration
+├── docs/                 # Comprehensive documentation
+├── supabase/             # Database migrations and schema
+└── tasks/                # Project tracking and todos
 ```
 
 ## 🎯 Development Phases
 
-- ✅ **Phase 1:** Project setup & structure
-- 🔄 **Phase 2:** Mobile onboarding flow (Steps 1-3 complete)  
-- 📋 **Phase 3:** Core community features
-- 💰 **Phase 4:** Payments & premium features
-- 🌐 **Phase 5:** Web dashboard
-- 🚀 **Phase 6:** Production deployment
+- ✅ **Phase 1:** Foundation Complete - Mobile onboarding (7/7 steps)
+- ✅ **Phase 2:** Platform Development Complete - Web app (25+ pages)
+- ✅ **Phase 2.5:** Backend Integration Complete - Supabase production ready
+- 🔄 **Phase 3:** Production Launch - Mobile-to-database integration
+- 📋 **Phase 4:** Real-time features - Chat, notifications, live updates
+- 💰 **Phase 5:** Subscription system - Stripe integration
+- 🚀 **Phase 6:** Scale & Growth - Advanced features
 
 ## 📚 Key Documentation
 
@@ -94,16 +109,20 @@ AdyaTribe/
 
 ## 🤖 AI Development Team
 
-This project includes specialized Claude agents for different aspects of development:
+This project uses Claude Code's agent system with specialized documentation:
 
-- **UI Specialist** - Design systems and beautiful interfaces
-- **UX Designer** - User experience and flow optimization
-- **Project Manager** - Planning, timelines, and coordination
-- **React Native Expert** - Mobile development specialist
-- **Firebase Architect** - Backend and database design
-- **Security Consultant** - Safety and privacy features
-- **Testing Engineer** - Quality assurance and debugging
-- **DevOps Engineer** - Deployment and CI/CD
+**Executable Agents (via Task tool):**
+- **`general-purpose`** - Complex research and multi-step tasks
+- **`feature-planner`** - Breaking down complex features
+- **`onboarding-flow-expert`** - AdyaTribe's 7-step onboarding optimization
+- **`design-system-guardian`** - Design consistency across platforms
+- **`file-consistency-manager`** - Project organization and duplicate management
+- **`react-native-debugger`** - Mobile development and Expo debugging
+
+**Reference Documentation (`.claude/agents/adyatribe/`):**
+- Development team knowledge (UI, UX, React Native, Testing, Supabase)
+- Deployment team expertise (Vercel, DevOps, GitHub Actions)
+- Management and security consultation
 
 ## 🚀 Getting Started
 
@@ -114,24 +133,30 @@ This project includes specialized Claude agents for different aspects of develop
 4. Build features incrementally
 
 ### **Current Status:**
-- ✅ Mobile app foundation complete
-- ✅ Onboarding Steps 1-2 working
-- 🔄 Email validation (Step 3) ready to implement
-- 📋 Profile picture upload next
+- ✅ Mobile app complete - 7/7 onboarding steps functional
+- ✅ Web platform complete - 25+ pages with full feature set
+- ✅ Backend infrastructure - Supabase production ready
+- ✅ Authentication system - Social login integration
+- ✅ Legal compliance - Privacy, Terms, Safety Center
+- 🔄 Backend integration - Connecting mobile onboarding to database
 
 ### **Next Immediate Steps:**
-1. Push current code to GitHub
-2. Set up Codespaces environment
-3. Complete onboarding flow (Steps 3-7)
-4. Integrate Firebase backend
+1. Integrate mobile onboarding with Supabase backend
+2. Implement real-time functionality (chat, notifications)
+3. Set up Stripe payment system
+4. Deploy web platform to production
+5. Prepare mobile app for App Store submission
 
 ## 🎉 Community Impact
 
-Building a safe, inclusive space for 30+ single & childfree women to:
-- Connect with like-minded individuals
-- Join interest-based groups (hiking, theater, book clubs)
-- Attend events and meet in person
-- Build lasting friendships and community
+**Platform Features Designed for Real Connection:**
+- 🔐 **Safety First:** Identity verification, selfie authentication, moderation
+- 👥 **Authentic Community:** 30+ age verification, genuine profiles only
+- 🌟 **Inclusive Space:** Celebrating single & childfree life choices
+- 🎯 **Interest-Based Matching:** 48 interests across 6 categories
+- 📅 **Real-World Events:** From hiking groups to professional networking
+- 💬 **Group-Based Chat:** Community focus, not 1:1 dating
+- 🏆 **Success Stories:** Already helping women build lasting friendships
 
 ## 📞 Support & Contact
 
@@ -149,4 +174,4 @@ Building a safe, inclusive space for 30+ single & childfree women to:
 
 ---
 
-*Last Updated: 2025-08-10*
+*Last Updated: 2025-01-11*

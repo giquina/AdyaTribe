@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { 
@@ -10,6 +11,32 @@ import {
   LockClosedIcon,
   ScaleIcon
 } from '@heroicons/react/24/outline'
+
+export const metadata: Metadata = {
+  title: 'Terms of Service | AdyaTribe - Community Guidelines & Platform Rules',
+  description: 'Review AdyaTribe\'s terms of service, community guidelines, and membership requirements for our safe 30+ women\'s community platform.',
+  keywords: [
+    'terms of service',
+    'community guidelines',
+    'platform rules',
+    'membership terms',
+    'women community rules',
+    'UK terms',
+    'community standards',
+    'platform policy',
+    'user agreement',
+    '30+ women community'
+  ],
+  openGraph: {
+    title: 'Terms of Service | AdyaTribe',
+    description: 'Review AdyaTribe\'s terms of service, community guidelines, and membership requirements.',
+    type: 'website',
+    url: '/terms',
+  },
+  alternates: {
+    canonical: '/terms'
+  }
+}
 
 export default function TermsOfService() {
   return (

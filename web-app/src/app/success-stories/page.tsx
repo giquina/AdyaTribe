@@ -1,3 +1,4 @@
+import { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { 
@@ -12,8 +13,73 @@ import {
   ChatBubbleOvalLeftIcon
 } from '@heroicons/react/24/outline'
 
+// TypeScript interfaces
+interface FeaturedStory {
+  id: number
+  name: string
+  location: string
+  memberSince: string
+  title: string
+  excerpt: string
+  story: string
+  image: string
+  tags: string[]
+  joinDate: string
+  testimonial: string
+}
+
+interface QuickStory {
+  name: string
+  location: string
+  story: string
+  category: string
+}
+
+interface ImpactStat {
+  label: string
+  value: string
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
+}
+
+export const metadata: Metadata = {
+  title: 'Success Stories - Real Women, Real Connections | AdyaTribe',
+  description: 'Discover how AdyaTribe has helped thousands of women 30+ across the UK build lasting friendships, launch businesses, and create meaningful support networks. Read authentic success stories from London, Manchester, Edinburgh and beyond.',
+  keywords: [
+    'AdyaTribe success stories',
+    'women friendship UK',
+    'female networking success',
+    '30+ women connections',
+    'UK women community testimonials',
+    'single women support network',
+    'childfree women friendships',
+    'London women networking',
+    'female entrepreneurs UK',
+    'women business partnerships'
+  ],
+  openGraph: {
+    title: 'Success Stories - Real Women, Real Connections | AdyaTribe',
+    description: 'Discover how AdyaTribe has helped thousands of women 30+ across the UK build lasting friendships, launch businesses, and create meaningful support networks.',
+    type: 'website',
+    url: 'https://adyatribe.com/success-stories',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'AdyaTribe Success Stories - Women Building Connections',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Success Stories - Real Women, Real Connections | AdyaTribe',
+    description: 'Discover how AdyaTribe has helped thousands of women 30+ across the UK build lasting friendships and support networks.',
+    images: ['/og-image.jpg'],
+  },
+}
+
 export default function SuccessStories() {
-  const featuredStories = [
+  const featuredStories: FeaturedStory[] = [
     {
       id: 1,
       name: "Emma & Sarah",
@@ -79,7 +145,7 @@ export default function SuccessStories() {
     }
   ]
 
-  const quickStories = [
+  const quickStories: QuickStory[] = [
     {
       name: "Charlotte",
       location: "Brighton",
@@ -115,14 +181,32 @@ export default function SuccessStories() {
       location: "Liverpool",
       story: "We started a monthly dinner club that's become the highlight of my month. Real conversations, real connections.",
       category: "Dinner Club"
+    },
+    {
+      name: "Zara",
+      location: "Cardiff",
+      story: "After my corporate burnout, the wellness group helped me transition to freelance life with amazing support and referrals.",
+      category: "Career Transition"
+    },
+    {
+      name: "Olivia",
+      location: "Newcastle",
+      story: "The travel group has become my adventure family - we've explored Scotland, Ireland, and planning our Iceland trip!",
+      category: "Travel Adventures"
+    },
+    {
+      name: "Amelia",
+      location: "Oxford",
+      story: "Started a sustainable living workshop with AdyaTribe friends - we're making real environmental impact together.",
+      category: "Sustainability"
     }
   ]
 
-  const impactStats = [
-    { label: "Lasting Friendships Formed", value: "480+", icon: HeartIcon },
-    { label: "Support Networks Created", value: "85+", icon: UserGroupIcon },
-    { label: "Business Partnerships", value: "42+", icon: TrophyIcon },
-    { label: "Women Supported", value: "300+", icon: SparklesIcon }
+  const impactStats: ImpactStat[] = [
+    { label: "Lasting Friendships Formed", value: "520+", icon: HeartIcon },
+    { label: "Support Networks Created", value: "95+", icon: UserGroupIcon },
+    { label: "Business Partnerships", value: "48+", icon: TrophyIcon },
+    { label: "Women Supported", value: "1,200+", icon: SparklesIcon }
   ]
 
   return (
@@ -137,10 +221,10 @@ export default function SuccessStories() {
                 <HeartIcon className="w-4 h-4 mr-2" />
                 Real Stories • Real Friendships
               </div>
-              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 text-balance">
                 Success Stories
               </h1>
-              <p className="text-xl text-gray-600 leading-relaxed">
+              <p className="text-lg sm:text-xl text-gray-600 leading-relaxed text-balance">
                 Discover how AdyaTribe has helped thousands of incredible women across the UK build meaningful friendships, 
                 launch businesses, and create the support networks they always dreamed of.
               </p>
@@ -182,9 +266,9 @@ export default function SuccessStories() {
                 In-depth stories from women whose lives have been transformed by the AdyaTribe community
               </p>
 
-              <div className="space-y-16">
+              <div className="space-y-16 lg:space-y-20">
                 {featuredStories.map((story, index) => (
-                  <div key={story.id} className={`grid lg:grid-cols-2 gap-12 items-start ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
+                  <div key={story.id} className={`grid lg:grid-cols-2 gap-8 lg:gap-12 items-start ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
                     {/* Image */}
                     <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
                       <div className="relative">
@@ -212,7 +296,7 @@ export default function SuccessStories() {
 
                     {/* Content */}
                     <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''}`}>
-                      <div className="bg-white rounded-2xl p-8 shadow-lg">
+                      <div className="bg-white rounded-2xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
                         <div className="flex items-center mb-4">
                           <StarIcon className="w-5 h-5 text-yellow-400 mr-1" />
                           <StarIcon className="w-5 h-5 text-yellow-400 mr-1" />
@@ -267,9 +351,9 @@ export default function SuccessStories() {
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                 {quickStories.map((story, index) => (
-                  <div key={index} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow border border-gray-100">
+                  <div key={index} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-100 transform hover:scale-105 transition-transform">
                     <div className="flex items-center mb-4">
                       <div className="w-12 h-12 bg-gradient-to-br from-primary-400 to-secondary-400 rounded-full flex items-center justify-center text-white font-bold text-lg mr-4">
                         {story.name.charAt(0)}
@@ -306,8 +390,8 @@ export default function SuccessStories() {
                 What Makes Our Community Special
               </h2>
               
-              <div className="grid md:grid-cols-2 gap-8">
-                <div className="bg-white rounded-xl p-8">
+              <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+                <div className="bg-white rounded-xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
                   <UserGroupIcon className="w-8 h-8 text-primary-600 mb-4" />
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">Authentic Connections</h3>
                   <p className="text-gray-600">
@@ -316,7 +400,7 @@ export default function SuccessStories() {
                   </p>
                 </div>
                 
-                <div className="bg-white rounded-xl p-8">
+                <div className="bg-white rounded-xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
                   <HeartIcon className="w-8 h-8 text-secondary-600 mb-4" />
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">Judgment-Free Environment</h3>
                   <p className="text-gray-600">
@@ -325,7 +409,7 @@ export default function SuccessStories() {
                   </p>
                 </div>
                 
-                <div className="bg-white rounded-xl p-8">
+                <div className="bg-white rounded-xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
                   <SparklesIcon className="w-8 h-8 text-purple-600 mb-4" />
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">Diverse Interests</h3>
                   <p className="text-gray-600">
@@ -334,7 +418,7 @@ export default function SuccessStories() {
                   </p>
                 </div>
                 
-                <div className="bg-white rounded-xl p-8">
+                <div className="bg-white rounded-xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
                   <TrophyIcon className="w-8 h-8 text-green-600 mb-4" />
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">Supportive Network</h3>
                   <p className="text-gray-600">
@@ -351,10 +435,10 @@ export default function SuccessStories() {
         <section className="py-20 bg-gradient-to-r from-primary-500 to-secondary-500 text-white">
           <div className="container-width px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 text-balance">
                 Ready to Write Your Own Success Story?
               </h2>
-              <p className="text-xl mb-8 opacity-90">
+              <p className="text-lg sm:text-xl mb-8 opacity-90 text-balance">
                 Join thousands of incredible women who've found their tribe through AdyaTribe. 
                 Your next best friend, business partner, or support network is waiting for you.
               </p>

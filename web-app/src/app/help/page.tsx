@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { 
@@ -14,6 +15,32 @@ import {
   LightBulbIcon,
   HandRaisedIcon
 } from '@heroicons/react/24/outline'
+
+export const metadata: Metadata = {
+  title: 'Help Center | AdyaTribe - Support, FAQs & User Guides',
+  description: 'Get help with AdyaTribe! Find answers to common questions, contact support, and learn how to make the most of our 30+ women\'s community platform.',
+  keywords: [
+    'help center',
+    'support',
+    'FAQ',
+    'user guide',
+    'AdyaTribe help',
+    'community support',
+    'platform help',
+    'user support',
+    'how to use',
+    '30+ women help'
+  ],
+  openGraph: {
+    title: 'Help Center | AdyaTribe',
+    description: 'Get help with AdyaTribe! Find answers to common questions, contact support, and user guides.',
+    type: 'website',
+    url: '/help',
+  },
+  alternates: {
+    canonical: '/help'
+  }
+}
 
 export default function HelpCenter() {
   const faqCategories = [

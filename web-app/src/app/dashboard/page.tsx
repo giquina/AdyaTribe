@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { authService, User } from '@/lib/auth'
 import { useRouter } from 'next/navigation'
+import EventImageWithFallback from '@/components/EventImageWithFallback'
 import { 
   Heart, 
   Calendar, 
@@ -370,10 +371,21 @@ export default function Dashboard() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {upcomingEvents.map(event => (
                     <div key={event.id} className="border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow">
-                      <div className="h-48 bg-gradient-to-r from-[#FF6B6B] to-[#4ECDC4] flex items-center justify-center">
-                        <div className="text-white text-center">
-                          {getCategoryIcon(event.category)}
-                          <p className="mt-2 font-medium">{event.category}</p>
+                      <div className="h-48 relative">
+                        <EventImageWithFallback
+                          src={event.image}
+                          alt={event.title}
+                          category={event.category}
+                          className="object-cover"
+                          fill
+                          priority
+                        />
+                        {/* Overlay */}
+                        <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                          <div className="text-white text-center">
+                            {getCategoryIcon(event.category)}
+                            <p className="mt-2 font-medium">{event.category}</p>
+                          </div>
                         </div>
                       </div>
                       <div className="p-4">

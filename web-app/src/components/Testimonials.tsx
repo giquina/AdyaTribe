@@ -3,13 +3,14 @@
 import { motion } from 'framer-motion'
 import { StarIcon } from '@heroicons/react/24/solid'
 import { ChatBubbleLeftIcon } from '@heroicons/react/24/outline'
+import { getProfileImage, getImagesByCategory, getImageWithFallback, getAltTextWithFallback } from '@/lib/profileImages'
 
 const testimonials = [
   {
     name: "Sarah Chen",
     age: "34",
     location: "Clapham, London",
-    image: "https://images.unsplash.com/photo-1494790108755-2616b612b1ac?w=150&h=150&fit=crop&crop=face&auto=format",
+    imageId: "sarah-chen",
     quote: "I moved to London at 32 for work and felt so isolated. AdyaTribe helped me find my book club girls and now we're planning a trip to Scotland together! It's like finding your chosen family.",
     rating: 5,
     relationship: "Found her London book club tribe"
@@ -18,7 +19,7 @@ const testimonials = [
     name: "Maya Patel",
     age: "38", 
     location: "Shoreditch, London",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face&auto=format",
+    imageId: "maya-patel",
     quote: "The walking group I joined through AdyaTribe has become my weekend sanctuary. From Hampstead Heath to Richmond Park, these women push me to explore London while providing incredible support.",
     rating: 5,
     relationship: "Adventure buddy for life"
@@ -27,7 +28,7 @@ const testimonials = [
     name: "Jessica Williams",
     age: "31",
     location: "Notting Hill, London", 
-    image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=150&h=150&fit=crop&crop=face&auto=format",
+    imageId: "jessica-williams",
     quote: "As a childfree woman in London, I often felt judged. Here, I found women who celebrate my choices and share similar life goals. We support each other's careers and UK travel dreams.",
     rating: 5,
     relationship: "Career and travel support system"
@@ -36,7 +37,7 @@ const testimonials = [
     name: "Emma Johnson",
     age: "41",
     location: "Greenwich, London",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face&auto=format",
+    imageId: "emma-johnson",
     quote: "After my divorce, I thought making new friends in London would be impossible. The women I met through AdyaTribe helped me rediscover myself and showed me that your 40s can be empowering.",
     rating: 5,
     relationship: "Post-divorce support network"
@@ -45,7 +46,7 @@ const testimonials = [
     name: "Priya Sharma",
     age: "35",
     location: "Canary Wharf, London",
-    image: "https://images.unsplash.com/photo-1504703395950-b89145a5425b?w=150&h=150&fit=crop&crop=face&auto=format", 
+    imageId: "priya-sharma",
     quote: "The cooking group introduced me to British and international women who've enriched my London experience immeasurably. We explore Borough Market together and share our cultural recipes.",
     rating: 5,
     relationship: "Cultural exchange and friendship"
@@ -54,7 +55,7 @@ const testimonials = [
     name: "Lisa Thompson",
     age: "39",
     location: "Richmond, London",
-    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face&auto=format",
+    imageId: "lisa-thompson",
     quote: "I was skeptical about online friendships, but these London connections are the most genuine I've experienced. The verification process ensures everyone is real and serious about friendship.",
     rating: 5,
     relationship: "Genuine London friendships"
@@ -151,8 +152,8 @@ export default function Testimonials() {
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-full overflow-hidden shadow-lg ring-2 ring-white">
                     <img 
-                      src={testimonial.image} 
-                      alt={`${testimonial.name} - AdyaTribe member`}
+                      src={getImageWithFallback(testimonial.imageId)} 
+                      alt={getAltTextWithFallback(testimonial.imageId)}
                       className="w-full h-full object-cover"
                       loading="lazy"
                     />
@@ -193,22 +194,9 @@ export default function Testimonials() {
           
           {/* Photo Grid */}
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4 mb-12">
-            {[
-              { src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Professional woman smiling" },
-              { src: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Confident woman in professional setting" },
-              { src: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Diverse professional woman" },
-              { src: "https://images.unsplash.com/photo-1594736797933-d0acc43a8f2a?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Woman with warm smile" },
-              { src: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Professional woman outdoors" },
-              { src: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Confident professional woman" },
-              { src: "https://images.unsplash.com/photo-1504703395950-b89145a5425b?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Woman with authentic smile" },
-              { src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Approachable professional woman" },
-              { src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Confident woman in natural lighting" },
-              { src: "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Professional woman with warm expression" },
-              { src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Diverse woman with bright smile" },
-              { src: "https://images.unsplash.com/photo-1494790108755-2616b612b1ac?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Woman with authentic expression" }
-            ].map((member, index) => (
+            {getImagesByCategory('community').map((member, index) => (
               <motion.div
-                key={index}
+                key={member.id}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -217,7 +205,7 @@ export default function Testimonials() {
                 className="aspect-square rounded-2xl overflow-hidden shadow-lg ring-2 ring-white hover:ring-primary-200 transition-all duration-300"
               >
                 <img 
-                  src={member.src}
+                  src={member.path}
                   alt={member.alt}
                   className="w-full h-full object-cover"
                   loading="lazy"

@@ -1,5 +1,7 @@
 'use client'
 
+import { getImageWithFallback } from '@/lib/profileImages'
+
 // Dummy authentication system for testing
 export interface User {
   id: string
@@ -22,7 +24,7 @@ const DUMMY_USERS: Record<string, User> = {
     name: 'Sarah Johnson',
     role: 'user',
     membershipTier: 'core',
-    profileImage: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80',
+    profileImage: getImageWithFallback('emma-wilson'),
     joinedDate: '2024-01-15',
     interests: ['Books & Reading', 'Wine Tasting', 'Fitness & Wellness', 'Travel & Adventures'],
     favoriteEvents: ['book-club-jan', 'wine-tasting-feb', 'yoga-march'],
@@ -34,7 +36,7 @@ const DUMMY_USERS: Record<string, User> = {
     name: 'Emma Williams',
     role: 'admin',
     membershipTier: 'premium',
-    profileImage: 'https://images.unsplash.com/photo-1494790108755-2616b9c3e1a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80',
+    profileImage: getImageWithFallback('rachel-green'),
     joinedDate: '2023-06-01',
     interests: ['Community Management', 'Event Planning', 'Networking', 'Women Empowerment'],
     favoriteEvents: ['admin-meetup', 'community-feedback'],
@@ -46,7 +48,7 @@ const DUMMY_USERS: Record<string, User> = {
     name: 'Jessica Brown',
     role: 'user', 
     membershipTier: 'free',
-    profileImage: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80',
+    profileImage: getImageWithFallback('chloe-brown'),
     joinedDate: '2024-03-01',
     interests: ['Arts & Culture', 'Food & Dining'],
     favoriteEvents: ['art-gallery-tour'],

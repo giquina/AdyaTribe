@@ -11,6 +11,7 @@ import {
   HeartIcon,
   SparklesIcon
 } from '@heroicons/react/24/outline'
+import { getImagesByCategory } from '@/lib/profileImages'
 
 const features = [
   {
@@ -151,19 +152,12 @@ export default function Features() {
             <div className="absolute inset-0 opacity-5">
               <div className="grid grid-cols-6 gap-2 h-full">
                 {Array.from({ length: 24 }).map((_, index) => {
-                  const photos = [
-                    "https://images.unsplash.com/photo-1494790108755-2616b612b1ac?w=80&h=80&fit=crop&crop=face&auto=format",
-                    "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&h=80&fit=crop&crop=face&auto=format",
-                    "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=80&h=80&fit=crop&crop=face&auto=format",
-                    "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face&auto=format",
-                    "https://images.unsplash.com/photo-1504703395950-b89145a5425b?w=80&h=80&fit=crop&crop=face&auto=format",
-                    "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=80&h=80&fit=crop&crop=face&auto=format"
-                  ]
+                  const photos = getImagesByCategory('community').slice(0, 6)
                   return (
                     <div key={index} className="aspect-square rounded-xl overflow-hidden">
                       <img 
-                        src={photos[index % photos.length]}
-                        alt="AdyaTribe member"
+                        src={photos[index % photos.length]?.path || '/profiles/default-avatar.svg'}
+                        alt={photos[index % photos.length]?.alt || 'AdyaTribe member'}
                         className="w-full h-full object-cover"
                         loading="lazy"
                       />
@@ -184,7 +178,7 @@ export default function Features() {
                 <div className="flex items-center justify-center gap-4 mb-4">
                   <div className="w-16 h-16 rounded-full overflow-hidden shadow-lg ring-2 ring-white">
                     <img 
-                      src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=face&auto=format"
+                      src={getImagesByCategory('community')[0]?.path || '/profiles/default-avatar.svg'}
                       alt="Adyam Embaie, AdyaTribe founder"
                       className="w-full h-full object-cover"
                       loading="lazy"

@@ -14,6 +14,7 @@ import {
   CameraIcon,
   StarIcon
 } from '@heroicons/react/24/outline'
+import { getImageWithFallback } from '@/lib/profileImages'
 
 const benefits = [
   {
@@ -51,14 +52,14 @@ const testimonials = [
     age: "34",
     location: "Clapham",
     quote: "Found my book club tribe through AdyaTribe. These friendships feel like chosen family.",
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b1ac?w=80&h=80&fit=crop&crop=face&auto=format"
+    avatar: getImageWithFallback('sarah-chen')
   },
   {
     name: "Maya P.",
     age: "38",
     location: "Shoreditch", 
     quote: "The verification process made me feel safe from day one. Real women, real friendships.",
-    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&h=80&fit=crop&crop=face&auto=format"
+    avatar: getImageWithFallback('maya-patel')
   }
 ]
 

@@ -1,26 +1,20 @@
 # 🚀 Deployment Team
 
-*Specialists for production deployment and infrastructure management*
+*For deployment tasks, use the general-purpose agent*
 
-## Team Members
+## Available Agents
 
-### **05 - 🌐 Vercel Deployment Specialist**
-**Focus:** Web deployment, serverless functions, performance optimization
-**Best for:** Deploying admin dashboard, landing pages, API routes, hosting setup
-**Recently Updated:** Enhanced with comprehensive Vercel deployment knowledge
+**No specific deployment agents available in Claude Code built-ins.**
 
-### **08 - ⚙️ DevOps Engineer**
-**Focus:** Deployment, CI/CD, infrastructure management
-**Best for:** App store submission, deployment automation, monitoring
+Use `general-purpose` agent for:
+- Web deployment and hosting setup
+- CI/CD and automation
+- Git workflows and repository management
+- Production deployment planning
 
-### **09 - 🐙 GitHub Deployment Specialist**
-**Focus:** Git workflows, GitHub Actions, repository management, CI/CD automation
-**Best for:** Repository setup, branch strategies, pull requests, automated pipelines, security scanning
-**Recently Added:** Comprehensive GitHub workflow and automation expertise
-
-## Quick Access
-- Web deployment? → Vercel Deployment Specialist
-- Git workflows & CI/CD? → GitHub Deployment Specialist
-- Production deployment? → DevOps Engineer
+## Usage
+```
+Task(subagent_type="general-purpose", prompt="Deploy web app to Vercel")
+```
 
 *Navigate back to [main agent directory](../README.md)*

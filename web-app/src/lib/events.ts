@@ -1,6 +1,7 @@
 'use client'
 
 import { User } from '@/lib/auth'
+import { getImageWithFallback } from '@/lib/profileImages'
 
 export interface EventAttendee {
   id: string
@@ -292,7 +293,7 @@ export class EventService {
         tags: ['book club', 'brunch', 'Chelsea', 'discussion', 'literature'],
         hostId: 'host-sarah',
         hostName: 'Sarah Chen',
-        hostImage: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
+        hostImage: getImageWithFallback('emma-wilson'),
         hostBio: 'Literature enthusiast and event organizer with 5+ years running book clubs',
         membershipRequired: 'core',
         price: 35,
@@ -385,7 +386,7 @@ export class EventService {
         tags: ['walking', 'Thames', 'exercise', 'sightseeing', 'outdoor'],
         hostId: 'host-rachel',
         hostName: 'Rachel Thompson',
-        hostImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
+        hostImage: getImageWithFallback('olivia-taylor'),
         hostBio: 'Fitness enthusiast and London walking expert',
         membershipRequired: 'free',
         price: 0,
@@ -471,7 +472,7 @@ export class EventService {
         tags: ['pottery', 'wine', 'creative', 'workshop', 'Hoxton'],
         hostId: 'host-isabella',
         hostName: 'Isabella Martinez',
-        hostImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80',
+        hostImage: getImageWithFallback('ava-davis'),
         hostBio: 'Professional ceramicist and wine enthusiast',
         membershipRequired: 'core',
         price: 75,

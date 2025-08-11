@@ -17,6 +17,7 @@ import {
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import EventImageWithFallback from '@/components/EventImageWithFallback'
 import { Event, EventFilters, eventService, EVENT_CATEGORIES } from '@/lib/events'
 
 const EventCard = ({ event }: { event: Event }) => {
@@ -74,10 +75,13 @@ const EventCard = ({ event }: { event: Event }) => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {event.photos?.map((photo) => (
                 <div key={photo.id} className="aspect-square rounded-lg overflow-hidden">
-                  <img 
+                  <EventImageWithFallback
                     src={photo.url}
                     alt={photo.caption || 'Event photo'}
+                    category={event.category}
                     className="w-full h-full object-cover"
+                    width={300}
+                    height={300}
                   />
                   {photo.caption && (
                     <p className="mt-2 text-sm text-gray-600">{photo.caption}</p>
@@ -101,27 +105,15 @@ const EventCard = ({ event }: { event: Event }) => {
         className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
       >
         {/* Event Image */}
-        <div className="relative h-48 bg-gradient-to-r from-primary-200 to-secondary-200">
-          {event.images[0] ? (
-            <img 
-              src={event.images[0]} 
-              alt={event.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-6xl">
-              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'BookOpen' && '📚'}
-              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Dumbbell' && '💪'}
-              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Palette' && '🎨'}
-              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Wine' && '🍷'}
-              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Coffee' && '☕'}
-              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Music' && '🎵'}
-              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Camera' && '📷'}
-              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Plane' && '✈️'}
-              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Heart' && '💕'}
-              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Star' && '⭐'}
-            </div>
-          )}
+        <div className="relative h-48 overflow-hidden">
+          <EventImageWithFallback
+            src={event.images?.[0] || ''}
+            alt={event.title}
+            category={event.category}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            fill
+            priority
+          />
           
           {/* Photo Gallery Indicator */}
           {event.photos && event.photos.length > 0 && (

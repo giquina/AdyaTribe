@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 import { motion } from 'framer-motion'
 import { StarIcon, CalendarDaysIcon, MapPinIcon, UsersIcon, HeartIcon, ChatBubbleLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import { CheckCircleIcon } from '@heroicons/react/24/solid'
+import { getImageWithFallback } from '@/lib/profileImages'
 
 const communityStats = [
   { number: '300+', label: 'Verified Members', icon: UsersIcon },
@@ -48,7 +49,7 @@ const memberSpotlight = [
     name: 'Emma',
     age: 34,
     location: 'Clapham',
-    image: 'https://images.unsplash.com/photo-1494790108755-2616b612b1ac?w=80&h=80&fit=crop&crop=face&auto=format',
+    image: getImageWithFallback('sarah-chen'),
     quote: 'Found my weekend hiking crew! 🥾',
     activity: 'Organized 3 events this month'
   },
@@ -56,7 +57,7 @@ const memberSpotlight = [
     name: 'Priya',
     age: 31,
     location: 'Shoreditch',
-    image: 'https://images.unsplash.com/photo-1504703395950-b89145a5425b?w=80&h=80&fit=crop&crop=face&auto=format',
+    image: getImageWithFallback('priya-sharma'),
     quote: 'The cooking group changed my London experience!',
     activity: 'Active in 4 groups'
   },
@@ -64,7 +65,7 @@ const memberSpotlight = [
     name: 'Sarah',
     age: 38,
     location: 'Richmond',
-    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&h=80&fit=crop&crop=face&auto=format',
+    image: getImageWithFallback('maya-patel'),
     quote: 'Finally found my West End theatre buddies! 🎭',
     activity: 'Attended 8 events'
   }

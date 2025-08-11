@@ -16,6 +16,46 @@ import {
   MusicalNoteIcon
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
+import EventImageWithFallback from '@/components/EventImageWithFallback'
+
+// Event Image Component with fallback
+const EventImage = ({ event }: { event: typeof upcomingEvents[0] }) => {
+  return (
+    <div className="h-48 relative overflow-hidden">
+      <EventImageWithFallback
+        src={event.image}
+        alt={`${event.title} event image`}
+        category={event.category}
+        className="object-cover"
+        fill
+        priority
+      />
+      
+      {/* Overlay for readability */}
+      <div className="absolute inset-0 bg-black/20"></div>
+      
+      {/* Category icon overlay */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="text-center text-white">
+          <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4">
+            {event.icon}
+          </div>
+          <div className="text-sm font-medium opacity-90">{event.category}</div>
+        </div>
+      </div>
+      
+      {/* Date badge */}
+      <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
+        <div className="text-xs font-bold text-gray-900">{event.date}</div>
+      </div>
+
+      {/* Price badge */}
+      <div className="absolute top-4 right-4 bg-green-500 text-white rounded-lg px-3 py-2">
+        <div className="text-xs font-bold">£{event.price}</div>
+      </div>
+    </div>
+  )
+}
 
 const upcomingEvents = [
   {
@@ -144,27 +184,7 @@ export default function EventsShowcase() {
               className="bg-white rounded-2xl shadow-lg overflow-hidden group"
             >
               {/* Event Image */}
-              <div className={`h-48 bg-gradient-to-br ${event.color} relative overflow-hidden`}>
-                <div className="absolute inset-0 bg-black/20"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4">
-                      {event.icon}
-                    </div>
-                    <div className="text-sm font-medium opacity-90">{event.category}</div>
-                  </div>
-                </div>
-                
-                {/* Date badge */}
-                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
-                  <div className="text-xs font-bold text-gray-900">{event.date}</div>
-                </div>
-
-                {/* Price badge */}
-                <div className="absolute top-4 right-4 bg-green-500 text-white rounded-lg px-3 py-2">
-                  <div className="text-xs font-bold">£{event.price}</div>
-                </div>
-              </div>
+              <EventImage event={event} />
 
               {/* Event Content */}
               <div className="p-6">

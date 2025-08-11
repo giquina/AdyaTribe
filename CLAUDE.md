@@ -207,15 +207,25 @@ These libraries provide TypeScript interfaces and integrate with the Supabase ba
 ### Web App Page Structure
 **Landing & Information Pages:**
 - `web-app/src/app/page.tsx`: Main landing page with hero, features, testimonials
-- `web-app/src/app/about/page.tsx`: About the platform
+- `web-app/src/app/about/page.tsx`: About the platform and founder
 - `web-app/src/app/how-it-works/page.tsx`: Platform usage guide
 - `web-app/src/app/community/page.tsx`: Community overview
 - `web-app/src/app/contact/page.tsx`: Contact information
 - `web-app/src/app/pricing/page.tsx`: Membership tiers and pricing
+- `web-app/src/app/success-stories/page.tsx`: Member success stories and testimonials
+- `web-app/src/app/safety/page.tsx`: Safety Center with guidelines and reporting
+- `web-app/src/app/community-guidelines/page.tsx`: Community standards and expectations
+
+**Legal & Support Pages:**
+- `web-app/src/app/privacy/page.tsx`: Privacy policy and data protection
+- `web-app/src/app/terms/page.tsx`: Terms of service and legal agreements
+- `web-app/src/app/help/page.tsx`: Help center and FAQ
 
 **Authentication Pages:**
-- `web-app/src/app/login/page.tsx`: User login form
-- `web-app/src/app/signup/page.tsx`: User registration form
+- `web-app/src/app/login/page.tsx`: User login form with social options
+- `web-app/src/app/signup/page.tsx`: User registration form with social options
+- `web-app/src/app/signup/success/page.tsx`: Post-signup welcome page
+- `web-app/src/app/forgot-password/page.tsx`: Password recovery form
 
 **Platform Features (Phase 2):**
 - `web-app/src/app/dashboard/page.tsx`: User dashboard and activity feed
@@ -228,14 +238,16 @@ These libraries provide TypeScript interfaces and integrate with the Supabase ba
 - `web-app/src/app/events/create/page.tsx`: Event creation form
 - `web-app/src/app/forums/page.tsx`: Discussion forums
 - `web-app/src/app/forums/topic/[id]/page.tsx`: Individual forum topic
+- `web-app/src/app/forums/create-topic/page.tsx`: Forum topic creation form
 - `web-app/src/app/profiles/page.tsx`: Profile browsing
 - `web-app/src/app/profile/[id]/page.tsx`: Public profile view
 - `web-app/src/app/profile/edit/page.tsx`: Profile editing interface
 - `web-app/src/app/admin/page.tsx`: Admin dashboard (restricted)
 
-### Advanced Profile Components
-The web app includes sophisticated profile management components in `src/components/profile/`:
+### Advanced Components
+The web app includes sophisticated components for enhanced user experience:
 
+**Profile Components (`src/components/profile/`):**
 - **`ProfileCard.tsx`**: Member profile card display
 - **`ProfileHeader.tsx`**: Profile header with avatar and basic info
 - **`ProfileEditForm.tsx`**: Comprehensive profile editing interface
@@ -246,6 +258,14 @@ The web app includes sophisticated profile management components in `src/compone
 - **`ProfilePrivacy.tsx`**: Privacy settings and visibility controls
 - **`ProfilePhotoManager.tsx`**: Photo upload and management system
 - **`ConnectionButton.tsx`**: Connect/follow button with state management
+
+**Platform Components (`src/components/`):**
+- **`EventImageWithFallback.tsx`**: Robust event image display with fallback system
+- **`EventsShowcase.tsx`**: Featured events display with category filtering
+- **`SuccessStories.tsx`**: Member success stories showcase
+- **`LiveFeedNotifications.tsx`**: Real-time activity feed notifications
+- **`WhatsAppWidget.tsx`**: Customer support integration
+- **`SocialLogin.tsx` & `SocialLoginButton.tsx`**: Social authentication components
 
 ## Design System
 
@@ -302,15 +322,18 @@ EXPO_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
 - ✅ **Database Schema:** Full production schema with RLS policies
 - ✅ **Mobile Backend:** Supabase client integrated with onboarding flow
 - ✅ **Web Backend:** TypeScript interfaces and helper functions
-- Core platform pages (Dashboard, Chat, Directory, Events, Forums)
-- Advanced profile management system with 10 specialized components
-- Utility libraries for all major platform features
-- Enhanced authentication with social login
-- Membership pricing page
-- Admin dashboard structure
+- ✅ **Core Platform Pages:** Dashboard, Chat, Directory, Events, Forums
+- ✅ **Legal & Safety Pages:** Privacy Policy, Terms of Service, Help Center, Safety Center
+- ✅ **Success Stories Page:** Complete with member testimonials and impact metrics
+- ✅ **Event System Enhancement:** Fallback image system and category filtering
+- ✅ **Profile Management System:** 10 specialized profile components
+- ✅ **Social Authentication:** Login/signup with social media options
+- ✅ **Community Guidelines:** Complete community standards page
+- ✅ **Enhanced UI Components:** Success stories, events showcase, live notifications
+- ✅ **Image Handling:** Robust fallback system for event and profile images
 
-**Current Focus:** Connecting UI components to Supabase backend
-**Next Priority:** Real-time functionality and onboarding-to-database integration
+**Current Focus:** Backend integration and mobile app completion
+**Next Priority:** Onboarding-to-database integration and real-time functionality
 
 ## Upcoming Platform Features
 
@@ -351,6 +374,10 @@ EXPO_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
 - **Styling issues:** Verify imports from Styles.js
 - **Supabase connection issues:** Check environment variables and network connectivity
 - **Database errors:** Verify RLS policies and user authentication state
+- **Image loading issues:** EventImageWithFallback component handles missing images
+- **Build errors:** Check for missing dependencies with `npm install`
+- **Social login issues:** Verify environment variables for OAuth providers
+- **Missing dependencies:** Run `npm install` in correct directory (mobile-app or web-app)
 - **Git sync issues:** Ensure you're in correct directory for commands
 
 ### Web App Development Notes
@@ -369,46 +396,51 @@ EXPO_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
 
 ## Claude AI Agent System
 
-AdyaTribe uses a specialized AI agent system organized in `.claude/agents/adyatribe/` with category-based structure:
+AdyaTribe uses Claude Code's built-in agent system with specialized documentation in `.claude/agents/adyatribe/` for reference:
 
-### Agent Categories
+### Available Executable Agents
 
-**💻 Development Team** (`.claude/agents/adyatribe/development/`)
-- **UI Specialist** - Visual design and component interface expertise
-- **UX Designer** - User experience and flow optimization  
-- **React Native Expert** - Mobile development and Expo technical implementation
-- **Testing Engineer** - Quality assurance and testing strategy
-- **Supabase MCP Specialist** - Database integration and backend development
+**Built-in Claude Code agents that work with Task tool:**
 
-**🚀 Deployment Team** (`.claude/agents/adyatribe/deployment/`)
-- **Vercel Deployment Specialist** - Web deployment with comprehensive issue resolution knowledge
-- **DevOps Engineer** - Production deployment and infrastructure management
-- **GitHub Deployment Specialist** - GitHub Actions and automated deployment workflows
+- **`general-purpose`** - Complex research, multi-step tasks, keyword searching
+- **`feature-planner`** - Breaking down complex features into manageable tasks for beginners
+- **`onboarding-flow-expert`** - AdyaTribe's 7-step onboarding workflow optimization  
+- **`design-system-guardian`** - Design consistency across AdyaTribe components
+- **`file-consistency-manager`** - File consistency, duplicates, single source of truth
+- **`react-native-debugger`** - React Native and Expo debugging for mobile app
 
-**📋 Management Team** (`.claude/agents/adyatribe/management/`)
-- **Project Manager** - Timeline management and project coordination
+### Agent Task Mapping
 
-**🛡️ Security Team** (`.claude/agents/adyatribe/security/`)
-- **Security Consultant** - User safety, GDPR compliance, and security expertise
+**For AdyaTribe Development:**
+- **UI/Visual Design** → use `design-system-guardian`
+- **UX/User Experience** → use `feature-planner` or `general-purpose`
+- **React Native/Mobile** → use `react-native-debugger` 
+- **Backend/Database** → use `general-purpose`
+- **Testing/QA** → use `general-purpose`
+- **Deployment/DevOps** → use `general-purpose`
+- **Project Management** → use `feature-planner`
+- **Security/Safety** → use `general-purpose`
+- **Onboarding Flow** → use `onboarding-flow-expert`
 
-### Usage
-Agents can be invoked using the `subagent_type` parameter in Claude Code's Task tool. Each agent contains specialized knowledge for their domain and can be used proactively when working on related features.
-
-### Folder Structure
-- `.claude/agents/` - Claude Code built-in agents (system level)
-- `.claude/agents/adyatribe/` - AdyaTribe project-specific agents
-- `.claude/hooks/` - Development hooks and automation
+### Reference Documentation
+- `.claude/agents/adyatribe/` - Detailed specialist knowledge (documentation only)
+- `.claude/hooks/` - Development hooks and automation  
 - `.claude/slash-commands/` - Custom Claude Code commands
 
-## 📊 **Current Project Metrics** 
-*(Auto-updated: 2025-08-11)*
+**Usage:** Use Task tool with appropriate `subagent_type` from the executable agents list above.
 
-- **Claude Code Agents**: 13 specialized agents (organized by category)
-- **Onboarding Steps**: 7/7 completed (ready for backend integration)
-- **Backend Infrastructure**: Supabase fully integrated with PostgreSQL schema
+## 📊 **Current Project Metrics** 
+*(Auto-updated: 2025-01-11)*
+
+- **Mobile App**: React Native 0.76.1 + Expo 52.0.0 (onboarding complete)
+- **Web App**: Next.js 14 with TypeScript and static export (25+ pages complete)
+- **Backend**: Supabase with PostgreSQL, Auth, Storage, and Edge Functions
+- **Web Pages**: 25+ complete pages including legal, safety, and community pages
+- **Components**: 20+ specialized components with fallback systems
+- **Authentication**: Social login integration (Google, Apple, Facebook)
+- **Onboarding Steps**: 7/7 mobile steps (ready for backend integration)
 - **Database Tables**: 6 core tables with RLS policies
 - **Storage Buckets**: 4 configured buckets for secure file management
-- **Authentication**: Supabase Auth with mobile and web client integration
-- **Git Status**: Clean (production-ready backend infrastructure)
-- **Last Activity**: Major Supabase integration and database deployment
+- **Image Handling**: Robust fallback system for all visual content
+- **Git Status**: Clean (platform-ready with comprehensive features)
 

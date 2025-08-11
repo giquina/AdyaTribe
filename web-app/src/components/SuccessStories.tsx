@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { HeartIcon, SparklesIcon } from '@heroicons/react/24/outline'
+import { getImageWithFallback } from '@/lib/profileImages'
 
 interface SuccessStory {
   id: string
@@ -23,8 +24,8 @@ const successStories: SuccessStory[] = [
     name: 'Sarah',
     age: 34,
     location: 'Clapham',
-    profileImage: 'https://images.unsplash.com/photo-1494790108755-2616b612b1ac?w=150&h=150&fit=crop&crop=face&auto=format',
-    friendImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face&auto=format',
+    profileImage: getImageWithFallback('sarah-chen'),
+    friendImage: getImageWithFallback('maya-patel'),
     friendName: 'Maya',
     story: 'Met Maya at a book club event and instantly clicked over our shared love of psychological thrillers. Six months later, we\'re planning our first girls\' trip to Edinburgh!',
     connectionType: 'Book Club',
@@ -36,8 +37,8 @@ const successStories: SuccessStory[] = [
     name: 'Jessica',
     age: 31,
     location: 'Notting Hill',
-    profileImage: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=150&h=150&fit=crop&crop=face&auto=format',
-    friendImage: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face&auto=format',
+    profileImage: getImageWithFallback('jessica-williams'),
+    friendImage: getImageWithFallback('emma-johnson'),
     friendName: 'Emma',
     story: 'Emma and I bonded over our career ambitions at a networking event. She\'s become my biggest cheerleader and we support each other through all of life\'s challenges.',
     connectionType: 'Professional Network',
@@ -49,8 +50,8 @@ const successStories: SuccessStory[] = [
     name: 'Priya',
     age: 35,
     location: 'Canary Wharf',
-    profileImage: 'https://images.unsplash.com/photo-1504703395950-b89145a5425b?w=150&h=150&fit=crop&crop=face&auto=format',
-    friendImage: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face&auto=format',
+    profileImage: getImageWithFallback('priya-sharma'),
+    friendImage: getImageWithFallback('lisa-thompson'),
     friendName: 'Lisa',
     story: 'Lisa invited me to join her walking group, and it transformed both my fitness and social life. Our Sunday Thames walks have become the highlight of my week.',
     connectionType: 'Fitness Group',
@@ -62,8 +63,8 @@ const successStories: SuccessStory[] = [
     name: 'Rachel',
     age: 38,
     location: 'Richmond',
-    profileImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face&auto=format',
-    friendImage: 'https://images.unsplash.com/photo-1594736797933-d0acc43a8f2a?w=150&h=150&fit=crop&crop=face&auto=format',
+    profileImage: getImageWithFallback('ava-davis'),
+    friendImage: getImageWithFallback('community-4'),
     friendName: 'Hannah',
     story: 'Hannah and I met at an art gallery event and discovered we both love creative pursuits. We now attend every major exhibition together and have started our own painting sessions.',
     connectionType: 'Arts & Culture',

@@ -1,23 +1,21 @@
 # 🛡️ Security Team
 
-*Safety and security specialists for user protection*
+*For security tasks, use the general-purpose agent*
 
-## Team Members
+## Available Agents
 
-### **06 - 🔒 Security Consultant**
-**Focus:** User safety, privacy protection, community moderation
-**Best for:** Verification systems, data protection, safety features, GDPR compliance
+**No specific security agents available in Claude Code built-ins.**
 
-## Quick Access
-- Security concerns? → Security Consultant
-- Privacy questions? → Security Consultant
-- Safety features? → Security Consultant
-
-## Key Areas of Expertise
-- User verification systems (selfie verification, age verification)
-- Data protection and privacy (GDPR compliance)
+Use `general-purpose` agent for:
+- User verification systems and safety features
+- Data protection and privacy compliance  
 - Community safety and moderation
 - Authentication and authorization
 - Secure data handling practices
+
+## Usage
+```
+Task(subagent_type="general-purpose", prompt="Design user verification system")
+```
 
 *Navigate back to [main agent directory](../README.md)*

@@ -1,19 +1,16 @@
 # 🤖 AdyaTribe Claude Directory
 
-*Organized agent system and development tools for AdyaTribe*
+*Executable Claude Code agents for AdyaTribe development*
 
-## 📁 Directory Structure
+## 📁 Available Agents
 
-### `/agents/` - AdyaTribe AI Development Team
-**Purpose:** Specialized Claude agents organized by expertise areas
-**Organization:**
+### Executable Built-in Agents:
+- **💻 `/development/`** - 4 working agents (design-system-guardian, react-native-debugger, etc.)
+- **🚀 `/deployment/`** - Use general-purpose agent for deployment tasks
+- **📋 `/management/`** - 1 working agent (feature-planner)
+- **🛡️ `/security/`** - Use general-purpose agent for security tasks
 
-- **💻 `/development/`** - Core development specialists (UI, UX, React Native, Testing)
-- **🚀 `/deployment/`** - Production deployment specialists (Vercel, DevOps)
-- **📋 `/management/`** - Project coordination specialists (Project Manager)
-- **🛡️ `/security/`** - Security and safety specialists (Security Consultant)
-
-**Quick Access:** [View AI Team Overview](agents/README.md)
+**Usage:** All agents work with Claude Code's Task tool using proper `subagent_type` values
 
 ### `/hooks/` - Development Hooks
 **Purpose:** Development automation and workflow tools

@@ -1,5 +1,7 @@
 'use client'
 
+import { getImageWithFallback } from '@/lib/profileImages'
+
 export interface ChatRoom {
   id: string
   name: string
@@ -173,7 +175,7 @@ export const mockChatRooms: ChatRoom[] = [
     createdBy: 'admin-1',
     createdAt: '2024-01-01T10:00:00Z',
     isArchived: false,
-    avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+    avatar: getImageWithFallback('forum-user-1'),
     rules: [
       'Be kind and welcoming to new members',
       'Keep introductions positive and friendly',
@@ -200,7 +202,7 @@ export const mockChatRooms: ChatRoom[] = [
     createdBy: 'host-sarah',
     createdAt: '2024-01-05T14:00:00Z',
     isArchived: false,
-    avatar: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+    avatar: getImageWithFallback('forum-user-2'),
     rules: [
       'No spoilers without warning tags',
       'Respect diverse reading preferences',
@@ -227,7 +229,7 @@ export const mockChatRooms: ChatRoom[] = [
     createdBy: 'host-rachel',
     createdAt: '2024-01-08T09:00:00Z',
     isArchived: false,
-    avatar: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+    avatar: getImageWithFallback('forum-user-1'),
     rules: [
       'Support and encourage all fitness levels',
       'Share workouts and healthy tips',
@@ -254,7 +256,7 @@ export const mockChatRooms: ChatRoom[] = [
     createdBy: 'admin-1',
     createdAt: '2024-01-10T11:00:00Z',
     isArchived: false,
-    avatar: 'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+    avatar: getImageWithFallback('forum-user-3'),
     rules: [
       'Keep meetup suggestions specific to Central London',
       'Always meet in public places',
@@ -281,7 +283,7 @@ export const mockChatRooms: ChatRoom[] = [
     createdBy: 'admin-1',
     createdAt: '2024-01-03T16:00:00Z',
     isArchived: false,
-    avatar: 'https://images.unsplash.com/photo-1506629905607-683b607dfc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
+    avatar: getImageWithFallback('forum-user-4'),
     rules: [
       'Premium members only',
       'Share exclusive opportunities and insights',
@@ -306,7 +308,7 @@ export const mockMessages: { [roomId: string]: ChatMessage[] } = {
       roomId: 'room-1',
       userId: 'user-1',
       userName: 'Emma Johnson',
-      userAvatar: 'https://images.unsplash.com/photo-1494790108755-2616b9c3e1a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80',
+      userAvatar: getImageWithFallback('rachel-green'),
       membershipTier: 'core',
       content: 'Hi everyone! Just joined AdyaTribe and so excited to meet like-minded women in London! 👋',
       type: 'text',
@@ -326,7 +328,7 @@ export const mockMessages: { [roomId: string]: ChatMessage[] } = {
       roomId: 'room-1',
       userId: 'user-2',
       userName: 'Lisa Wang',
-      userAvatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80',
+      userAvatar: getImageWithFallback('sophia-martinez'),
       membershipTier: 'premium',
       content: 'Welcome Emma! You\'ll love it here. What part of London are you in? Always great to connect with neighbors! 🏠',
       type: 'text',
@@ -345,7 +347,7 @@ export const mockMessages: { [roomId: string]: ChatMessage[] } = {
       roomId: 'room-3',
       userId: 'user-4',
       userName: 'Rachel Thompson',
-      userAvatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80',
+      userAvatar: getImageWithFallback('olivia-taylor'),
       membershipTier: 'core',
       content: 'Just finished a great 5k run along the Thames! Anyone else running this weekend? 🏃‍♀️',
       type: 'text',

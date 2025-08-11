@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { ArrowRightIcon, SparklesIcon, HeartIcon, UsersIcon } from '@heroicons/react/24/outline'
 import { useState, useEffect } from 'react'
 import SocialLogin from './SocialLogin'
+import { getImagesByCategory } from '@/lib/profileImages'
 
 export default function Hero() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -197,14 +198,7 @@ export default function Hero() {
             {/* Member Photos Background */}
             <div className="absolute inset-0 z-0">
               <div className="grid grid-cols-3 gap-2 opacity-20 h-full">
-                {[
-                  "https://images.unsplash.com/photo-1494790108755-2616b612b1ac?w=100&h=100&fit=crop&crop=face&auto=format",
-                  "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face&auto=format",
-                  "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop&crop=face&auto=format",
-                  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face&auto=format",
-                  "https://images.unsplash.com/photo-1504703395950-b89145a5425b?w=100&h=100&fit=crop&crop=face&auto=format",
-                  "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop&crop=face&auto=format"
-                ].map((src, index) => (
+                {getImagesByCategory('community').slice(0, 6).map((photo, index) => (
                   <motion.div
                     key={index}
                     initial={{ scale: 0, rotate: -180 }}
@@ -213,8 +207,8 @@ export default function Hero() {
                     className="aspect-square rounded-2xl overflow-hidden"
                   >
                     <img 
-                      src={src}
-                      alt="AdyaTribe community member"
+                      src={photo.path}
+                      alt={photo.alt}
                       className="w-full h-full object-cover"
                       loading="lazy"
                     />
@@ -233,12 +227,7 @@ export default function Hero() {
                 {/* Member Avatars */}
                 <div className="flex justify-center mb-4">
                   <div className="flex -space-x-3">
-                    {[
-                      "https://images.unsplash.com/photo-1494790108755-2616b612b1ac?w=60&h=60&fit=crop&crop=face&auto=format",
-                      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=60&h=60&fit=crop&crop=face&auto=format",
-                      "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=60&h=60&fit=crop&crop=face&auto=format",
-                      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face&auto=format"
-                    ].map((src, index) => (
+                    {getImagesByCategory('community').slice(0, 4).map((photo, index) => (
                       <motion.div
                         key={index}
                         initial={{ x: -20, opacity: 0 }}
@@ -247,8 +236,8 @@ export default function Hero() {
                         className="w-12 h-12 rounded-full border-2 border-white shadow-lg overflow-hidden"
                       >
                         <img 
-                          src={src}
-                          alt="AdyaTribe member"
+                          src={photo.path}
+                          alt={photo.alt}
                           className="w-full h-full object-cover"
                           loading="lazy"
                         />

@@ -11,7 +11,7 @@ import {
   ClockIcon,
   TicketIcon,
   HeartIcon,
-  WineGlassIcon,
+  BeakerIcon,
   BookOpenIcon,
   MusicalNoteIcon
 } from '@heroicons/react/24/outline'

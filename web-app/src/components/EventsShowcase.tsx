@@ -31,7 +31,7 @@ const upcomingEvents = [
     category: "Art & Culture",
     image: "/events/wine-paint.jpg",
     color: "from-purple-400 to-pink-400",
-    icon: <WineGlassIcon className="w-5 h-5" />
+    icon: <BeakerIcon className="w-5 h-5" />
   },
   {
     id: 2,

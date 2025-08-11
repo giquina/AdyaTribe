@@ -151,7 +151,8 @@ npm install          # Ensure dependencies are current
 - **React Navigation 7** for navigation
 - **Formik + Yup** for form handling and validation
 - **React Native Paper** for UI components
-- **Supabase Client** for backend integration (connected)
+- **Supabase Client** for backend integration (installed but missing from package.json)
+- **Firebase 10.0.0** (legacy dependency, can be removed)
 - **Expo Camera** and **Image Picker** for photo features
 
 ### Web App
@@ -378,6 +379,7 @@ EXPO_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
 - **Build errors:** Check for missing dependencies with `npm install`
 - **Social login issues:** Verify environment variables for OAuth providers
 - **Missing dependencies:** Run `npm install` in correct directory (mobile-app or web-app)
+- **Mobile Supabase import errors:** Add `@supabase/supabase-js` to mobile-app/package.json if needed
 - **Git sync issues:** Ensure you're in correct directory for commands
 
 ### Web App Development Notes
@@ -430,7 +432,7 @@ AdyaTribe uses Claude Code's built-in agent system with specialized documentatio
 **Usage:** Use Task tool with appropriate `subagent_type` from the executable agents list above.
 
 ## 📊 **Current Project Metrics** 
-*(Auto-updated: 2025-01-11)*
+*(Auto-updated: 2025-08-11)*
 
 - **Mobile App**: React Native 0.76.1 + Expo 52.0.0 (onboarding complete)
 - **Web App**: Next.js 14 with TypeScript and static export (25+ pages complete)

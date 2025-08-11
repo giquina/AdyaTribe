@@ -214,7 +214,7 @@ export const mockForumTopics: ForumTopic[] = [
     author: {
       id: 'user-001',
       name: 'Emma Thompson',
-      avatar: '/profiles/emma-thompson.jpg',
+      avatar: 'https://images.unsplash.com/photo-1494790108755-2616b9c3e1a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80',
       membershipTier: 'core',
       role: 'member'
     },
@@ -244,7 +244,7 @@ export const mockForumTopics: ForumTopic[] = [
     author: {
       id: 'user-002',
       name: 'Sarah Mitchell',
-      avatar: '/profiles/sarah-mitchell.jpg',
+      avatar: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80',
       membershipTier: 'premium',
       role: 'moderator'
     },
@@ -274,7 +274,7 @@ export const mockForumTopics: ForumTopic[] = [
     author: {
       id: 'user-003',
       name: 'Lisa Chen',
-      avatar: '/profiles/lisa-chen.jpg',
+      avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80',
       membershipTier: 'core',
       role: 'member'
     },
@@ -304,7 +304,7 @@ export const mockForumTopics: ForumTopic[] = [
     author: {
       id: 'user-004',
       name: 'Rachel Davis',
-      avatar: '/profiles/rachel-davis.jpg',
+      avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80',
       membershipTier: 'premium',
       role: 'member'
     },
@@ -334,7 +334,7 @@ export const mockForumTopics: ForumTopic[] = [
     author: {
       id: 'admin-001',
       name: 'Emma Williams',
-      avatar: '/profiles/emma-williams.jpg',
+      avatar: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80',
       membershipTier: 'premium',
       role: 'admin'
     },
@@ -367,7 +367,7 @@ export const mockForumPosts: { [topicId: string]: ForumPost[] } = {
       author: {
         id: 'user-002',
         name: 'Sarah Mitchell',
-        avatar: '/profiles/sarah-mitchell.jpg',
+        avatar: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80',
         membershipTier: 'premium',
         role: 'moderator',
         joinedDate: '2024-01-08',
@@ -391,7 +391,7 @@ export const mockForumPosts: { [topicId: string]: ForumPost[] } = {
       author: {
         id: 'user-003',
         name: 'Lisa Chen',
-        avatar: '/profiles/lisa-chen.jpg',
+        avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80',
         membershipTier: 'core',
         role: 'member',
         joinedDate: '2024-01-12',
@@ -410,7 +410,7 @@ export const mockForumPosts: { [topicId: string]: ForumPost[] } = {
           author: {
             id: 'user-001',
             name: 'Emma Thompson',
-            avatar: '/profiles/emma-thompson.jpg',
+            avatar: 'https://images.unsplash.com/photo-1494790108755-2616b9c3e1a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80',
             membershipTier: 'core',
             role: 'member',
             joinedDate: '2024-01-26',

@@ -111,7 +111,7 @@ export const mockUserProfiles: UserProfile[] = [
     location: 'Chelsea, London',
     bio: 'Marketing professional who loves wine tasting, book clubs, and exploring London\'s hidden gems. Always up for trying new restaurants and making genuine connections!',
     interests: ['Wine Tasting', 'Books', 'Marketing', 'Food', 'Travel', 'Photography'],
-    profileImage: '/profiles/emma-thompson.jpg',
+    profileImage: 'https://images.unsplash.com/photo-1494790108755-2616b9c3e1a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
     membershipTier: 'core',
     joinedAt: '2024-01-15T10:00:00Z',
     lastActive: '2024-01-26T14:30:00Z',
@@ -149,7 +149,7 @@ export const mockUserProfiles: UserProfile[] = [
     location: 'Kensington, London',
     bio: 'Yoga instructor and wellness coach passionate about mindful living, hiking, and connecting with like-minded women. Love organizing outdoor adventures and cozy coffee chats.',
     interests: ['Yoga', 'Wellness', 'Hiking', 'Mindfulness', 'Coffee', 'Nature'],
-    profileImage: '/profiles/sarah-mitchell.jpg',
+    profileImage: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
     membershipTier: 'premium',
     joinedAt: '2024-01-08T09:00:00Z',
     lastActive: '2024-01-26T16:45:00Z',
@@ -187,7 +187,7 @@ export const mockUserProfiles: UserProfile[] = [
     location: 'Canary Wharf, London',
     bio: 'Tech consultant who enjoys fitness classes, art galleries, and weekend getaways. Looking to expand my social circle with ambitious, fun-loving women.',
     interests: ['Technology', 'Fitness', 'Art', 'Travel', 'Business', 'Museums'],
-    profileImage: '/profiles/lisa-chen.jpg',
+    profileImage: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
     membershipTier: 'core',
     joinedAt: '2024-01-12T14:00:00Z',
     lastActive: '2024-01-26T12:20:00Z',
@@ -224,7 +224,7 @@ export const mockUserProfiles: UserProfile[] = [
     location: 'Shoreditch, London',
     bio: 'Creative director with a passion for photography, indie music, and discovering London\'s best brunch spots. Always ready for spontaneous adventures!',
     interests: ['Photography', 'Music', 'Brunch', 'Design', 'Art', 'Culture'],
-    profileImage: '/profiles/rachel-davis.jpg',
+    profileImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
     membershipTier: 'premium',
     joinedAt: '2024-01-10T11:00:00Z',
     lastActive: '2024-01-26T15:10:00Z',
@@ -299,7 +299,7 @@ export const mockConnectionRequests: ConnectionRequest[] = [
     fromUser: {
       id: 'user-003',
       name: 'Lisa Chen',
-      profileImage: '/profiles/lisa-chen.jpg',
+      profileImage: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
       location: 'Canary Wharf',
       membershipTier: 'core'
     }
@@ -314,7 +314,7 @@ export const mockConnectionRequests: ConnectionRequest[] = [
     fromUser: {
       id: 'user-004',
       name: 'Rachel Davis',
-      profileImage: '/profiles/rachel-davis.jpg',
+      profileImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
       location: 'Shoreditch',
       membershipTier: 'premium'
     }

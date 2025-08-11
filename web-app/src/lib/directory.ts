@@ -38,7 +38,7 @@ export const mockDirectoryProfiles: UserProfile[] = [
     location: 'Chelsea, London',
     bio: 'Marketing professional who loves wine tasting, book clubs, and exploring London\'s hidden gems. Always up for trying new restaurants and making genuine connections!',
     interests: ['Wine Tasting', 'Books', 'Marketing', 'Food', 'Travel', 'Photography'],
-    profileImage: '/profiles/emma-thompson.jpg',
+    profileImage: 'https://images.unsplash.com/photo-1494790108755-2616b9c3e1a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
     membershipTier: 'core',
     joinedAt: '2024-01-15T10:00:00Z',
     lastActive: '2024-01-26T14:30:00Z',
@@ -50,8 +50,8 @@ export const mockDirectoryProfiles: UserProfile[] = [
       { id: 'badge-2', name: 'Community Builder', description: 'Made 25+ connections', icon: '🤝', color: 'blue', earnedAt: '2024-01-25T10:00:00Z' }
     ],
     photos: [
-      { id: 'photo-1', url: '/profiles/emma-1.jpg', caption: 'Wine tasting in Tuscany!', isProfilePicture: false, uploadedAt: '2024-01-20T10:00:00Z', likes: 12, comments: [] },
-      { id: 'photo-2', url: '/profiles/emma-2.jpg', caption: 'Book club meetup', isProfilePicture: false, uploadedAt: '2024-01-22T10:00:00Z', likes: 8, comments: [] }
+      { id: 'photo-1', url: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80', caption: 'Wine tasting in Tuscany!', isProfilePicture: false, uploadedAt: '2024-01-20T10:00:00Z', likes: 12, comments: [] },
+      { id: 'photo-2', url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80', caption: 'Book club meetup', isProfilePicture: false, uploadedAt: '2024-01-22T10:00:00Z', likes: 8, comments: [] }
     ],
     preferences: {
       lookingFor: 'friendship',
@@ -79,7 +79,7 @@ export const mockDirectoryProfiles: UserProfile[] = [
     location: 'Kensington, London',
     bio: 'Yoga instructor and wellness coach passionate about mindful living, hiking, and connecting with like-minded women. Love organizing outdoor adventures and cozy coffee chats.',
     interests: ['Yoga', 'Wellness', 'Hiking', 'Mindfulness', 'Coffee', 'Nature'],
-    profileImage: '/profiles/sarah-mitchell.jpg',
+    profileImage: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
     membershipTier: 'premium',
     joinedAt: '2024-01-08T09:00:00Z',
     lastActive: '2024-01-26T16:45:00Z',
@@ -91,8 +91,8 @@ export const mockDirectoryProfiles: UserProfile[] = [
       { id: 'badge-4', name: 'Super Connector', description: 'Made 40+ connections', icon: '⭐', color: 'gold', earnedAt: '2024-01-24T10:00:00Z' }
     ],
     photos: [
-      { id: 'photo-3', url: '/profiles/sarah-1.jpg', caption: 'Morning yoga in Hyde Park', isProfilePicture: false, uploadedAt: '2024-01-15T10:00:00Z', likes: 24, comments: [] },
-      { id: 'photo-4', url: '/profiles/sarah-2.jpg', caption: 'Hiking in the Cotswolds', isProfilePicture: false, uploadedAt: '2024-01-18T10:00:00Z', likes: 18, comments: [] }
+      { id: 'photo-3', url: 'https://images.unsplash.com/photo-1506629905607-683b607dfc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80', caption: 'Morning yoga in Hyde Park', isProfilePicture: false, uploadedAt: '2024-01-15T10:00:00Z', likes: 24, comments: [] },
+      { id: 'photo-4', url: 'https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80', caption: 'Hiking in the Cotswolds', isProfilePicture: false, uploadedAt: '2024-01-18T10:00:00Z', likes: 18, comments: [] }
     ],
     preferences: {
       lookingFor: 'all',
@@ -120,7 +120,7 @@ export const mockDirectoryProfiles: UserProfile[] = [
     location: 'Canary Wharf, London',
     bio: 'Tech consultant who enjoys fitness classes, art galleries, and weekend getaways. Looking to expand my social circle with ambitious, fun-loving women.',
     interests: ['Technology', 'Fitness', 'Art', 'Travel', 'Business', 'Museums'],
-    profileImage: '/profiles/lisa-chen.jpg',
+    profileImage: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
     membershipTier: 'core',
     joinedAt: '2024-01-12T14:00:00Z',
     lastActive: '2024-01-26T12:20:00Z',
@@ -131,7 +131,7 @@ export const mockDirectoryProfiles: UserProfile[] = [
       { id: 'badge-5', name: 'Tech Pioneer', description: 'Attended tech networking events', icon: '💻', color: 'blue', earnedAt: '2024-01-22T10:00:00Z' }
     ],
     photos: [
-      { id: 'photo-5', url: '/profiles/lisa-1.jpg', caption: 'Tech conference networking', isProfilePicture: false, uploadedAt: '2024-01-16T10:00:00Z', likes: 15, comments: [] }
+      { id: 'photo-5', url: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80', caption: 'Tech conference networking', isProfilePicture: false, uploadedAt: '2024-01-16T10:00:00Z', likes: 15, comments: [] }
     ],
     preferences: {
       lookingFor: 'networking',
@@ -159,7 +159,7 @@ export const mockDirectoryProfiles: UserProfile[] = [
     location: 'Shoreditch, London',
     bio: 'Creative director with a passion for photography, indie music, and discovering London\'s best brunch spots. Always ready for spontaneous adventures!',
     interests: ['Photography', 'Music', 'Brunch', 'Design', 'Art', 'Culture'],
-    profileImage: '/profiles/rachel-davis.jpg',
+    profileImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
     membershipTier: 'premium',
     joinedAt: '2024-01-10T11:00:00Z',
     lastActive: '2024-01-26T15:10:00Z',
@@ -171,8 +171,8 @@ export const mockDirectoryProfiles: UserProfile[] = [
       { id: 'badge-7', name: 'Social Butterfly', description: 'Attended 15+ social events', icon: '🦋', color: 'pink', earnedAt: '2024-01-23T10:00:00Z' }
     ],
     photos: [
-      { id: 'photo-6', url: '/profiles/rachel-1.jpg', caption: 'Street art tour in Shoreditch', isProfilePicture: false, uploadedAt: '2024-01-14T10:00:00Z', likes: 32, comments: [] },
-      { id: 'photo-7', url: '/profiles/rachel-2.jpg', caption: 'Behind the scenes at a photoshoot', isProfilePicture: false, uploadedAt: '2024-01-21T10:00:00Z', likes: 28, comments: [] }
+      { id: 'photo-6', url: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80', caption: 'Street art tour in Shoreditch', isProfilePicture: false, uploadedAt: '2024-01-14T10:00:00Z', likes: 32, comments: [] },
+      { id: 'photo-7', url: 'https://images.unsplash.com/photo-1522512115668-c09775d6f424?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80', caption: 'Behind the scenes at a photoshoot', isProfilePicture: false, uploadedAt: '2024-01-21T10:00:00Z', likes: 28, comments: [] }
     ],
     preferences: {
       lookingFor: 'activity_partners',
@@ -200,7 +200,7 @@ export const mockDirectoryProfiles: UserProfile[] = [
     location: 'Clapham, London',
     bio: 'Recently moved to London from Manchester! Love dancing, trying new cuisines, and weekend farmers markets. Excited to build a new community here.',
     interests: ['Dancing', 'Food', 'Markets', 'Fitness', 'Socializing', 'Exploring'],
-    profileImage: '/profiles/amanda-foster.jpg',
+    profileImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
     membershipTier: 'free',
     joinedAt: '2024-01-24T16:00:00Z',
     lastActive: '2024-01-26T18:20:00Z',
@@ -211,7 +211,7 @@ export const mockDirectoryProfiles: UserProfile[] = [
       { id: 'badge-8', name: 'New Member', description: 'Welcome to AdyaTribe!', icon: '👋', color: 'green', earnedAt: '2024-01-24T16:00:00Z' }
     ],
     photos: [
-      { id: 'photo-8', url: '/profiles/amanda-1.jpg', caption: 'First London weekend market!', isProfilePicture: false, uploadedAt: '2024-01-25T10:00:00Z', likes: 5, comments: [] }
+      { id: 'photo-8', url: 'https://images.unsplash.com/photo-1506629905607-683b607dfc6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80', caption: 'First London weekend market!', isProfilePicture: false, uploadedAt: '2024-01-25T10:00:00Z', likes: 5, comments: [] }
     ],
     preferences: {
       lookingFor: 'friendship',
@@ -239,7 +239,7 @@ export const mockDirectoryProfiles: UserProfile[] = [
     location: 'Hampstead, London',
     bio: 'Psychologist and mother of two teenagers. Love book clubs, theater, and quiet coffees. Looking for meaningful friendships with other women juggling careers and family.',
     interests: ['Psychology', 'Books', 'Theater', 'Coffee', 'Parenting', 'Mental Health'],
-    profileImage: '/profiles/jessica-williams.jpg',
+    profileImage: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80',
     membershipTier: 'core',
     joinedAt: '2024-01-20T12:00:00Z',
     lastActive: '2024-01-26T09:30:00Z',

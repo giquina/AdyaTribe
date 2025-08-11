@@ -20,9 +20,14 @@
 **Focus:** Quality assurance, automated testing, bug prevention
 **Best for:** Test strategy, debugging, quality improvement
 
+### **09 - 🗄️ Supabase MCP Specialist**
+**Focus:** Database management, MCP server configuration, authentication, real-time features
+**Best for:** Database design, Supabase setup, authentication flows, performance optimization
+
 ## Quick Access
 - Need design help? → UI Specialist or UX Designer
 - Technical problems? → React Native Expert
+- Database/backend issues? → Supabase MCP Specialist
 - Quality issues? → Testing Engineer
 
 *Navigate back to [main agent directory](../README.md)*

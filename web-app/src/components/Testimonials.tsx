@@ -111,7 +111,7 @@ export default function Testimonials() {
             <span className="gradient-text">Amazing Community</span>
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
-            Discover how thousands of women have transformed their social lives and built meaningful connections through AdyaTribe.
+            Discover how hundreds of women have transformed their social lives and built meaningful connections through AdyaTribe.
           </p>
         </motion.div>
 
@@ -187,7 +187,7 @@ export default function Testimonials() {
               Meet Your <span className="gradient-text">Future Friends</span>
             </h3>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Join thousands of amazing women from diverse backgrounds who are building meaningful connections across London and the UK.
+              Join hundreds of amazing women from diverse backgrounds who are building meaningful connections across London and the UK.
             </p>
           </div>
           
@@ -242,8 +242,8 @@ export default function Testimonials() {
                 <p className="text-gray-600">Average Rating</p>
               </div>
               <div>
-                <p className="text-4xl font-bold text-secondary-400 mb-2">1,247</p>
-                <p className="text-gray-600">Active Members</p>
+                <p className="text-4xl font-bold text-secondary-400 mb-2">300+</p>
+                <p className="text-gray-600">Verified Members</p>
               </div>
               <div>
                 <p className="text-4xl font-bold text-primary-400 mb-2">89%</p>
@@ -265,7 +265,7 @@ export default function Testimonials() {
             Ready to Write Your Own Success Story?
           </h3>
           <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-            Join thousands of women who've found their tribe. Your perfect friendship match is just a click away.
+            Join hundreds of women who've found their tribe. Your perfect friendship match is just a click away.
           </p>
           <a href="/signup" className="btn-primary text-lg px-10 py-4 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 inline-block">
             Start Your Journey Today

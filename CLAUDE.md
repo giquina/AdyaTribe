@@ -403,7 +403,7 @@ Agents can be invoked using the `subagent_type` parameter in Claude Code's Task 
 ## 📊 **Current Project Metrics** 
 *(Auto-updated: 2025-08-11)*
 
-- **Claude Code Agents**: 9 specialized agents (organized by category)
+- **Claude Code Agents**: 13 specialized agents (organized by category)
 - **Onboarding Steps**: 7/7 completed (ready for backend integration)
 - **Backend Infrastructure**: Supabase fully integrated with PostgreSQL schema
 - **Database Tables**: 6 core tables with RLS policies

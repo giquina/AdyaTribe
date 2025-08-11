@@ -223,7 +223,7 @@ export default function SuccessStories() {
             Ready to Write Your Own Success Story?
           </h3>
           <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-            Join thousands of women who\'ve found their perfect friendship matches. Your next best friend could be just one event away.
+            Join hundreds of women who\'ve found their perfect friendship matches. Your next best friend could be just one event away.
           </p>
           <a 
             href="/signup" 

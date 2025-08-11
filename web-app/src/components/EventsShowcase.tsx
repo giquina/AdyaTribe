@@ -66,8 +66,8 @@ const upcomingEvents = [
 ]
 
 const eventStats = [
-  { number: "500+", label: "Events This Month", icon: <CalendarDaysIcon className="w-5 h-5" /> },
-  { number: "2,500+", label: "Active Members", icon: <UsersIcon className="w-5 h-5" /> },
+  { number: "30+", label: "Events This Month", icon: <CalendarDaysIcon className="w-5 h-5" /> },
+  { number: "300+", label: "Active Members", icon: <UsersIcon className="w-5 h-5" /> },
   { number: "98%", label: "Satisfaction Rate", icon: <HeartIcon className="w-5 h-5" /> },
   { number: "45+", label: "UK Locations", icon: <MapPinIcon className="w-5 h-5" /> }
 ]

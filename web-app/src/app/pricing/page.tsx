@@ -195,8 +195,8 @@ const testimonials = [
 ]
 
 const stats = [
-  { number: '2,500+', label: 'Active Members', icon: <UsersIcon className="w-6 h-6" /> },
-  { number: '500+', label: 'Monthly Events', icon: <CalendarIcon className="w-6 h-6" /> },
+  { number: '300+', label: 'Active Members', icon: <UsersIcon className="w-6 h-6" /> },
+  { number: '30+', label: 'Monthly Events', icon: <CalendarIcon className="w-6 h-6" /> },
   { number: '98%', label: 'Safety Rating', icon: <ShieldCheckIconSolid className="w-6 h-6" /> },
   { number: '4.9/5', label: 'Member Satisfaction', icon: <StarIconSolid className="w-6 h-6" /> }
 ]
@@ -218,7 +218,7 @@ export default function Pricing() {
             <div className="text-center mb-16">
               <div className="inline-flex items-center bg-white/60 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-primary-600 mb-6">
                 <ShieldCheckIconSolid className="w-4 h-4 mr-2" />
-                Trusted by 2,500+ verified women across the UK
+                Trusted by 300+ verified women across the UK
               </div>
               <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
                 Your Tribe Awaits:
@@ -383,7 +383,7 @@ export default function Pricing() {
                 What Our Members Say
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Join thousands of women who have found their tribe and embraced their authentic selves.
+                Join hundreds of women who have found their tribe and embraced their authentic selves.
               </p>
             </div>
 
@@ -538,7 +538,7 @@ export default function Pricing() {
                       </div>
                       <div className="ml-3">
                         <h5 className="font-semibold text-gray-900">Book Club Londoners</h5>
-                        <p className="text-sm text-gray-600">127 members • Active now</p>
+                        <p className="text-sm text-gray-600">45 members • Active now</p>
                       </div>
                     </div>
                     <div className="space-y-3">
@@ -841,7 +841,7 @@ export default function Pricing() {
                       </div>
                     </div>
                     <div className="text-center pt-4">
-                      <div className="text-sm text-gray-500">47 new activities in the last hour</div>
+                      <div className="text-sm text-gray-500">12 new activities in the last hour</div>
                     </div>
                   </div>
                 </div>
@@ -857,19 +857,19 @@ export default function Pricing() {
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-600">New Connections</span>
-                      <span className="font-bold text-primary-600">2,847</span>
+                      <span className="font-bold text-primary-600">187</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-600">Events Hosted</span>
-                      <span className="font-bold text-secondary-600">127</span>
+                      <span className="font-bold text-secondary-600">8</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-600">Messages Sent</span>
-                      <span className="font-bold text-green-600">15,692</span>
+                      <span className="font-bold text-green-600">1,247</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-gray-600">Verified Members</span>
-                      <span className="font-bold text-purple-600">384</span>
+                      <span className="font-bold text-purple-600">28</span>
                     </div>
                   </div>
                 </div>
@@ -878,7 +878,7 @@ export default function Pricing() {
                   <SparklesIcon className="w-8 h-8 mx-auto mb-2" />
                   <div className="text-lg font-bold mb-1">99.7%</div>
                   <div className="text-sm opacity-90">Member Satisfaction</div>
-                  <div className="text-xs opacity-75 mt-2">Based on 10,000+ reviews</div>
+                  <div className="text-xs opacity-75 mt-2">Based on 300+ reviews</div>
                 </div>
               </div>
             </div>
@@ -895,7 +895,7 @@ export default function Pricing() {
             <div className="max-w-4xl mx-auto">
               <div className="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium mb-6">
                 <BoltIcon className="w-4 h-4 mr-2" />
-                Join 2,500+ verified women today
+                Join 300+ verified women today
               </div>
               
               <h2 className="text-3xl md:text-5xl font-bold mb-6">
@@ -918,7 +918,7 @@ export default function Pricing() {
                     <div className="text-sm opacity-80">Money-Back Guarantee</div>
                   </div>
                   <div className="transform hover:scale-110 transition-transform duration-200">
-                    <div className="text-2xl font-bold mb-1">500+</div>
+                    <div className="text-2xl font-bold mb-1">30+</div>
                     <div className="text-sm opacity-80">Events This Month</div>
                   </div>
                 </div>

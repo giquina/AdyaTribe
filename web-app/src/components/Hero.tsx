@@ -86,7 +86,7 @@ export default function Hero() {
               <div className="flex items-center gap-2">
                 <SparklesIcon className="h-5 w-5 text-pink-500" />
                 <span className="text-sm font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-                  500+ Events Monthly • 2,500+ Members • UK-Wide
+                  30+ Events Monthly • 300+ Active Members • UK-Wide
                 </span>
               </div>
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
@@ -121,8 +121,8 @@ export default function Hero() {
               className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6"
             >
               {[
-                { icon: HeartIcon, text: "500+ EVENTS MONTHLY", color: "#ef4444" },
-                { icon: UsersIcon, text: "2,500+ VERIFIED MEMBERS", color: "#3b82f6" },
+                { icon: HeartIcon, text: "30+ EVENTS MONTHLY", color: "#ef4444" },
+                { icon: UsersIcon, text: "300+ VERIFIED MEMBERS", color: "#3b82f6" },
                 { icon: SparklesIcon, text: "98% SAFETY RATING", color: "#f59e0b" }
               ].map((item, index) => (
                 <motion.div
@@ -226,7 +226,7 @@ export default function Hero() {
             <div className="relative z-10 bg-white/20 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/30">
               <div className="space-y-6">
                 <div className="text-center">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">Join 5,000+ Women</h3>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-2">Join 300+ Women</h3>
                   <p className="text-gray-600">Already connecting in London</p>
                 </div>
                 
@@ -255,7 +255,7 @@ export default function Hero() {
                       </motion.div>
                     ))}
                     <div className="w-12 h-12 rounded-full border-2 border-white shadow-lg bg-gradient-to-r from-primary-400 to-secondary-400 flex items-center justify-center text-white text-xs font-bold">
-                      +5K
+                      +300
                     </div>
                   </div>
                 </div>
@@ -266,7 +266,7 @@ export default function Hero() {
                     <div className="text-sm text-gray-600">Success Rate</div>
                   </div>
                   <div className="bg-white/40 rounded-2xl p-4">
-                    <div className="text-3xl font-bold text-purple-600">2.3K</div>
+                    <div className="text-3xl font-bold text-purple-600">30+</div>
                     <div className="text-sm text-gray-600">Monthly Events</div>
                   </div>
                 </div>

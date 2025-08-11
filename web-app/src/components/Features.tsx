@@ -196,7 +196,7 @@ export default function Features() {
                   </div>
                 </div>
                 <p className="text-lg text-gray-600 italic mb-4">
-                  "After moving to London and struggling to make authentic friendships in my 30s, I created AdyaTribe to solve a problem I knew thousands of women faced."
+                  "After moving to London and struggling to make authentic friendships in my 30s, I created AdyaTribe to solve a problem I knew hundreds of women faced."
                 </p>
               </div>
               

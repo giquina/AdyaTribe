@@ -297,7 +297,7 @@ export default function HowItWorks() {
                 How AdyaTribe <span className="gradient-text">Works</span>
               </h1>
               <p className="text-xl text-gray-600 leading-relaxed mb-12 max-w-3xl mx-auto">
-                From secure onboarding to thriving community membership, discover how thousands of UK women 30+ are building meaningful friendships through our thoughtfully designed platform.
+                From secure onboarding to thriving community membership, discover how hundreds of UK women 30+ are building meaningful friendships through our thoughtfully designed platform.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -956,7 +956,7 @@ export default function HowItWorks() {
                 Ready to Find Your Tribe?
               </h2>
               <p className="text-xl opacity-90 leading-relaxed mb-12">
-                Join thousands of amazing women who've already found meaningful friendships through AdyaTribe. 
+                Join hundreds of amazing women who've already found meaningful friendships through AdyaTribe. 
                 Your community is waiting for you.
               </p>
               

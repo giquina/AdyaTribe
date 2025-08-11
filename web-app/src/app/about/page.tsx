@@ -79,7 +79,7 @@ export default function About() {
               
               <div className="bg-gradient-to-br from-primary-50 to-white rounded-2xl p-8 mb-16">
                 <blockquote className="text-xl text-gray-700 font-medium italic text-center mb-6">
-                  "That night, I realized there were thousands of incredible women like me across London 
+                  "That night, I realized there were hundreds of incredible women like me across London 
                   and the UK—accomplished, independent, happy with our choices—but struggling to find 
                   our people. So I decided to create the community I wished existed."
                 </blockquote>
@@ -127,7 +127,7 @@ export default function About() {
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-3">The Vision</h3>
                   <p className="text-gray-600">
-                    That's when it hit me: What if I could create a platform to help thousands of women find their tribe, just like we had? AdyaTribe was born.
+                    That's when it hit me: What if I could create a platform to help hundreds of women find their tribe, just like we had? AdyaTribe was born.
                   </p>
                 </div>
               </div>
@@ -206,19 +206,19 @@ export default function About() {
                 The Impact We're Making Together
               </h2>
               <p className="text-xl text-gray-600 mb-12">
-                Since launching in early 2024, AdyaTribe has helped thousands of women find their people.
+                Since launching in early 2024, AdyaTribe has helped hundreds of women find their people.
               </p>
               
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
                 <div className="bg-white rounded-xl p-6 shadow-sm">
-                  <div className="text-3xl font-bold text-primary-600 mb-2">2,500+</div>
-                  <div className="text-sm text-gray-600">Verified Members</div>
-                  <div className="text-xs text-gray-500 mt-1">Across the UK</div>
+                  <div className="text-3xl font-bold text-primary-600 mb-2">300+</div>
+                  <div className="text-sm text-gray-600">Active Members</div>
+                  <div className="text-xs text-gray-500 mt-1">Growing UK Community</div>
                 </div>
                 <div className="bg-white rounded-xl p-6 shadow-sm">
-                  <div className="text-3xl font-bold text-secondary-600 mb-2">1,200+</div>
+                  <div className="text-3xl font-bold text-secondary-600 mb-2">120+</div>
                   <div className="text-sm text-gray-600">Events Hosted</div>
-                  <div className="text-xs text-gray-500 mt-1">Since January 2024</div>
+                  <div className="text-xs text-gray-500 mt-1">Since Launch</div>
                 </div>
                 <div className="bg-white rounded-xl p-6 shadow-sm">
                   <div className="text-3xl font-bold text-purple-600 mb-2">98%</div>
@@ -309,12 +309,12 @@ export default function About() {
               <div className="grid md:grid-cols-3 gap-8 text-center mb-12">
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
                   <TrophyIcon className="w-8 h-8 mx-auto mb-3" />
-                  <h3 className="font-semibold mb-2">50,000+ Members</h3>
-                  <p className="text-sm opacity-80">Across every UK city</p>
+                  <h3 className="font-semibold mb-2">10,000+ Members</h3>
+                  <p className="text-sm opacity-80">Across major UK cities</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
                   <CalendarIcon className="w-8 h-8 mx-auto mb-3" />
-                  <h3 className="font-semibold mb-2">12,000+ Events</h3>
+                  <h3 className="font-semibold mb-2">2,000+ Events</h3>
                   <p className="text-sm opacity-80">Annual community experiences</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">

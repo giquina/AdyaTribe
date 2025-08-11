@@ -619,7 +619,7 @@ export default function EventsPage() {
                   <div className="text-sm text-gray-600">Events This Month</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-2xl sm:text-3xl font-bold text-secondary-600 mb-1">500+</div>
+                  <div className="text-2xl sm:text-3xl font-bold text-secondary-600 mb-1">300+</div>
                   <div className="text-sm text-gray-600">Active Members</div>
                 </div>
                 <div className="text-center">

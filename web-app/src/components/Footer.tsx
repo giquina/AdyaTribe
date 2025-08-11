@@ -6,7 +6,7 @@ const footerLinks = {
   community: [
     { name: 'How It Works', href: '/how-it-works' },
     { name: 'Success Stories', href: '/success-stories' },
-    { name: 'Community Guidelines', href: '/community' },
+    { name: 'Community Guidelines', href: '/community-guidelines' },
     { name: 'Safety Center', href: '/safety' },
   ],
   support: [

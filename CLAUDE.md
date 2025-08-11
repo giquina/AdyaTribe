@@ -151,7 +151,7 @@ npm install          # Ensure dependencies are current
 - **React Navigation 7** for navigation
 - **Formik + Yup** for form handling and validation
 - **React Native Paper** for UI components
-- **Firebase 10.0.0** for backend (not yet connected)
+- **Supabase Client** for backend integration (connected)
 - **Expo Camera** and **Image Picker** for photo features
 
 ### Web App
@@ -161,9 +161,9 @@ npm install          # Ensure dependencies are current
 - **Headless UI** for accessible components
 - **Lucide React** for icons
 
-### Planned Backend
-- **Firebase** (Authentication, Firestore, Storage, Functions)
-- **Stripe** for payment processing
+### Backend (Production Ready ✅)
+- **Supabase** (PostgreSQL, Authentication, Storage, Edge Functions) - INTEGRATED
+- **Stripe** for payment processing (planned)
 
 ## Utility Libraries (Web App)
 
@@ -176,8 +176,9 @@ The web app includes several utility libraries in `src/lib/`:
 - **`forums.ts`**: Discussion forums and topic management
 - **`messaging.ts`**: Chat rooms and messaging system
 - **`profile.ts`**: User profile management and completion tracking
+- **`supabase.ts`**: Supabase client with TypeScript interfaces for database operations
 
-These libraries provide TypeScript interfaces and mock data for development, ready to be connected to Firebase backend.
+These libraries provide TypeScript interfaces and integrate with the Supabase backend for real-time functionality.
 
 ## Key Files to Understand
 
@@ -185,6 +186,7 @@ These libraries provide TypeScript interfaces and mock data for development, rea
 - `mobile-app/App.js`: Main app entry point, renders OnboardingFlow
 - `mobile-app/src/screens/onboarding/OnboardingFlow.js`: Navigation controller for 7-step onboarding
 - `mobile-app/src/constants/Styles.js`: Complete design system (Colors, Typography, Spacing, CommonStyles)
+- `mobile-app/src/lib/supabase.js`: Supabase client configuration and helper functions for mobile
 - `mobile-app/app.json`: Expo configuration
 - `mobile-app/package.json`: Dependencies and scripts
 
@@ -197,6 +199,7 @@ These libraries provide TypeScript interfaces and mock data for development, rea
 - `web-app/src/components/Testimonials.tsx`: User testimonials
 - `web-app/src/components/CTA.tsx`: Call-to-action sections
 - `web-app/src/components/Footer.tsx`: Site footer with links
+- `web-app/src/lib/supabase.ts`: Supabase client configuration and TypeScript interfaces for web
 - `web-app/next.config.js`: Next.js configuration for static export
 - `web-app/tailwind.config.js`: Tailwind CSS configuration with AdyaTribe brand colors
 - `web-app/tsconfig.json`: TypeScript configuration with path aliases (@/)
@@ -260,14 +263,34 @@ The mobile app uses a centralized design system in `src/constants/Styles.js`:
 import { Colors, Spacing, Typography, CommonStyles } from '../../constants/Styles';
 ```
 
-## Firebase Integration (Planned)
+## Supabase Integration (Complete ✅)
 
-When implementing Firebase:
-1. Create Firebase project
-2. Configure authentication (email + additional verification)
-3. Set up Firestore for user profiles and community data
-4. Configure Firebase Storage for image uploads
-5. Implement Firebase Functions for backend logic
+The project uses Supabase as the production backend with the following setup:
+
+### Database Schema
+- **PostgreSQL** with comprehensive schema in `/supabase/migrations/20250811_001_initial_schema.sql`
+- **Tables:** profiles, interests, user_interests, groups, group_members, events, event_attendees
+- **Row Level Security (RLS)** policies for data privacy and access control
+- **Storage buckets** for profile pictures, verification selfies, group images, event images
+
+### Authentication & Security
+- **Supabase Auth** with email/password and social login support
+- **Automatic user profile creation** via database triggers
+- **Secure file upload** policies with user-specific folder structure
+- **Verification system** for selfies and identity validation
+
+### Environment Configuration
+**Web App (.env.local):**
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+```
+
+**Mobile App (app.json or .env):**
+```env
+EXPO_PUBLIC_SUPABASE_URL=your_supabase_url
+EXPO_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+```
 
 ## Development Status
 
@@ -275,6 +298,10 @@ When implementing Firebase:
 **Previous Milestone:** Phase 1 - Foundation Complete ✅
 
 **Recently Completed:**
+- ✅ **Supabase Integration:** Complete backend with PostgreSQL, Auth, Storage
+- ✅ **Database Schema:** Full production schema with RLS policies
+- ✅ **Mobile Backend:** Supabase client integrated with onboarding flow
+- ✅ **Web Backend:** TypeScript interfaces and helper functions
 - Core platform pages (Dashboard, Chat, Directory, Events, Forums)
 - Advanced profile management system with 10 specialized components
 - Utility libraries for all major platform features
@@ -282,8 +309,8 @@ When implementing Firebase:
 - Membership pricing page
 - Admin dashboard structure
 
-**Current Focus:** Backend integration and real-time functionality
-**Next Priority:** Firebase integration for authentication and data persistence
+**Current Focus:** Connecting UI components to Supabase backend
+**Next Priority:** Real-time functionality and onboarding-to-database integration
 
 ## Upcoming Platform Features
 
@@ -296,11 +323,11 @@ When implementing Firebase:
 - **Event System:** Community events and expert sessions
 
 ### Technical Architecture Priorities
-- **Real-time Chat:** WebSocket-based group messaging
-- **Subscription Management:** Stripe integration with webhook handling
-- **Content Moderation:** Automated filtering + human review queues
-- **GDPR Compliance:** Data minimization and user rights management
-- **Privacy by Design:** On-device verification, encrypted data storage
+- **Real-time Chat:** Supabase Realtime subscriptions for group messaging
+- **Subscription Management:** Stripe integration with Supabase webhook handling
+- **Content Moderation:** Automated filtering + human review queues via Edge Functions
+- **GDPR Compliance:** Data minimization and user rights management (built into RLS)
+- **Privacy by Design:** On-device verification, secure Supabase storage policies
 
 ## Common Development Tasks
 
@@ -309,7 +336,8 @@ When implementing Firebase:
 2. Follow existing pattern from `EmailStep.js`
 3. Add case to `OnboardingFlow.js` switch statement
 4. Update userData state structure if needed
-5. Test navigation flow thoroughly
+5. Integrate with Supabase using functions from `src/lib/supabase.js`
+6. Test navigation flow thoroughly
 
 ### Modifying Design System
 1. Edit values in `src/constants/Styles.js`
@@ -321,6 +349,8 @@ When implementing Firebase:
 - **Metro bundler errors:** Clear cache with `npx expo start --clear`
 - **Navigation issues:** Check step numbers and navigation logic
 - **Styling issues:** Verify imports from Styles.js
+- **Supabase connection issues:** Check environment variables and network connectivity
+- **Database errors:** Verify RLS policies and user authentication state
 - **Git sync issues:** Ensure you're in correct directory for commands
 
 ### Web App Development Notes
@@ -329,6 +359,7 @@ When implementing Firebase:
 - **TypeScript:** All new components should be TypeScript with proper interfaces
 - **Design System:** Use Tailwind classes that match the mobile app color scheme
 - **Component Structure:** Follow existing patterns in profile components for consistency
+- **Supabase Integration:** Use TypeScript interfaces from `src/lib/supabase.ts` for type safety
 
 ### Deployment Configuration
 - **Next.js Config:** Static export with `output: 'export'` in next.config.js
@@ -338,35 +369,46 @@ When implementing Firebase:
 
 ## Claude AI Agent System
 
-AdyaTribe uses a specialized AI agent system organized in `/claude/agents/` with category-based structure:
+AdyaTribe uses a specialized AI agent system organized in `.claude/agents/adyatribe/` with category-based structure:
 
 ### Agent Categories
 
-**💻 Development Team** (`/claude/agents/development/`)
+**💻 Development Team** (`.claude/agents/adyatribe/development/`)
 - **UI Specialist** - Visual design and component interface expertise
 - **UX Designer** - User experience and flow optimization  
 - **React Native Expert** - Mobile development and Expo technical implementation
 - **Testing Engineer** - Quality assurance and testing strategy
+- **Supabase MCP Specialist** - Database integration and backend development
 
-**🚀 Deployment Team** (`/claude/agents/deployment/`)
+**🚀 Deployment Team** (`.claude/agents/adyatribe/deployment/`)
 - **Vercel Deployment Specialist** - Web deployment with comprehensive issue resolution knowledge
 - **DevOps Engineer** - Production deployment and infrastructure management
+- **GitHub Deployment Specialist** - GitHub Actions and automated deployment workflows
 
-**📋 Management Team** (`/claude/agents/management/`)
+**📋 Management Team** (`.claude/agents/adyatribe/management/`)
 - **Project Manager** - Timeline management and project coordination
 
-**🛡️ Security Team** (`/claude/agents/security/`)
+**🛡️ Security Team** (`.claude/agents/adyatribe/security/`)
 - **Security Consultant** - User safety, GDPR compliance, and security expertise
 
 ### Usage
 Agents can be invoked using the `subagent_type` parameter in Claude Code's Task tool. Each agent contains specialized knowledge for their domain and can be used proactively when working on related features.
 
-## 📊 **Current Project Metrics** 
-*(Auto-updated: 2025-08-10)*
+### Folder Structure
+- `.claude/agents/` - Claude Code built-in agents (system level)
+- `.claude/agents/adyatribe/` - AdyaTribe project-specific agents
+- `.claude/hooks/` - Development hooks and automation
+- `.claude/slash-commands/` - Custom Claude Code commands
 
-- **Claude Code Agents**: 8 specialized agents (organized by category)
-- **Onboarding Steps**: 7/7 completed
-- **Documentation Files**: Auto-synced with codebase
-- **Git Status**: Clean (deployed to production)
-- **Last Activity**: Comprehensive platform infrastructure deployment
+## 📊 **Current Project Metrics** 
+*(Auto-updated: 2025-08-11)*
+
+- **Claude Code Agents**: 9 specialized agents (organized by category)
+- **Onboarding Steps**: 7/7 completed (ready for backend integration)
+- **Backend Infrastructure**: Supabase fully integrated with PostgreSQL schema
+- **Database Tables**: 6 core tables with RLS policies
+- **Storage Buckets**: 4 configured buckets for secure file management
+- **Authentication**: Supabase Auth with mobile and web client integration
+- **Git Status**: Clean (production-ready backend infrastructure)
+- **Last Activity**: Major Supabase integration and database deployment
 

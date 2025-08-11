@@ -44,7 +44,7 @@ const WhatsAppWidget: React.FC = () => {
       icon: <Users className="w-4 h-4 text-purple-600" />
     },
     {
-      message: "Perfect! 🎉 We offer flexible membership options:\n\n🆓 **Free**: Browse and basic connections\n⭐ **Core**: Full access to groups & events (£19/month)\n💎 **Premium**: Priority booking & exclusive events (£39/month)\n\nAll with London-focused meetups!",
+      message: "Perfect! 🎉 We offer flexible membership options:\n\n🆓 **Free**: Browse and basic connections\n⭐ **Core**: Full access to groups & events (£12/month)\n💎 **Premium**: Priority booking & exclusive events (£25/month)\n\nAll with London-focused meetups!",
       options: ["I'm interested in joining!", "Tell me about premium benefits", "Can I try it first?", "What's the signup process?"],
       icon: <Calendar className="w-4 h-4 text-[#FF6B6B]" />
     },
@@ -55,22 +55,30 @@ const WhatsAppWidget: React.FC = () => {
     }
   ]
 
-  // Auto-open widget after 5 minutes
+  // Check if device is mobile
+  const isMobile = () => {
+    if (typeof window === 'undefined') return false
+    return window.innerWidth < 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+  }
+
+  // Always show widget, but control auto-popup behavior
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!hasInteracted) {
-        setShowWidget(true)
-        setTimeout(() => {
+    // Show widget immediately on load
+    setShowWidget(true)
+    
+    // Auto-open only on desktop after 5 minutes
+    if (!isMobile()) {
+      const timer = setTimeout(() => {
+        if (!hasInteracted) {
           setIsOpen(true)
-          // Start conversation after widget appears
           setTimeout(() => {
             addBotMessage(conversationFlow[0])
           }, 800)
-        }, 200)
-      }
-    }, 300000) // 5 minutes = 300000ms
-
-    return () => clearTimeout(timer)
+        }
+      }, 300000) // 5 minutes = 300000ms
+      
+      return () => clearTimeout(timer)
+    }
   }, [hasInteracted])
 
   const addBotMessage = (step: typeof conversationFlow[0]) => {
@@ -182,10 +190,10 @@ const WhatsAppWidget: React.FC = () => {
   if (!showWidget) return null
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 font-sans">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 font-sans">
       {/* Chat Window */}
       {isOpen && !isMinimized && (
-        <div className="mb-4 bg-white rounded-2xl shadow-2xl border border-gray-200 w-80 sm:w-96 max-h-[32rem] flex flex-col animate-scale-in">
+        <div className="mb-4 bg-white rounded-2xl shadow-2xl border border-gray-200 w-80 sm:w-96 lg:w-80 max-w-[calc(100vw-2rem)] max-h-[80vh] sm:max-h-[32rem] flex flex-col animate-scale-in">
           {/* Header */}
           <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#FF6B6B] to-[#4ECDC4] text-white rounded-t-2xl">
             <div className="flex items-center space-x-3">
@@ -216,7 +224,7 @@ const WhatsAppWidget: React.FC = () => {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 max-h-80">
+          <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 bg-gray-50 max-h-60 sm:max-h-80">
             {messages.map((message) => (
               <div key={message.id} className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}>
                 <div className={`max-w-xs sm:max-w-sm ${
@@ -292,7 +300,7 @@ const WhatsAppWidget: React.FC = () => {
 
       {/* Initial Welcome Tooltip */}
       {!hasInteracted && !isOpen && (
-        <div className="absolute bottom-20 right-0 bg-white p-4 rounded-xl shadow-xl border border-gray-200 max-w-xs animate-fade-in">
+        <div className="absolute bottom-20 right-0 sm:bottom-20 bg-white p-3 sm:p-4 rounded-xl shadow-xl border border-gray-200 max-w-xs sm:max-w-xs animate-fade-in">
           <div className="text-sm">
             <div className="flex items-center space-x-2 mb-2">
               <Heart className="w-4 h-4 text-[#FF6B6B]" />

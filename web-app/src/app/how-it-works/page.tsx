@@ -169,7 +169,7 @@ const membershipTiers = [
   {
     name: "Core Member",
     icon: TrophyIcon,
-    price: "£19",
+    price: "£12",
     period: "per month",
     color: "text-primary-600",
     bgColor: "bg-primary-50",
@@ -189,7 +189,7 @@ const membershipTiers = [
   {
     name: "VIP Premium",
     icon: StarIcon,
-    price: "£49",
+    price: "£25",
     period: "per month",
     color: "text-secondary-600",
     bgColor: "bg-secondary-50",

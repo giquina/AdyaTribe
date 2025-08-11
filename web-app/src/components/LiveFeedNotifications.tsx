@@ -26,6 +26,20 @@ const LiveFeedNotifications = () => {
   const [notifications, setNotifications] = useState<NotificationItem[]>([])
   const [currentNotification, setCurrentNotification] = useState<NotificationItem | null>(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 1024 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+      setIsMobile(mobile)
+    }
+    
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   // Mock data for realistic notifications
   const mockNotifications: Omit<NotificationItem, 'id' | 'timeAgo'>[] = [
@@ -205,7 +219,8 @@ const LiveFeedNotifications = () => {
     setCurrentNotification(null)
   }
 
-  if (!isVisible) return null
+  // Hide on mobile devices or if not visible
+  if (!isVisible || isMobile) return null
 
   return (
     <div className="fixed bottom-6 left-6 z-40 pointer-events-none">

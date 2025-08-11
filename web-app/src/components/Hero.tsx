@@ -86,7 +86,7 @@ export default function Hero() {
               <div className="flex items-center gap-2">
                 <SparklesIcon className="h-5 w-5 text-pink-500" />
                 <span className="text-sm font-bold bg-gradient-to-r from-pink-600 to-purple-600 bg-clip-text text-transparent">
-                  Welcome to London's #1 Community
+                  500+ Events Monthly • 2,500+ Members • UK-Wide
                 </span>
               </div>
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
@@ -109,7 +109,7 @@ export default function Hero() {
                 </span>
               </h1>
               <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-700 leading-relaxed max-w-2xl font-medium break-words">
-                Join the <span className="font-bold text-pink-600">premier verified community</span> for 30+ single & childfree women in the UK. Find your tribe, make meaningful friendships, and discover shared adventures across <span className="font-bold text-purple-600">London and beyond</span>.
+                Join the <span className="font-bold text-pink-600">premier verified community</span> for 30+ single & childfree women in the UK. From wine tastings in Covent Garden to career workshops in Shoreditch—find your tribe and create the social life you've always wanted across <span className="font-bold text-purple-600">London and beyond</span>.
               </p>
             </motion.div>
 
@@ -121,9 +121,9 @@ export default function Hero() {
               className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6"
             >
               {[
-                { icon: HeartIcon, text: "VERIFIED SAFETY", color: "#ef4444" },
-                { icon: UsersIcon, text: "EXCLUSIVE 30+ CLUB", color: "#3b82f6" },
-                { icon: SparklesIcon, text: "REAL CONNECTIONS", color: "#f59e0b" }
+                { icon: HeartIcon, text: "500+ EVENTS MONTHLY", color: "#ef4444" },
+                { icon: UsersIcon, text: "2,500+ VERIFIED MEMBERS", color: "#3b82f6" },
+                { icon: SparklesIcon, text: "98% SAFETY RATING", color: "#f59e0b" }
               ].map((item, index) => (
                 <motion.div
                   key={item.text}
@@ -159,12 +159,13 @@ export default function Hero() {
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <span className="relative z-10 flex items-center justify-center gap-3">
-                  JOIN FREE TODAY
+                  JOIN FREE & BROWSE EVENTS
                   <ArrowRightIcon className="h-6 w-6 group-hover:translate-x-1 transition-transform duration-200" />
                 </span>
               </motion.a>
 
-              <motion.button
+              <motion.a
+                href="/events"
                 whileHover={{ 
                   scale: 1.05,
                   backgroundColor: "rgba(255,255,255,0.9)"
@@ -172,8 +173,8 @@ export default function Hero() {
                 whileTap={{ scale: 0.95 }}
                 className="text-lg sm:text-xl font-bold px-8 sm:px-10 py-4 sm:py-5 bg-white/70 backdrop-blur-lg text-gray-800 border-2 border-gray-200 rounded-2xl shadow-lg hover:shadow-xl transform transition-all duration-300 hover:border-purple-300"
               >
-                WATCH DEMO
-              </motion.button>
+                VIEW UPCOMING EVENTS
+              </motion.a>
             </motion.div>
 
             {/* Social Login */}

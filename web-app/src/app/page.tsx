@@ -1,6 +1,7 @@
 import Header from '@/components/Header'
 import Hero from '@/components/Hero'
 import Features from '@/components/Features'
+import SuccessStories from '@/components/SuccessStories'
 import AppDownloadSection from '@/components/AppDownloadSection'
 import Testimonials from '@/components/Testimonials'
 import CTA from '@/components/CTA'
@@ -13,6 +14,7 @@ export default function Home() {
       <div className="pt-16 w-full">
         <Hero />
         <Features />
+        <SuccessStories />
         <AppDownloadSection />
         <Testimonials />
         <CTA />

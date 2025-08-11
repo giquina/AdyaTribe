@@ -11,7 +11,8 @@ import {
   StarIcon,
   HeartIcon,
   ShareIcon,
-  ClockIcon
+  ClockIcon,
+  PhotoIcon
 } from '@heroicons/react/24/outline'
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid'
 import Header from '@/components/Header'
@@ -20,6 +21,7 @@ import { Event, EventFilters, eventService, EVENT_CATEGORIES } from '@/lib/event
 
 const EventCard = ({ event }: { event: Event }) => {
   const [isFavorited, setIsFavorited] = useState(false)
+  const [showPhotoGallery, setShowPhotoGallery] = useState(false)
   
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr)
@@ -42,29 +44,98 @@ const EventCard = ({ event }: { event: Event }) => {
   const isAlmostFull = spotsLeft <= 3 && spotsLeft > 0
   const isFull = spotsLeft <= 0
 
+  // Photo gallery modal component
+  const PhotoGalleryModal = () => (
+    <AnimatePresence>
+      {showPhotoGallery && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-4"
+          onClick={() => setShowPhotoGallery(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.8 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0.8 }}
+            className="max-w-4xl w-full max-h-[90vh] overflow-auto bg-white rounded-2xl p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-xl font-bold">Event Photos</h3>
+              <button 
+                onClick={() => setShowPhotoGallery(false)}
+                className="text-gray-500 hover:text-gray-700"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {event.photos?.map((photo) => (
+                <div key={photo.id} className="aspect-square rounded-lg overflow-hidden">
+                  <img 
+                    src={photo.url}
+                    alt={photo.caption || 'Event photo'}
+                    className="w-full h-full object-cover"
+                  />
+                  {photo.caption && (
+                    <p className="mt-2 text-sm text-gray-600">{photo.caption}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+
   return (
-    <motion.div
-      layout
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
-    >
-      {/* Event Image */}
-      <div className="relative h-48 bg-gradient-to-r from-primary-200 to-secondary-200">
-        {event.images[0] ? (
-          <img 
-            src={event.images[0]} 
-            alt={event.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center text-6xl">
-            {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'BookOpen' && '📚'}
-            {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Dumbbell' && '💪'}
-            {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Palette' && '🎨'}
-          </div>
-        )}
+    <>
+      <motion.div
+        layout
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
+      >
+        {/* Event Image */}
+        <div className="relative h-48 bg-gradient-to-r from-primary-200 to-secondary-200">
+          {event.images[0] ? (
+            <img 
+              src={event.images[0]} 
+              alt={event.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-6xl">
+              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'BookOpen' && '📚'}
+              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Dumbbell' && '💪'}
+              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Palette' && '🎨'}
+              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Wine' && '🍷'}
+              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Coffee' && '☕'}
+              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Music' && '🎵'}
+              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Camera' && '📷'}
+              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Plane' && '✈️'}
+              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Heart' && '💕'}
+              {EVENT_CATEGORIES[event.category as keyof typeof EVENT_CATEGORIES]?.icon === 'Star' && '⭐'}
+            </div>
+          )}
+          
+          {/* Photo Gallery Indicator */}
+          {event.photos && event.photos.length > 0 && (
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                setShowPhotoGallery(true)
+              }}
+              className="absolute bottom-3 right-3 bg-black/70 text-white text-xs px-2 py-1 rounded-full hover:bg-black/80 transition-colors flex items-center gap-1"
+            >
+              <PhotoIcon className="w-3 h-3" />
+              {event.photos.length}
+            </button>
+          )}
         
         {/* Badges */}
         <div className="absolute top-3 left-3 flex gap-2">
@@ -167,10 +238,10 @@ const EventCard = ({ event }: { event: Event }) => {
               <img 
                 src={event.hostImage} 
                 alt={event.hostName}
-                className="w-8 h-8 rounded-full object-cover"
+                className="w-8 h-8 rounded-full object-cover ring-2 ring-white shadow-md"
               />
             ) : (
-              <div className="w-8 h-8 bg-gradient-to-r from-primary-400 to-secondary-400 rounded-full flex items-center justify-center text-white text-sm font-bold">
+              <div className="w-8 h-8 bg-gradient-to-r from-primary-400 to-secondary-400 rounded-full flex items-center justify-center text-white text-sm font-bold ring-2 ring-white shadow-md">
                 {event.hostName.split(' ').map(n => n[0]).join('')}
               </div>
             )}
@@ -190,6 +261,70 @@ const EventCard = ({ event }: { event: Event }) => {
             )}
           </div>
         </div>
+
+        {/* Attendee Photos */}
+        {event.attendees && event.attendees.length > 0 && (
+          <div className="mb-4">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-sm font-medium text-gray-700">Going:</span>
+              <div className="flex -space-x-2">
+                {event.attendees.slice(0, 5).map((attendee, index) => (
+                  <div
+                    key={attendee.id}
+                    className="relative"
+                  >
+                    {attendee.profileImage ? (
+                      <img
+                        src={attendee.profileImage}
+                        alt={attendee.name}
+                        className="w-8 h-8 rounded-full border-2 border-white object-cover shadow-sm hover:scale-110 transition-transform"
+                        title={attendee.name}
+                      />
+                    ) : (
+                      <div 
+                        className="w-8 h-8 rounded-full border-2 border-white bg-gradient-to-r from-primary-300 to-secondary-300 flex items-center justify-center text-white text-xs font-bold shadow-sm hover:scale-110 transition-transform"
+                        title={attendee.name}
+                      >
+                        {attendee.name.split(' ').map(n => n[0]).join('').substring(0, 2)}
+                      </div>
+                    )}
+                    <div className={`absolute -bottom-1 -right-1 w-3 h-3 rounded-full border border-white text-xs flex items-center justify-center ${
+                      attendee.membershipTier === 'premium' ? 'bg-purple-500' : 
+                      attendee.membershipTier === 'core' ? 'bg-blue-500' : 'bg-green-500'
+                    }`}>
+                      <div className="w-1.5 h-1.5 bg-white rounded-full"></div>
+                    </div>
+                  </div>
+                ))}
+                {event.attendees.length > 5 && (
+                  <div className="w-8 h-8 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center text-gray-600 text-xs font-bold shadow-sm">
+                    +{event.attendees.length - 5}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="text-xs text-gray-500">
+              {event.attendees.filter(a => a.membershipTier === 'premium').length > 0 && (
+                <span className="inline-flex items-center gap-1">
+                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                  {event.attendees.filter(a => a.membershipTier === 'premium').length} Premium
+                </span>
+              )}
+              {event.attendees.filter(a => a.membershipTier === 'core').length > 0 && (
+                <span className="inline-flex items-center gap-1 ml-3">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  {event.attendees.filter(a => a.membershipTier === 'core').length} Core
+                </span>
+              )}
+              {event.attendees.filter(a => a.membershipTier === 'free').length > 0 && (
+                <span className="inline-flex items-center gap-1 ml-3">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  {event.attendees.filter(a => a.membershipTier === 'free').length} Free
+                </span>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Tags */}
         <div className="flex flex-wrap gap-2 mb-4">
@@ -216,7 +351,11 @@ const EventCard = ({ event }: { event: Event }) => {
           {isFull ? 'Join Waitlist' : 'View Details & RSVP'}
         </a>
       </div>
-    </motion.div>
+      </motion.div>
+      
+      {/* Photo Gallery Modal */}
+      <PhotoGalleryModal />
+    </>
   )
 }
 
@@ -441,35 +580,99 @@ export default function EventsPage() {
       
       <main className="pt-16">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-primary-50 to-secondary-50 py-16">
-          <div className="container-width px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto">
-              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
+        <section className="relative bg-gradient-to-r from-primary-50 to-secondary-50 py-16 overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-200 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+            <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary-200 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+          </div>
+          
+          <div className="container-width px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center max-w-4xl mx-auto">
+              <motion.h1 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6"
+              >
                 Discover Amazing{' '}
                 <span className="gradient-text">Events</span>
-              </h1>
-              <p className="text-lg sm:text-xl text-gray-600 mb-8">
+              </motion.h1>
+              <motion.p 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-lg sm:text-xl text-gray-600 mb-8"
+              >
                 Join fellow women in London for meaningful experiences, new friendships, and unforgettable adventures.
-              </p>
+              </motion.p>
+
+              {/* Event Stats */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="grid grid-cols-3 gap-8 max-w-md mx-auto mb-8"
+              >
+                <div className="text-center">
+                  <div className="text-2xl sm:text-3xl font-bold text-primary-600 mb-1">150+</div>
+                  <div className="text-sm text-gray-600">Events This Month</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl sm:text-3xl font-bold text-secondary-600 mb-1">500+</div>
+                  <div className="text-sm text-gray-600">Active Members</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl sm:text-3xl font-bold text-purple-600 mb-1">4.9</div>
+                  <div className="text-sm text-gray-600">Average Rating</div>
+                </div>
+              </motion.div>
               
-              {/* Search Bar */}
-              <div className="relative max-w-2xl mx-auto">
+              {/* Enhanced Search Bar */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="relative max-w-2xl mx-auto"
+              >
                 <input
                   type="text"
                   placeholder="Search events by name, location, or interests..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                  className="w-full pl-12 pr-4 py-4 text-lg rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent"
+                  className="w-full pl-12 pr-24 py-4 text-lg rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-transparent shadow-lg bg-white/80 backdrop-blur-sm"
                 />
                 <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-400" />
                 <button
                   onClick={handleSearch}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary-500 text-white px-6 py-2 rounded-xl hover:bg-primary-600 transition-colors font-medium"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-6 py-2 rounded-xl hover:from-primary-600 hover:to-secondary-600 transition-all duration-200 font-medium shadow-lg"
                 >
                   Search
                 </button>
-              </div>
+              </motion.div>
+
+              {/* Quick Category Filters */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
+                className="flex flex-wrap justify-center gap-3 mt-8"
+              >
+                {Object.keys(EVENT_CATEGORIES).slice(0, 6).map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setFilters({ ...filters, category: category === filters.category ? undefined : category })}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                      filters.category === category
+                        ? 'bg-primary-500 text-white shadow-lg transform scale-105'
+                        : 'bg-white/80 text-gray-700 hover:bg-white hover:shadow-md'
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </motion.div>
             </div>
           </div>
         </section>

@@ -193,11 +193,70 @@ export default function Hero() {
             transition={{ delay: 0.4, duration: 0.8 }}
             className="relative"
           >
+            {/* Member Photos Background */}
+            <div className="absolute inset-0 z-0">
+              <div className="grid grid-cols-3 gap-2 opacity-20 h-full">
+                {[
+                  "https://images.unsplash.com/photo-1494790108755-2616b612b1ac?w=100&h=100&fit=crop&crop=face&auto=format",
+                  "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop&crop=face&auto=format",
+                  "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&h=100&fit=crop&crop=face&auto=format",
+                  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face&auto=format",
+                  "https://images.unsplash.com/photo-1504703395950-b89145a5425b?w=100&h=100&fit=crop&crop=face&auto=format",
+                  "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=100&h=100&fit=crop&crop=face&auto=format"
+                ].map((src, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ scale: 0, rotate: -180 }}
+                    animate={{ scale: 1, rotate: 0 }}
+                    transition={{ delay: 1 + index * 0.1, duration: 0.5 }}
+                    className="aspect-square rounded-2xl overflow-hidden"
+                  >
+                    <img 
+                      src={src}
+                      alt="AdyaTribe community member"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
             <div className="relative z-10 bg-white/20 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-white/30">
               <div className="space-y-6">
                 <div className="text-center">
                   <h3 className="text-2xl font-bold text-gray-800 mb-2">Join 5,000+ Women</h3>
                   <p className="text-gray-600">Already connecting in London</p>
+                </div>
+                
+                {/* Member Avatars */}
+                <div className="flex justify-center mb-4">
+                  <div className="flex -space-x-3">
+                    {[
+                      "https://images.unsplash.com/photo-1494790108755-2616b612b1ac?w=60&h=60&fit=crop&crop=face&auto=format",
+                      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=60&h=60&fit=crop&crop=face&auto=format",
+                      "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=60&h=60&fit=crop&crop=face&auto=format",
+                      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=60&h=60&fit=crop&crop=face&auto=format"
+                    ].map((src, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ x: -20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: 0.8 + index * 0.1, duration: 0.4 }}
+                        className="w-12 h-12 rounded-full border-2 border-white shadow-lg overflow-hidden"
+                      >
+                        <img 
+                          src={src}
+                          alt="AdyaTribe member"
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                        />
+                      </motion.div>
+                    ))}
+                    <div className="w-12 h-12 rounded-full border-2 border-white shadow-lg bg-gradient-to-r from-primary-400 to-secondary-400 flex items-center justify-center text-white text-xs font-bold">
+                      +5K
+                    </div>
+                  </div>
                 </div>
                 
                 <div className="grid grid-cols-2 gap-4 text-center">

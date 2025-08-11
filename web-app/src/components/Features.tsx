@@ -138,7 +138,7 @@ export default function Features() {
           ))}
         </motion.div>
 
-        {/* Trust Indicators */}
+        {/* Trust Indicators with Member Photos */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -146,15 +146,65 @@ export default function Features() {
           transition={{ delay: 0.4, duration: 0.8 }}
           className="mt-20 text-center"
         >
-          <div className="bg-gradient-to-r from-primary-50 to-secondary-50 rounded-2xl p-8 border border-white shadow-lg">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <HeartIcon className="h-6 w-6 text-primary-400" />
-              <h3 className="text-2xl font-semibold text-gray-900">Built by Women, for Women</h3>
+          <div className="bg-gradient-to-r from-primary-50 to-secondary-50 rounded-2xl p-8 border border-white shadow-lg relative overflow-hidden">
+            {/* Background Member Photos */}
+            <div className="absolute inset-0 opacity-5">
+              <div className="grid grid-cols-6 gap-2 h-full">
+                {Array.from({ length: 24 }).map((_, index) => {
+                  const photos = [
+                    "https://images.unsplash.com/photo-1494790108755-2616b612b1ac?w=80&h=80&fit=crop&crop=face&auto=format",
+                    "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&h=80&fit=crop&crop=face&auto=format",
+                    "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=80&h=80&fit=crop&crop=face&auto=format",
+                    "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face&auto=format",
+                    "https://images.unsplash.com/photo-1504703395950-b89145a5425b?w=80&h=80&fit=crop&crop=face&auto=format",
+                    "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=80&h=80&fit=crop&crop=face&auto=format"
+                  ]
+                  return (
+                    <div key={index} className="aspect-square rounded-xl overflow-hidden">
+                      <img 
+                        src={photos[index % photos.length]}
+                        alt="AdyaTribe member"
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  )
+                })}
+              </div>
             </div>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              AdyaTribe was created by women who understand the unique challenges of making meaningful adult friendships. 
-              Every feature is designed with empathy, safety, and authenticity at its core.
-            </p>
+            
+            <div className="relative z-10">
+              <div className="flex items-center justify-center gap-2 mb-6">
+                <HeartIcon className="h-6 w-6 text-primary-400" />
+                <h3 className="text-2xl font-semibold text-gray-900">Built by Women, for Women</h3>
+              </div>
+              
+              {/* Featured Member Testimonial */}
+              <div className="max-w-3xl mx-auto mb-6">
+                <div className="flex items-center justify-center gap-4 mb-4">
+                  <div className="w-16 h-16 rounded-full overflow-hidden shadow-lg ring-2 ring-white">
+                    <img 
+                      src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=face&auto=format"
+                      alt="Sarah, AdyaTribe founder"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="text-left">
+                    <p className="font-semibold text-gray-900">Sarah, Founder</p>
+                    <p className="text-sm text-gray-600">London, UK</p>
+                  </div>
+                </div>
+                <p className="text-lg text-gray-600 italic mb-4">
+                  "After moving to London and struggling to make authentic friendships in my 30s, I created AdyaTribe to solve a problem I knew thousands of women faced."
+                </p>
+              </div>
+              
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                AdyaTribe was created by women who understand the unique challenges of making meaningful adult friendships. 
+                Every feature is designed with empathy, safety, and authenticity at its core.
+              </p>
+            </div>
           </div>
         </motion.div>
       </div>

@@ -166,16 +166,54 @@ export default function CreateEventPage() {
       <Header />
       
       <main className="pt-16">
-        {/* Hero Section */}
-        <section className="bg-gradient-to-r from-primary-50 to-secondary-50 py-12">
-          <div className="container-width px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-2xl mx-auto">
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                Create New Event
-              </h1>
-              <p className="text-lg text-gray-600">
+        {/* Enhanced Hero Section */}
+        <section className="relative bg-gradient-to-r from-primary-50 to-secondary-50 py-16 overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary-200 rounded-full mix-blend-multiply filter blur-2xl animate-pulse"></div>
+            <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-secondary-200 rounded-full mix-blend-multiply filter blur-2xl animate-pulse"></div>
+          </div>
+          
+          <div className="container-width px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center max-w-3xl mx-auto">
+              <motion.h1 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
+              >
+                Create Your{' '}
+                <span className="gradient-text">Event</span>
+              </motion.h1>
+              <motion.p 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-lg text-gray-600 mb-8"
+              >
                 Bring women together for meaningful experiences and lasting friendships.
-              </p>
+              </motion.p>
+              
+              {/* Event Creation Stats */}
+              <motion.div 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="grid grid-cols-3 gap-6 max-w-lg mx-auto"
+              >
+                <div className="text-center">
+                  <div className="text-xl sm:text-2xl font-bold text-primary-600 mb-1">50+</div>
+                  <div className="text-sm text-gray-600">Events Created</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xl sm:text-2xl font-bold text-secondary-600 mb-1">95%</div>
+                  <div className="text-sm text-gray-600">Success Rate</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xl sm:text-2xl font-bold text-purple-600 mb-1">4.8</div>
+                  <div className="text-sm text-gray-600">Avg Rating</div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>

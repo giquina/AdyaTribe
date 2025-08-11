@@ -133,6 +133,7 @@ export interface EventFilters {
     end: string
   }
   location?: string
+  area?: string
   priceRange?: {
     min: number
     max: number
@@ -140,8 +141,12 @@ export interface EventFilters {
   skillLevel?: 'beginner' | 'intermediate' | 'advanced' | 'all'
   availability?: 'available' | 'waitlist' | 'all'
   featured?: boolean
+  verified?: boolean
   searchQuery?: string
   tags?: string[]
+  timeOfDay?: 'morning' | 'afternoon' | 'evening' | 'all'
+  dayOfWeek?: 'weekend' | 'weekday' | 'all'
+  accessibility?: string[]
 }
 
 export interface EventSortOptions {
@@ -298,8 +303,39 @@ export class EventService {
         waitlistCount: 2,
         status: 'published',
         featured: true,
-        images: ['/events/book-club-brunch-1.jpg', '/events/ivy-chelsea.jpg'],
-        photos: [],
+        images: [
+          'https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=600&h=400&fit=crop&auto=format',
+          'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop&auto=format'
+        ],
+        photos: [
+          {
+            id: 'photo-1',
+            eventId: 'event-1',
+            url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop&auto=format',
+            caption: 'Book club members enjoying brunch and literary discussion',
+            uploadedBy: 'Sarah Chen',
+            uploadedAt: '2024-01-15T13:00:00Z',
+            featured: true
+          },
+          {
+            id: 'photo-2', 
+            eventId: 'event-1',
+            url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&auto=format',
+            caption: 'Animated discussion about character development',
+            uploadedBy: 'Emma Johnson',
+            uploadedAt: '2024-01-15T13:30:00Z',
+            featured: false
+          },
+          {
+            id: 'photo-3',
+            eventId: 'event-1', 
+            url: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&auto=format',
+            caption: 'Perfect venue with amazing company',
+            uploadedBy: 'Lisa Wang',
+            uploadedAt: '2024-01-15T14:00:00Z',
+            featured: false
+          }
+        ],
         attendees: [
           { id: 'att-1', userId: 'user-1', eventId: 'event-1', name: 'Emma Johnson', email: 'emma@example.com', membershipTier: 'core', joinedAt: '2024-01-15T10:00:00Z', status: 'confirmed' },
           { id: 'att-2', userId: 'user-2', eventId: 'event-1', name: 'Lisa Wang', email: 'lisa@example.com', membershipTier: 'premium', joinedAt: '2024-01-16T14:30:00Z', status: 'confirmed' }
@@ -359,8 +395,39 @@ export class EventService {
         waitlistCount: 0,
         status: 'published',
         featured: false,
-        images: ['/events/thames-walk-1.jpg', '/events/tower-bridge.jpg'],
-        photos: [],
+        images: [
+          'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=600&h=400&fit=crop&auto=format',
+          'https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=600&h=400&fit=crop&auto=format'
+        ],
+        photos: [
+          {
+            id: 'photo-4',
+            eventId: 'event-2',
+            url: 'https://images.unsplash.com/photo-1594736797933-d0acc43a8f2a?w=400&h=400&fit=crop&auto=format',
+            caption: 'Walking group enjoying Thames views',
+            uploadedBy: 'Rachel Thompson',
+            uploadedAt: '2024-01-22T11:00:00Z',
+            featured: true
+          },
+          {
+            id: 'photo-5',
+            eventId: 'event-2',
+            url: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop&auto=format',
+            caption: 'Coffee break with new friends',
+            uploadedBy: 'Jenny Liu',
+            uploadedAt: '2024-01-22T12:15:00Z',
+            featured: false
+          },
+          {
+            id: 'photo-6',
+            eventId: 'event-2',
+            url: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=400&fit=crop&auto=format',
+            caption: 'Celebrating our Tower Bridge arrival',
+            uploadedBy: 'Maria Santos',
+            uploadedAt: '2024-01-22T12:45:00Z',
+            featured: false
+          }
+        ],
         attendees: [
           { id: 'att-3', userId: 'user-3', eventId: 'event-2', name: 'Jenny Liu', email: 'jenny@example.com', membershipTier: 'free', joinedAt: '2024-01-22T09:00:00Z', status: 'confirmed' }
         ],
@@ -459,22 +526,37 @@ export class EventService {
     let filteredEvents = [...this.events]
 
     if (filters) {
+      // Category filter
       if (filters.category) {
         filteredEvents = filteredEvents.filter(e => e.category === filters.category)
       }
+      
+      // Subcategory filter
+      if (filters.subcategory) {
+        filteredEvents = filteredEvents.filter(e => e.subcategory === filters.subcategory)
+      }
+      
+      // Membership level filter
       if (filters.membershipLevel) {
         const tierLevels = { free: 0, core: 1, premium: 2 }
         const userLevel = tierLevels[filters.membershipLevel]
         filteredEvents = filteredEvents.filter(e => tierLevels[e.membershipRequired] <= userLevel)
       }
+      
+      // Search query filter
       if (filters.searchQuery) {
         const query = filters.searchQuery.toLowerCase()
         filteredEvents = filteredEvents.filter(e => 
           e.title.toLowerCase().includes(query) ||
           e.description.toLowerCase().includes(query) ||
-          e.tags.some(tag => tag.toLowerCase().includes(query))
+          e.location.toLowerCase().includes(query) ||
+          e.address.toLowerCase().includes(query) ||
+          e.tags.some(tag => tag.toLowerCase().includes(query)) ||
+          e.hostName.toLowerCase().includes(query)
         )
       }
+      
+      // Date range filter
       if (filters.dateRange) {
         filteredEvents = filteredEvents.filter(e => {
           const eventDate = new Date(e.date)
@@ -483,12 +565,80 @@ export class EventService {
           return eventDate >= start && eventDate <= end
         })
       }
+      
+      // Price range filter
+      if (filters.priceRange) {
+        filteredEvents = filteredEvents.filter(e => 
+          e.price >= filters.priceRange!.min && e.price <= filters.priceRange!.max
+        )
+      }
+      
+      // Availability filter
       if (filters.availability) {
         if (filters.availability === 'available') {
           filteredEvents = filteredEvents.filter(e => e.currentAttendees < e.maxAttendees)
         } else if (filters.availability === 'waitlist') {
           filteredEvents = filteredEvents.filter(e => e.currentAttendees >= e.maxAttendees && e.allowWaitlist)
         }
+      }
+      
+      // Featured filter
+      if (filters.featured !== undefined) {
+        filteredEvents = filteredEvents.filter(e => e.featured === filters.featured)
+      }
+      
+      // Verified filter
+      if (filters.verified !== undefined) {
+        filteredEvents = filteredEvents.filter(e => e.verifiedEvent === filters.verified)
+      }
+      
+      // Skill level filter
+      if (filters.skillLevel && filters.skillLevel !== 'all') {
+        filteredEvents = filteredEvents.filter(e => e.skillLevel === filters.skillLevel || e.skillLevel === 'all')
+      }
+      
+      // Time of day filter
+      if (filters.timeOfDay && filters.timeOfDay !== 'all') {
+        filteredEvents = filteredEvents.filter(e => {
+          const hour = parseInt(e.time.split(':')[0])
+          if (filters.timeOfDay === 'morning') return hour < 12
+          if (filters.timeOfDay === 'afternoon') return hour >= 12 && hour < 17
+          if (filters.timeOfDay === 'evening') return hour >= 17
+          return true
+        })
+      }
+      
+      // Day of week filter
+      if (filters.dayOfWeek && filters.dayOfWeek !== 'all') {
+        filteredEvents = filteredEvents.filter(e => {
+          const dayOfWeek = new Date(e.date).getDay()
+          if (filters.dayOfWeek === 'weekend') return dayOfWeek === 0 || dayOfWeek === 6
+          if (filters.dayOfWeek === 'weekday') return dayOfWeek >= 1 && dayOfWeek <= 5
+          return true
+        })
+      }
+      
+      // Tags filter
+      if (filters.tags && filters.tags.length > 0) {
+        filteredEvents = filteredEvents.filter(e => 
+          filters.tags!.some(tag => e.tags.includes(tag))
+        )
+      }
+      
+      // Accessibility filter
+      if (filters.accessibility && filters.accessibility.length > 0) {
+        filteredEvents = filteredEvents.filter(e => 
+          filters.accessibility!.some(accessibilityFeature => 
+            e.accessibility?.includes(accessibilityFeature)
+          )
+        )
+      }
+      
+      // Area filter (extract from address)
+      if (filters.area) {
+        filteredEvents = filteredEvents.filter(e => 
+          e.address.toLowerCase().includes(filters.area!.toLowerCase())
+        )
       }
     }
 

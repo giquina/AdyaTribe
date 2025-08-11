@@ -27,8 +27,13 @@ const ReviewCard = ({ review }: { review: EventReview }) => {
   return (
     <div className="bg-white p-6 rounded-xl border border-gray-200">
       <div className="flex items-start gap-4">
-        <div className="w-12 h-12 bg-gradient-to-r from-primary-400 to-secondary-400 rounded-full flex items-center justify-center text-white font-bold">
-          {review.reviewerName[0]}
+        <div className="w-12 h-12 rounded-full overflow-hidden ring-2 ring-white shadow-lg">
+          <img 
+            src={review.profileImage || `https://images.unsplash.com/photo-${review.id === 'rev-1' ? '1494790108755-2616b612b1ac' : '1580489944761-15a19d654956'}?w=100&h=100&fit=crop&crop=face&auto=format`}
+            alt={`${review.reviewerName} profile`}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
         </div>
         
         <div className="flex-1">
@@ -548,6 +553,158 @@ export default function EventDetailsPage() {
                         </ul>
                       </div>
                     )}
+                  </div>
+                )}
+
+                {/* Enhanced Photo Gallery */}
+                {event.photos && event.photos.length > 0 && (
+                  <div className="bg-white rounded-2xl p-6 shadow-lg">
+                    <div className="flex items-center justify-between mb-6">
+                      <h2 className="text-xl font-bold text-gray-900">Event Photos</h2>
+                      <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                        {event.photos.length} photos
+                      </span>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {event.photos.map((photo, index) => (
+                        <motion.div
+                          key={photo.id}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: index * 0.1, duration: 0.5 }}
+                          whileHover={{ scale: 1.02 }}
+                          className="relative aspect-square rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer group"
+                          onClick={() => {
+                            // Could implement a lightbox modal here
+                            window.open(photo.url, '_blank')
+                          }}
+                        >
+                          <img 
+                            src={photo.url}
+                            alt={photo.caption || 'Event photo'}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            loading="lazy"
+                          />
+                          
+                          {/* Photo Overlay */}
+                          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                            <div className="p-3 w-full">
+                              {photo.caption && (
+                                <p className="text-white text-sm font-medium mb-1">{photo.caption}</p>
+                              )}
+                              <p className="text-white/80 text-xs">📸 by {photo.uploadedBy}</p>
+                            </div>
+                          </div>
+                          
+                          {/* Featured Badge */}
+                          {photo.featured && (
+                            <div className="absolute top-2 right-2 bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded-full">
+                              ⭐ Featured
+                            </div>
+                          )}
+                        </motion.div>
+                      ))}
+                    </div>
+                    
+                    {event.photos.length > 6 && (
+                      <div className="text-center mt-6">
+                        <button className="text-primary-600 hover:text-primary-700 font-medium transition-colors">
+                          View all photos ({event.photos.length}) →
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Event Attendees Section */}
+                {event.attendees && event.attendees.length > 0 && (
+                  <div className="bg-white rounded-2xl p-6 shadow-lg">
+                    <div className="flex items-center justify-between mb-6">
+                      <h2 className="text-xl font-bold text-gray-900">Who's Going</h2>
+                      <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
+                        {event.attendees.length} attending
+                      </span>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                      {event.attendees.map((attendee) => (
+                        <motion.div
+                          key={attendee.id}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          className="text-center group cursor-pointer"
+                          whileHover={{ scale: 1.05 }}
+                        >
+                          <div className="relative inline-block mb-2">
+                            {attendee.profileImage ? (
+                              <img
+                                src={attendee.profileImage}
+                                alt={attendee.name}
+                                className="w-16 h-16 rounded-full object-cover border-3 border-white shadow-lg group-hover:shadow-xl transition-shadow"
+                              />
+                            ) : (
+                              <div className="w-16 h-16 rounded-full bg-gradient-to-r from-primary-300 to-secondary-300 flex items-center justify-center text-white font-bold text-lg border-3 border-white shadow-lg group-hover:shadow-xl transition-shadow">
+                                {attendee.name.split(' ').map(n => n[0]).join('').substring(0, 2)}
+                              </div>
+                            )}
+                            
+                            {/* Membership Badge */}
+                            <div className={`absolute -bottom-1 -right-1 w-6 h-6 rounded-full border-2 border-white flex items-center justify-center text-xs font-bold text-white ${
+                              attendee.membershipTier === 'premium' ? 'bg-purple-500' : 
+                              attendee.membershipTier === 'core' ? 'bg-blue-500' : 'bg-green-500'
+                            }`}>
+                              {attendee.membershipTier === 'premium' ? 'P' : 
+                               attendee.membershipTier === 'core' ? 'C' : 'F'}
+                            </div>
+                          </div>
+                          
+                          <h4 className="text-sm font-medium text-gray-900 mb-1 truncate">
+                            {attendee.name.split(' ')[0]}
+                          </h4>
+                          <p className="text-xs text-gray-500 capitalize">
+                            {attendee.membershipTier}
+                          </p>
+                        </motion.div>
+                      ))}
+                    </div>
+                    
+                    {/* Membership Distribution */}
+                    <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+                      <div className="flex items-center justify-between text-sm">
+                        <div className="flex items-center gap-4">
+                          <span className="text-gray-600">Community Mix:</span>
+                          <div className="flex items-center gap-3">
+                            {event.attendees.filter(a => a.membershipTier === 'premium').length > 0 && (
+                              <div className="flex items-center gap-1">
+                                <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+                                <span className="text-purple-700 font-medium">
+                                  {event.attendees.filter(a => a.membershipTier === 'premium').length} Premium
+                                </span>
+                              </div>
+                            )}
+                            {event.attendees.filter(a => a.membershipTier === 'core').length > 0 && (
+                              <div className="flex items-center gap-1">
+                                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                                <span className="text-blue-700 font-medium">
+                                  {event.attendees.filter(a => a.membershipTier === 'core').length} Core
+                                </span>
+                              </div>
+                            )}
+                            {event.attendees.filter(a => a.membershipTier === 'free').length > 0 && (
+                              <div className="flex items-center gap-1">
+                                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                                <span className="text-green-700 font-medium">
+                                  {event.attendees.filter(a => a.membershipTier === 'free').length} Free
+                                </span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 )}
 

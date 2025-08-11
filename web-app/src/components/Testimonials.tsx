@@ -9,7 +9,7 @@ const testimonials = [
     name: "Sarah Chen",
     age: "34",
     location: "Clapham, London",
-    image: "bg-gradient-to-br from-pink-300 to-rose-400",
+    image: "https://images.unsplash.com/photo-1494790108755-2616b612b1ac?w=150&h=150&fit=crop&crop=face&auto=format",
     quote: "I moved to London at 32 for work and felt so isolated. AdyaTribe helped me find my book club girls and now we're planning a trip to Scotland together! It's like finding your chosen family.",
     rating: 5,
     relationship: "Found her London book club tribe"
@@ -18,7 +18,7 @@ const testimonials = [
     name: "Maya Patel",
     age: "38", 
     location: "Shoreditch, London",
-    image: "bg-gradient-to-br from-purple-300 to-indigo-400",
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face&auto=format",
     quote: "The walking group I joined through AdyaTribe has become my weekend sanctuary. From Hampstead Heath to Richmond Park, these women push me to explore London while providing incredible support.",
     rating: 5,
     relationship: "Adventure buddy for life"
@@ -27,7 +27,7 @@ const testimonials = [
     name: "Jessica Williams",
     age: "31",
     location: "Notting Hill, London", 
-    image: "bg-gradient-to-br from-emerald-300 to-teal-400",
+    image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=150&h=150&fit=crop&crop=face&auto=format",
     quote: "As a childfree woman in London, I often felt judged. Here, I found women who celebrate my choices and share similar life goals. We support each other's careers and UK travel dreams.",
     rating: 5,
     relationship: "Career and travel support system"
@@ -36,7 +36,7 @@ const testimonials = [
     name: "Emma Johnson",
     age: "41",
     location: "Greenwich, London",
-    image: "bg-gradient-to-br from-amber-300 to-orange-400",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face&auto=format",
     quote: "After my divorce, I thought making new friends in London would be impossible. The women I met through AdyaTribe helped me rediscover myself and showed me that your 40s can be empowering.",
     rating: 5,
     relationship: "Post-divorce support network"
@@ -45,7 +45,7 @@ const testimonials = [
     name: "Priya Sharma",
     age: "35",
     location: "Canary Wharf, London",
-    image: "bg-gradient-to-br from-violet-300 to-purple-400", 
+    image: "https://images.unsplash.com/photo-1504703395950-b89145a5425b?w=150&h=150&fit=crop&crop=face&auto=format", 
     quote: "The cooking group introduced me to British and international women who've enriched my London experience immeasurably. We explore Borough Market together and share our cultural recipes.",
     rating: 5,
     relationship: "Cultural exchange and friendship"
@@ -54,7 +54,7 @@ const testimonials = [
     name: "Lisa Thompson",
     age: "39",
     location: "Richmond, London",
-    image: "bg-gradient-to-br from-cyan-300 to-blue-400",
+    image: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face&auto=format",
     quote: "I was skeptical about online friendships, but these London connections are the most genuine I've experienced. The verification process ensures everyone is real and serious about friendship.",
     rating: 5,
     relationship: "Genuine London friendships"
@@ -149,8 +149,13 @@ export default function Testimonials() {
 
                 {/* Author Info */}
                 <div className="flex items-center gap-4">
-                  <div className={`w-14 h-14 ${testimonial.image} rounded-full flex items-center justify-center text-white font-semibold text-lg shadow-lg`}>
-                    {testimonial.name.split(' ').map(n => n[0]).join('')}
+                  <div className="w-14 h-14 rounded-full overflow-hidden shadow-lg ring-2 ring-white">
+                    <img 
+                      src={testimonial.image} 
+                      alt={`${testimonial.name} - AdyaTribe member`}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900">
@@ -169,12 +174,65 @@ export default function Testimonials() {
           ))}
         </motion.div>
 
-        {/* Community Stats */}
+        {/* Community Showcase */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.8 }}
+          className="mt-16"
+        >
+          <div className="text-center mb-12">
+            <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
+              Meet Your <span className="gradient-text">Future Friends</span>
+            </h3>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Join thousands of amazing women from diverse backgrounds who are building meaningful connections across London and the UK.
+            </p>
+          </div>
+          
+          {/* Photo Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4 mb-12">
+            {[
+              { src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Professional woman smiling" },
+              { src: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Confident woman in professional setting" },
+              { src: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Diverse professional woman" },
+              { src: "https://images.unsplash.com/photo-1594736797933-d0acc43a8f2a?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Woman with warm smile" },
+              { src: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Professional woman outdoors" },
+              { src: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Confident professional woman" },
+              { src: "https://images.unsplash.com/photo-1504703395950-b89145a5425b?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Woman with authentic smile" },
+              { src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Approachable professional woman" },
+              { src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Confident woman in natural lighting" },
+              { src: "https://images.unsplash.com/photo-1554151228-14d9def656e4?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Professional woman with warm expression" },
+              { src: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Diverse woman with bright smile" },
+              { src: "https://images.unsplash.com/photo-1494790108755-2616b612b1ac?w=200&h=200&fit=crop&crop=face&auto=format", alt: "AdyaTribe member - Woman with authentic expression" }
+            ].map((member, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 * index, duration: 0.5 }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="aspect-square rounded-2xl overflow-hidden shadow-lg ring-2 ring-white hover:ring-primary-200 transition-all duration-300"
+              >
+                <img 
+                  src={member.src}
+                  alt={member.alt}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Community Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6, duration: 0.8 }}
           className="mt-16 text-center"
         >
           <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 border border-white/50 shadow-lg">

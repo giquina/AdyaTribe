@@ -185,13 +185,13 @@ export default function Features() {
                   <div className="w-16 h-16 rounded-full overflow-hidden shadow-lg ring-2 ring-white">
                     <img 
                       src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=face&auto=format"
-                      alt="Sarah, AdyaTribe founder"
+                      alt="Adyam Embaie, AdyaTribe founder"
                       className="w-full h-full object-cover"
                       loading="lazy"
                     />
                   </div>
                   <div className="text-left">
-                    <p className="font-semibold text-gray-900">Sarah, Founder</p>
+                    <p className="font-semibold text-gray-900">Adyam Embaie, Founder</p>
                     <p className="text-sm text-gray-600">London, UK</p>
                   </div>
                 </div>

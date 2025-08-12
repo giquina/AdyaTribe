@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Header from '@/components/Header'
 import { HeartIcon, EyeIcon, EyeSlashIcon, ExclamationCircleIcon } from '@heroicons/react/24/outline'
-import { authService, DEMO_CREDENTIALS } from '@/lib/auth'
+import { authService } from '@/lib/auth'
 
 export default function Login() {
   const [formData, setFormData] = useState({
@@ -66,11 +66,10 @@ export default function Login() {
     }
   }
 
-  const handleDemoLogin = (demoType: 'user' | 'admin' | 'free') => {
-    const credentials = DEMO_CREDENTIALS[demoType]
+  const handleDemoLogin = (email: string) => {
     setFormData({
-      email: credentials.email,
-      password: credentials.password
+      email: email,
+      password: ''
     })
   }
 
@@ -92,21 +91,18 @@ export default function Login() {
                 <p className="text-gray-600">Sign in to connect with your tribe</p>
               </div>
 
-              {/* Demo Credentials Helper */}
+              {/* Quick Access Helper */}
               <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <h3 className="text-sm font-medium text-blue-900 mb-2">Demo Accounts:</h3>
-                <div className="space-y-2 text-xs">
-                  {Object.entries(DEMO_CREDENTIALS).map(([key, cred]) => (
-                    <button
-                      key={key}
-                      onClick={() => handleDemoLogin(key as 'user' | 'admin' | 'free')}
-                      className="block w-full text-left p-2 bg-white border border-blue-200 rounded text-blue-700 hover:bg-blue-50 transition-colors"
-                    >
-                      <div className="font-medium">{cred.description}</div>
-                      <div className="text-blue-600">{cred.email}</div>
-                    </button>
-                  ))}
-                </div>
+                <h3 className="text-sm font-medium text-blue-900 mb-2">New to AdyaTribe?</h3>
+                <p className="text-xs text-blue-700 mb-3">
+                  Create your account to join our community of verified women 30+
+                </p>
+                <a 
+                  href="/signup"
+                  className="block w-full text-center p-2 bg-primary-400 text-white rounded hover:bg-primary-500 transition-colors text-sm font-medium"
+                >
+                  Join AdyaTribe →
+                </a>
               </div>
 
               {/* Error Display */}

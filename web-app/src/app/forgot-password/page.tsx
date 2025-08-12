@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { authService } from '@/lib/auth'
 import { 
   LockClosedIcon, 
   EnvelopeIcon, 
@@ -31,12 +32,15 @@ export default function ForgotPassword() {
     }
 
     try {
-      // Here you would integrate with Supabase auth for password reset
-      // For now, we'll simulate the process
-      await new Promise(resolve => setTimeout(resolve, 2000)) // Simulate API call
+      const result = await authService.resetPassword(email)
       
-      setIsSubmitted(true)
+      if (result.success) {
+        setIsSubmitted(true)
+      } else {
+        setError(result.error || 'Something went wrong. Please try again.')
+      }
     } catch (err) {
+      console.error('Password reset error:', err)
       setError('Something went wrong. Please try again.')
     } finally {
       setIsLoading(false)

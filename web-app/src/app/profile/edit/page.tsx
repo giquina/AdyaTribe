@@ -11,21 +11,76 @@ import {
   Cog6ToothIcon,
   PhotoIcon
 } from '@heroicons/react/24/outline'
-import { authService, User } from '@/lib/auth'
-import { UserProfile } from '@/lib/connections'
-import { profileService, ProfileFormData, INTEREST_CATEGORIES, LONDON_AREAS } from '@/lib/profile'
+import { getCurrentUser, getCurrentUserProfile, UserProfile, updateProfile } from '@/lib/supabase'
 import ProfileEditForm from '@/components/profile/ProfileEditForm'
 import ProfilePhotoManager from '@/components/profile/ProfilePhotoManager'
-import ProfileVerification from '@/components/profile/ProfileVerification'
-import ProfilePrivacy from '@/components/profile/ProfilePrivacy'
-import { toast } from 'react-hot-toast'
+import ProfileCompletion from '@/components/profile/ProfileCompletion'
 
-type EditTab = 'profile' | 'photos' | 'verification' | 'privacy'
+// Define interest categories
+const INTEREST_CATEGORIES = {
+  'Social & Networking': [
+    'Networking', 'Coffee Chats', 'Dinner Parties', 'Happy Hour',
+    'Wine Tasting', 'Book Clubs', 'Game Nights', 'Meetups'
+  ],
+  'Health & Wellness': [
+    'Yoga', 'Pilates', 'Gym & Fitness', 'Running', 'Cycling',
+    'Meditation', 'Wellness Retreats', 'Healthy Cooking'
+  ],
+  'Arts & Culture': [
+    'Art Galleries', 'Museums', 'Theatre', 'Concerts', 'Photography',
+    'Poetry', 'Creative Writing', 'Film & Cinema', 'Dancing'
+  ],
+  'Outdoor & Adventure': [
+    'Hiking', 'Rock Climbing', 'Camping', 'Water Sports',
+    'Travel Adventures', 'Nature Walks', 'Outdoor Photography'
+  ],
+  'Food & Dining': [
+    'Restaurant Tours', 'Cooking Classes', 'Food Markets',
+    'Brunch', 'Vegetarian/Vegan', 'International Cuisine'
+  ],
+  'Professional & Learning': [
+    'Career Development', 'Entrepreneurship', 'Public Speaking',
+    'Languages', 'Online Courses', 'Workshops', 'Conferences'
+  ]
+}
+
+const LONDON_AREAS = [
+  'Central London', 'Westminster', 'City of London', 'Camden',
+  'Islington', 'Hackney', 'Tower Hamlets', 'Greenwich', 'Lewisham',
+  'Southwark', 'Lambeth', 'Wandsworth', 'Hammersmith & Fulham',
+  'Kensington & Chelsea', 'Chelsea', 'Kensington', 'Notting Hill',
+  'Paddington', 'Marylebone', 'Fitzrovia', 'Covent Garden',
+  'Shoreditch', 'Canary Wharf', 'Borough', 'Clapham', 'Battersea',
+  'Wimbledon', 'Richmond', 'Kingston', 'Croydon'
+]
+
+interface ProfileFormData {
+  first_name: string
+  last_name?: string
+  bio: string
+  location: string
+  date_of_birth: string
+  interests: string[]
+  preferences: {
+    looking_for: 'friendship' | 'activity_partners' | 'networking' | 'all'
+    age_range_min: number
+    age_range_max: number
+    preferred_locations: string[]
+  }
+  privacy_settings: {
+    show_age: boolean
+    show_location: boolean
+    allow_messages: 'everyone' | 'connections' | 'premium'
+    profile_visibility: 'public' | 'members_only' | 'connections_only'
+  }
+}
+
+type EditTab = 'profile' | 'photos' | 'completion'
 
 function ProfileEditPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [currentUser, setCurrentUser] = useState<User | null>(null)
+  const [currentUser, setCurrentUser] = useState<any>(null)
   const [profile, setProfile] = useState<UserProfile | null>(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -33,26 +88,30 @@ function ProfileEditPageContent() {
 
   // Form data
   const [formData, setFormData] = useState<ProfileFormData>({
-    name: '',
+    first_name: '',
+    last_name: '',
     bio: '',
     location: '',
-    age: 30,
+    date_of_birth: '',
     interests: [],
-    lookingFor: 'friendship',
-    ageRange: { min: 28, max: 45 },
-    preferredLocations: [],
-    privacy: {
-      showAge: true,
-      showLocation: true,
-      allowMessages: 'connections',
-      profileVisibility: 'members_only'
+    preferences: {
+      looking_for: 'friendship',
+      age_range_min: 28,
+      age_range_max: 45,
+      preferred_locations: []
+    },
+    privacy_settings: {
+      show_age: true,
+      show_location: true,
+      allow_messages: 'connections',
+      profile_visibility: 'members_only'
     }
   })
 
   useEffect(() => {
     // Get tab from URL params
     const tab = searchParams.get('tab') as EditTab
-    if (tab && ['profile', 'photos', 'verification', 'privacy'].includes(tab)) {
+    if (tab && ['profile', 'photos', 'completion'].includes(tab)) {
       setActiveTab(tab)
     }
   }, [searchParams])
@@ -65,7 +124,7 @@ function ProfileEditPageContent() {
     setLoading(true)
     
     try {
-      const user = authService.getCurrentUser()
+      const user = await getCurrentUser()
       if (!user) {
         router.push('/login')
         return
@@ -74,34 +133,35 @@ function ProfileEditPageContent() {
       setCurrentUser(user)
 
       // Load profile data
-      const profileData = await profileService.getProfile(user.id)
+      const profileData = await getCurrentUserProfile()
       setProfile(profileData)
 
       // Populate form data
       if (profileData) {
         setFormData({
-          name: user.name,
-          bio: profileData.bio,
-          location: user.location,
-          age: profileData.age,
-          interests: user.interests,
-          lookingFor: profileData.preferences.lookingFor,
-          ageRange: profileData.preferences.ageRange,
-          preferredLocations: profileData.preferences.location,
-          privacy: profileData.privacy
+          first_name: profileData.first_name || '',
+          last_name: profileData.last_name || '',
+          bio: profileData.bio || '',
+          location: profileData.location || '',
+          date_of_birth: profileData.date_of_birth || '',
+          interests: profileData.interests || [],
+          preferences: profileData.preferences || {
+            looking_for: 'friendship',
+            age_range_min: 28,
+            age_range_max: 45,
+            preferred_locations: []
+          },
+          privacy_settings: profileData.privacy_settings || {
+            show_age: true,
+            show_location: true,
+            allow_messages: 'connections',
+            profile_visibility: 'members_only'
+          }
         })
-      } else {
-        // Initialize with user data if no profile exists
-        setFormData(prev => ({
-          ...prev,
-          name: user.name,
-          location: user.location,
-          interests: user.interests
-        }))
       }
     } catch (error) {
       console.error('Error loading profile:', error)
-      toast.error('Failed to load profile data')
+      alert('Failed to load profile data')
     } finally {
       setLoading(false)
     }
@@ -113,17 +173,17 @@ function ProfileEditPageContent() {
     setSaving(true)
     
     try {
-      const result = await profileService.updateProfile(currentUser.id, formData)
+      const result = await updateProfile(currentUser.id, formData)
       
       if (result.success) {
-        toast.success('Profile updated successfully!')
+        alert('Profile updated successfully!')
         router.push(`/profile/${currentUser.id}`)
       } else {
-        toast.error(result.message)
+        alert(result.error || 'Failed to save profile')
       }
     } catch (error) {
       console.error('Error saving profile:', error)
-      toast.error('Failed to save profile')
+      alert('Failed to save profile')
     } finally {
       setSaving(false)
     }
@@ -150,16 +210,10 @@ function ProfileEditPageContent() {
       description: 'Profile pictures and gallery'
     },
     {
-      id: 'verification' as EditTab,
-      name: 'Verification',
+      id: 'completion' as EditTab,
+      name: 'Completion',
       icon: <ShieldCheckIcon className="w-4 h-4" />,
-      description: 'Account security and verification'
-    },
-    {
-      id: 'privacy' as EditTab,
-      name: 'Privacy',
-      icon: <Cog6ToothIcon className="w-4 h-4" />,
-      description: 'Privacy settings and preferences'
+      description: 'Profile progress and completion'
     }
   ]
 
@@ -281,32 +335,35 @@ function ProfileEditPageContent() {
               >
                 {activeTab === 'profile' && (
                   <ProfileEditForm
+                    profile={profile}
                     formData={formData}
                     onChange={handleFormChange}
                     interestCategories={INTEREST_CATEGORIES}
                     locations={LONDON_AREAS}
+                    onSave={handleSave}
+                    saving={saving}
                   />
                 )}
                 
                 {activeTab === 'photos' && (
                   <ProfilePhotoManager
-                    currentUser={currentUser}
                     profile={profile}
                     onUpdate={loadProfileData}
                   />
                 )}
                 
-                {activeTab === 'verification' && (
-                  <ProfileVerification
+                {activeTab === 'completion' && currentUser && (
+                  <ProfileCompletion
+                    userId={currentUser.id}
                     profile={profile}
-                    onUpdate={loadProfileData}
-                  />
-                )}
-                
-                {activeTab === 'privacy' && (
-                  <ProfilePrivacy
-                    privacy={formData.privacy}
-                    onChange={(privacy) => handleFormChange('privacy', privacy)}
+                    onStepClick={(stepId) => {
+                      // Navigate to appropriate tab based on step
+                      if (['profile_picture'].includes(stepId)) {
+                        setActiveTab('photos')
+                      } else {
+                        setActiveTab('profile')
+                      }
+                    }}
                   />
                 )}
               </motion.div>

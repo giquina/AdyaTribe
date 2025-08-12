@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   PlusIcon, 
@@ -10,48 +10,81 @@ import {
   StarIcon,
   ArrowUpTrayIcon
 } from '@heroicons/react/24/outline'
-import { User } from '@/lib/auth'
-import { UserProfile, ProfilePhoto } from '@/lib/connections'
-import { profileService, PhotoUpload } from '@/lib/profile'
-import { toast } from 'react-hot-toast'
+import { getCurrentUser, UserProfile, uploadPhoto, updateProfile, deletePhoto, validateImage, compressImage } from '@/lib/supabase'
+
+interface PhotoUpload {
+  id: string
+  file: File
+  preview: string
+  caption?: string
+  isProfilePicture: boolean
+  uploadProgress: number
+  status: 'uploading' | 'completed' | 'error'
+}
 
 interface ProfilePhotoManagerProps {
-  currentUser: User
   profile: UserProfile | null
   onUpdate: () => void
 }
 
-export default function ProfilePhotoManager({ currentUser, profile, onUpdate }: ProfilePhotoManagerProps) {
+export default function ProfilePhotoManager({ profile, onUpdate }: ProfilePhotoManagerProps) {
   const [uploads, setUploads] = useState<PhotoUpload[]>([])
   const [dragOver, setDragOver] = useState(false)
+  const [currentUser, setCurrentUser] = useState<any>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
+  // Get current user on component mount
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const user = await getCurrentUser()
+        setCurrentUser(user)
+      } catch (error) {
+        console.error('Error loading user:', error)
+      }
+    }
+    loadUser()
+  }, [])
+
   const photos = profile?.photos || []
-  const profilePicture = photos.find(p => p.isProfilePicture)
+  const profilePicture = photos.find(p => p.is_profile_picture)
+  const hasProfilePicture = !!profile?.profile_picture_url
+
+  const createPhotoUpload = (file: File, isProfilePicture: boolean = false): PhotoUpload => {
+    return {
+      id: `upload-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      file,
+      preview: URL.createObjectURL(file),
+      isProfilePicture,
+      uploadProgress: 0,
+      status: 'uploading'
+    }
+  }
 
   const handleFileSelect = async (files: FileList | null) => {
-    if (!files) return
+    if (!files || !currentUser) return
 
     const newUploads: PhotoUpload[] = []
 
     for (let i = 0; i < files.length; i++) {
       const file = files[i]
-      const validation = profileService.validateImage(file)
+      const validation = validateImage(file)
       
       if (!validation.valid) {
-        toast.error(`${file.name}: ${validation.error}`)
+        // Use a simple alert instead of toast for now
+        alert(`${file.name}: ${validation.error}`)
         continue
       }
 
       try {
         // Compress the image
-        const compressedFile = await profileService.compressImage(file)
+        const compressedFile = await compressImage(file)
         
-        // Create upload object
-        const upload = profileService.createPhotoUpload(compressedFile, photos.length === 0)
+        // Create upload object - first upload becomes profile picture if none exists
+        const upload = createPhotoUpload(compressedFile, !hasProfilePicture && i === 0)
         newUploads.push(upload)
       } catch (error) {
-        toast.error(`Failed to process ${file.name}`)
+        alert(`Failed to process ${file.name}`)
       }
     }
 
@@ -59,12 +92,14 @@ export default function ProfilePhotoManager({ currentUser, profile, onUpdate }: 
       setUploads(prev => [...prev, ...newUploads])
       // Start uploading
       for (const upload of newUploads) {
-        uploadPhoto(upload)
+        handlePhotoUpload(upload)
       }
     }
   }
 
-  const uploadPhoto = async (upload: PhotoUpload) => {
+  const handlePhotoUpload = async (upload: PhotoUpload) => {
+    if (!currentUser) return
+
     try {
       setUploads(prev => prev.map(u => 
         u.id === upload.id 
@@ -72,13 +107,18 @@ export default function ProfilePhotoManager({ currentUser, profile, onUpdate }: 
           : u
       ))
 
-      const result = await profileService.uploadPhoto(upload, (progress) => {
+      // Simulate progress for better UX
+      const progressInterval = setInterval(() => {
         setUploads(prev => prev.map(u => 
-          u.id === upload.id 
-            ? { ...u, uploadProgress: progress }
+          u.id === upload.id && u.uploadProgress < 90
+            ? { ...u, uploadProgress: u.uploadProgress + 10 }
             : u
         ))
-      })
+      }, 200)
+
+      const result = await uploadPhoto(currentUser.id, upload.file, upload.isProfilePicture)
+
+      clearInterval(progressInterval)
 
       if (result.success) {
         setUploads(prev => prev.map(u => 
@@ -87,9 +127,9 @@ export default function ProfilePhotoManager({ currentUser, profile, onUpdate }: 
             : u
         ))
         
-        toast.success('Photo uploaded successfully!')
+        alert('Photo uploaded successfully!')
         
-        // Remove from uploads after delay
+        // Remove from uploads after delay and refresh profile
         setTimeout(() => {
           setUploads(prev => prev.filter(u => u.id !== upload.id))
           onUpdate()
@@ -100,7 +140,7 @@ export default function ProfilePhotoManager({ currentUser, profile, onUpdate }: 
             ? { ...u, status: 'error' as const }
             : u
         ))
-        toast.error('Failed to upload photo')
+        alert(result.error || 'Failed to upload photo')
       }
     } catch (error) {
       setUploads(prev => prev.map(u => 
@@ -108,31 +148,45 @@ export default function ProfilePhotoManager({ currentUser, profile, onUpdate }: 
           ? { ...u, status: 'error' as const }
           : u
       ))
-      toast.error('Upload failed')
+      alert('Upload failed')
     }
   }
 
-  const handleSetProfilePicture = async (photoId: string) => {
+  const handleSetProfilePicture = async (photoUrl: string) => {
+    if (!currentUser) return
+
     try {
-      // TODO: Implement set profile picture API call
-      toast.success('Profile picture updated!')
-      onUpdate()
+      const result = await updateProfile(currentUser.id, { 
+        profile_picture_url: photoUrl 
+      })
+      
+      if (result.success) {
+        alert('Profile picture updated!')
+        onUpdate()
+      } else {
+        alert(result.error || 'Failed to update profile picture')
+      }
     } catch (error) {
-      toast.error('Failed to update profile picture')
+      alert('Failed to update profile picture')
     }
   }
 
-  const handleDeletePhoto = async (photoId: string) => {
+  const handleDeletePhoto = async (photoPath: string) => {
     if (!window.confirm('Are you sure you want to delete this photo?')) {
       return
     }
 
     try {
-      // TODO: Implement delete photo API call
-      toast.success('Photo deleted')
-      onUpdate()
+      const result = await deletePhoto(photoPath)
+      
+      if (result.success) {
+        alert('Photo deleted')
+        onUpdate()
+      } else {
+        alert(result.error || 'Failed to delete photo')
+      }
     } catch (error) {
-      toast.error('Failed to delete photo')
+      alert('Failed to delete photo')
     }
   }
 
@@ -166,7 +220,7 @@ export default function ProfilePhotoManager({ currentUser, profile, onUpdate }: 
       </div>
 
       {/* Current Profile Picture */}
-      {profilePicture && (
+      {hasProfilePicture && profile?.profile_picture_url && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -179,7 +233,7 @@ export default function ProfilePhotoManager({ currentUser, profile, onUpdate }: 
           <div className="flex items-center gap-6">
             <div className="w-24 h-24 rounded-xl overflow-hidden border-2 border-white shadow-lg">
               <img
-                src={profilePicture.url}
+                src={profile.profile_picture_url}
                 alt="Profile"
                 className="w-full h-full object-cover"
               />
@@ -189,11 +243,7 @@ export default function ProfilePhotoManager({ currentUser, profile, onUpdate }: 
                 This is how other members see you in their feed and search results.
               </p>
               <p className="text-sm text-gray-500">
-                Uploaded {new Date(profilePicture.uploadedAt).toLocaleDateString('en-GB', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric'
-                })}
+                Profile picture set • AdyaTribe verified
               </p>
             </div>
           </div>
@@ -323,67 +373,40 @@ export default function ProfilePhotoManager({ currentUser, profile, onUpdate }: 
         </motion.div>
       )}
 
-      {/* Current Photos */}
-      {photos.length > 0 && (
+      {/* Photo Gallery Status */}
+      {!hasProfilePicture && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="space-y-4"
+          className="bg-yellow-50 border border-yellow-200 rounded-xl p-6"
         >
-          <h3 className="text-lg font-semibold text-gray-900">
-            Your Photos ({photos.length})
+          <h3 className="text-lg font-semibold text-yellow-900 mb-2 flex items-center gap-2">
+            <PhotoIcon className="w-5 h-5" />
+            No Profile Picture Yet
           </h3>
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {photos.map((photo, index) => (
-              <motion.div
-                key={photo.id}
-                layout
-                className="relative group aspect-square bg-gray-200 rounded-xl overflow-hidden"
-              >
-                <img
-                  src={photo.url}
-                  alt={photo.caption || `Photo ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
-                
-                {/* Profile Picture Badge */}
-                {photo.isProfilePicture && (
-                  <div className="absolute top-2 left-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded-full font-medium flex items-center gap-1">
-                    <StarIcon className="w-3 h-3" />
-                    Profile
-                  </div>
-                )}
-
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors duration-300 flex items-center justify-center">
-                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-2">
-                    {!photo.isProfilePicture && (
-                      <button
-                        onClick={() => handleSetProfilePicture(photo.id)}
-                        className="flex items-center gap-1 bg-yellow-500 text-white text-xs px-3 py-2 rounded-lg hover:bg-yellow-600 transition-colors"
-                      >
-                        <StarIcon className="w-3 h-3" />
-                        Set as Profile
-                      </button>
-                    )}
-                    <button
-                      onClick={() => handleDeletePhoto(photo.id)}
-                      className="bg-red-500 text-white p-2 rounded-lg hover:bg-red-600 transition-colors"
-                    >
-                      <XMarkIcon className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-
-                {/* Stats */}
-                <div className="absolute bottom-2 left-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded flex items-center justify-between">
-                  <span>{photo.likes} likes</span>
-                  <span>{photo.comments.length} comments</span>
-                </div>
-              </motion.div>
-            ))}
+          <p className="text-yellow-800 mb-4">
+            Upload your first photo to complete your profile and help other members recognize you.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-yellow-800">
+            <div>
+              <h4 className="font-medium mb-2">Benefits of adding a photo:</h4>
+              <ul className="space-y-1">
+                <li>• Increase profile views by 70%</li>
+                <li>• Build trust with the community</li>
+                <li>• Help others recognize you at events</li>
+                <li>• Complete your profile verification</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-medium mb-2">What makes a great photo:</h4>
+              <ul className="space-y-1">
+                <li>• Clear view of your face</li>
+                <li>• Good lighting</li>
+                <li>• Recent photo (within 1 year)</li>
+                <li>• Genuine smile</li>
+              </ul>
+            </div>
           </div>
         </motion.div>
       )}

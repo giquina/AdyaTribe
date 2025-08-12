@@ -270,16 +270,26 @@ export default function ChatRoomsPage() {
   const loadChatRooms = async () => {
     setLoading(true)
     try {
-      const currentUser = authService.getCurrentUser()
+      // Initialize auth first
+      const currentUser = await authService.initializeAuth()
+      if (!currentUser) {
+        // Show empty state for non-authenticated users
+        setChatRooms([])
+        setLoading(false)
+        return
+      }
+
       const rooms = await messagingService.getChatRooms(
-        currentUser?.id, 
-        currentUser?.membershipTier
+        currentUser.id, 
+        currentUser.membershipTier
       )
       setChatRooms(rooms)
     } catch (error) {
       console.error('Error loading chat rooms:', error)
+      setChatRooms([])
+    } finally {
+      setLoading(false)
     }
-    setLoading(false)
   }
 
   const handleJoinRoom = async (roomId: string) => {
@@ -290,10 +300,15 @@ export default function ChatRoomsPage() {
     }
 
     try {
-      const result = await messagingService.joinRoom(roomId, currentUser.id, currentUser)
+      const result = await messagingService.joinRoom(roomId, currentUser.id, {
+        name: currentUser.name,
+        profileImage: currentUser.profileImage,
+        membershipTier: currentUser.membershipTier
+      })
+      
       if (result.success) {
         // Refresh rooms to update joined status
-        loadChatRooms()
+        await loadChatRooms()
       } else {
         alert(result.message)
       }

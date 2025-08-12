@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   CheckCircleIcon, 
@@ -9,31 +9,67 @@ import {
   ChevronUpIcon,
   StarIcon
 } from '@heroicons/react/24/outline'
-import { ProfileCompletionStep, ProfileStats } from '@/lib/profile'
+import { UserProfile, ProfileCompletion, calculateProfileCompletion } from '@/lib/supabase'
 
 interface ProfileCompletionProps {
-  stats: ProfileStats
-  steps: ProfileCompletionStep[]
+  userId: string
+  profile: UserProfile | null
   onStepClick?: (stepId: string) => void
 }
 
-export default function ProfileCompletion({ stats, steps, onStepClick }: ProfileCompletionProps) {
+export default function ProfileCompletion({ userId, profile, onStepClick }: ProfileCompletionProps) {
   const [expanded, setExpanded] = useState(false)
-  
-  const requiredSteps = steps.filter(step => step.required)
-  const optionalSteps = steps.filter(step => !step.required)
+  const [completionData, setCompletionData] = useState<ProfileCompletion>({
+    percentage: 0,
+    completed_steps: [],
+    missing_steps: [],
+    total_points: 0,
+    max_points: 100
+  })
+
+  useEffect(() => {
+    const loadCompletion = async () => {
+      if (userId) {
+        const data = await calculateProfileCompletion(userId)
+        setCompletionData(data)
+      }
+    }
+    loadCompletion()
+  }, [userId, profile])
+
+  // Define step information
+  const stepInfo = {
+    basic_info: { name: 'Basic Information', description: 'Name and email verified', required: true, points: 15 },
+    profile_picture: { name: 'Profile Picture', description: 'Photo uploaded and verified', required: true, points: 20 },
+    bio: { name: 'About Me', description: 'Personal bio (20+ characters)', required: true, points: 15 },
+    location: { name: 'Location', description: 'Primary location selected', required: true, points: 10 },
+    date_of_birth: { name: 'Age Verification', description: 'Date of birth confirmed', required: true, points: 10 },
+    interests: { name: 'Interests', description: '3+ interests selected', required: true, points: 15 },
+    verification: { name: 'Profile Verification', description: 'Photo verification completed', required: false, points: 10 },
+    preferences: { name: 'Connection Preferences', description: 'Looking for & age range set', required: false, points: 5 }
+  }
+
+  const allStepIds = ['basic_info', 'profile_picture', 'bio', 'location', 'date_of_birth', 'interests', 'verification', 'preferences']
+  const allSteps = allStepIds.map(stepId => ({
+    id: stepId,
+    ...stepInfo[stepId as keyof typeof stepInfo],
+    completed: completionData.completed_steps.includes(stepId)
+  }))
+
+  const requiredSteps = allSteps.filter(step => step.required)
+  const optionalSteps = allSteps.filter(step => !step.required)
   const completedRequired = requiredSteps.filter(step => step.completed).length
   const allRequiredComplete = completedRequired === requiredSteps.length
 
   const getProgressColor = () => {
-    if (stats.completionPercentage >= 80) return 'text-green-600'
-    if (stats.completionPercentage >= 60) return 'text-yellow-600'
+    if (completionData.percentage >= 80) return 'text-green-600'
+    if (completionData.percentage >= 60) return 'text-yellow-600'
     return 'text-red-600'
   }
 
   const getProgressBg = () => {
-    if (stats.completionPercentage >= 80) return 'bg-green-500'
-    if (stats.completionPercentage >= 60) return 'bg-yellow-500'
+    if (completionData.percentage >= 80) return 'bg-green-500'
+    if (completionData.percentage >= 60) return 'bg-yellow-500'
     return 'bg-red-500'
   }
 
@@ -65,12 +101,12 @@ export default function ProfileCompletion({ stats, steps, onStepClick }: Profile
         <div>
           <div className="flex items-center justify-between mb-2">
             <span className={`text-2xl font-bold ${getProgressColor()}`}>
-              {stats.completionPercentage}%
+              {completionData.percentage}%
             </span>
             <div className="flex items-center gap-1">
               <StarIcon className="w-4 h-4 text-yellow-500" />
               <span className="text-sm text-gray-600">
-                {stats.totalPoints}/{stats.maxPoints} points
+                {completionData.total_points}/{completionData.max_points} points
               </span>
             </div>
           </div>
@@ -78,7 +114,7 @@ export default function ProfileCompletion({ stats, steps, onStepClick }: Profile
           <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
             <motion.div
               initial={{ width: 0 }}
-              animate={{ width: `${stats.completionPercentage}%` }}
+              animate={{ width: `${completionData.percentage}%` }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
               className={`h-full ${getProgressBg()} rounded-full relative`}
             >
@@ -90,7 +126,7 @@ export default function ProfileCompletion({ stats, steps, onStepClick }: Profile
         {/* Quick Stats */}
         <div className="flex items-center justify-between text-sm">
           <span className="text-gray-600">
-            {stats.completedSteps}/{stats.totalSteps} steps complete
+            {completionData.completed_steps.length}/{allSteps.length} steps complete
           </span>
           {allRequiredComplete ? (
             <span className="flex items-center gap-1 text-green-600 font-medium">
@@ -228,7 +264,7 @@ export default function ProfileCompletion({ stats, steps, onStepClick }: Profile
                   <li>• Priority placement in member discovery</li>
                   <li>• Unlock advanced matching preferences</li>
                   <li>• Access to exclusive community features</li>
-                  {stats.completionPercentage >= 100 && (
+                  {completionData.percentage >= 100 && (
                     <li className="text-green-600 font-medium">
                       ✨ All benefits unlocked! You're a profile superstar!
                     </li>

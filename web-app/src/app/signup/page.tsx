@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import Header from '@/components/Header'
 import SocialLogin from '@/components/SocialLogin'
@@ -12,9 +13,11 @@ import {
   SparklesIcon,
   LockClosedIcon,
   CameraIcon,
-  StarIcon
+  StarIcon,
+  ExclamationCircleIcon
 } from '@heroicons/react/24/outline'
 import { getImageWithFallback } from '@/lib/profileImages'
+import { authService } from '@/lib/auth'
 
 const benefits = [
   {
@@ -64,19 +67,103 @@ const testimonials = [
 ]
 
 export default function Signup() {
-  const [currentStep, setCurrentStep] = useState(1)
+  const [formData, setFormData] = useState({
+    email: '',
+    firstName: '',
+    password: '',
+    confirmPassword: '',
+    ageConfirmation: false,
+    agreeTerms: false
+  })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
+  const router = useRouter()
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }))
+    // Clear error when user starts typing
+    if (error) setError('')
+  }
+
+  const validateForm = () => {
+    if (!formData.email.trim()) {
+      setError('Email is required')
+      return false
+    }
+    
+    if (!formData.firstName.trim()) {
+      setError('First name is required')
+      return false
+    }
+    
+    if (!formData.password) {
+      setError('Password is required')
+      return false
+    }
+    
+    if (formData.password.length < 6) {
+      setError('Password must be at least 6 characters')
+      return false
+    }
+    
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match')
+      return false
+    }
+    
+    if (!formData.ageConfirmation) {
+      setError('You must confirm you are 30 years old or older')
+      return false
+    }
+    
+    if (!formData.agreeTerms) {
+      setError('You must agree to the terms and conditions')
+      return false
+    }
+    
+    return true
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setError('')
+    setSuccess('')
     
-    // Simulate form submission
-    setTimeout(() => {
+    if (!validateForm()) {
       setIsSubmitting(false)
-      // Redirect to success page
-      window.location.href = '/signup/success'
-    }, 2000)
+      return
+    }
+    
+    try {
+      const result = await authService.signup(
+        formData.email,
+        formData.password,
+        {
+          firstName: formData.firstName
+        }
+      )
+      
+      if (result.success) {
+        setSuccess('Account created successfully! Please check your email to verify your account.')
+        // Redirect to success page after a short delay
+        setTimeout(() => {
+          router.push('/signup/success')
+        }, 2000)
+      } else {
+        setError(result.error || 'Failed to create account')
+      }
+    } catch (error) {
+      console.error('Signup error:', error)
+      setError('An unexpected error occurred. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -192,9 +279,24 @@ export default function Signup() {
                     <p className="text-center text-sm text-gray-500 mb-4">Quick signup with social media</p>
                     <SocialLogin mode="signup" />
                   </div>
+
+                  {/* Error Display */}
+                  {error && (
+                    <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-3">
+                      <ExclamationCircleIcon className="h-5 w-5 text-red-500 flex-shrink-0" />
+                      <p className="text-sm text-red-700">{error}</p>
+                    </div>
+                  )}
+
+                  {/* Success Display */}
+                  {success && (
+                    <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-center gap-3">
+                      <CheckIcon className="h-5 w-5 text-green-500 flex-shrink-0" />
+                      <p className="text-sm text-green-700">{success}</p>
+                    </div>
+                  )}
                   
                   <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-                    {/* Simplified form - only essential fields */}
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                         Professional Email Address
@@ -203,8 +305,11 @@ export default function Signup() {
                         type="email"
                         id="email"
                         name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        disabled={isSubmitting}
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-400 focus:border-transparent bg-white/90 backdrop-blur-sm"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-400 focus:border-transparent bg-white/90 backdrop-blur-sm disabled:opacity-50"
                         placeholder="sarah@company.com"
                       />
                     </div>
@@ -217,9 +322,49 @@ export default function Signup() {
                         type="text"
                         id="firstName"
                         name="firstName"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                        disabled={isSubmitting}
                         required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-400 focus:border-transparent bg-white/90 backdrop-blur-sm"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-400 focus:border-transparent bg-white/90 backdrop-blur-sm disabled:opacity-50"
                         placeholder="Sarah"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                        Password
+                      </label>
+                      <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        disabled={isSubmitting}
+                        required
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-400 focus:border-transparent bg-white/90 backdrop-blur-sm disabled:opacity-50"
+                        placeholder="Enter a secure password"
+                        minLength={6}
+                      />
+                      <p className="text-xs text-gray-500 mt-1">At least 6 characters</p>
+                    </div>
+
+                    <div>
+                      <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
+                        Confirm Password
+                      </label>
+                      <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={handleInputChange}
+                        disabled={isSubmitting}
+                        required
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-400 focus:border-transparent bg-white/90 backdrop-blur-sm disabled:opacity-50"
+                        placeholder="Confirm your password"
+                        minLength={6}
                       />
                     </div>
                     
@@ -232,8 +377,11 @@ export default function Signup() {
                           id="ageConfirmation"
                           name="ageConfirmation"
                           type="checkbox"
+                          checked={formData.ageConfirmation}
+                          onChange={handleInputChange}
+                          disabled={isSubmitting}
                           required
-                          className="h-4 w-4 text-primary-400 focus:ring-primary-400 border-gray-300 rounded"
+                          className="h-4 w-4 text-primary-400 focus:ring-primary-400 border-gray-300 rounded disabled:opacity-50"
                         />
                         <label htmlFor="ageConfirmation" className="ml-3 text-sm text-gray-700">
                           I confirm I am 30 years old or older
@@ -268,13 +416,16 @@ export default function Signup() {
                     
                     <div className="flex items-start space-x-3">
                       <input
-                        id="agree-terms"
-                        name="agree-terms"
+                        id="agreeTerms"
+                        name="agreeTerms"
                         type="checkbox"
+                        checked={formData.agreeTerms}
+                        onChange={handleInputChange}
+                        disabled={isSubmitting}
                         required
-                        className="h-4 w-4 text-primary-400 focus:ring-primary-400 border-gray-300 rounded mt-1 flex-shrink-0"
+                        className="h-4 w-4 text-primary-400 focus:ring-primary-400 border-gray-300 rounded mt-1 flex-shrink-0 disabled:opacity-50"
                       />
-                      <label htmlFor="agree-terms" className="text-sm text-gray-700">
+                      <label htmlFor="agreeTerms" className="text-sm text-gray-700">
                         I agree to AdyaTribe's{' '}
                         <a href="/terms" className="text-primary-400 hover:text-primary-500 underline">Terms of Service</a>,{' '}
                         <a href="/privacy" className="text-primary-400 hover:text-primary-500 underline">Privacy Policy</a>, and{' '}
@@ -284,16 +435,21 @@ export default function Signup() {
                     
                     <button
                       type="submit"
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || !!success}
                       className="btn-primary w-full text-lg py-4 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                     >
                       {isSubmitting ? (
                         <span className="flex items-center justify-center gap-2">
                           <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                          Securing Your Spot...
+                          Creating Account...
+                        </span>
+                      ) : success ? (
+                        <span className="flex items-center justify-center gap-2">
+                          <CheckIcon className="h-5 w-5" />
+                          Account Created!
                         </span>
                       ) : (
-                        'Request My Invitation →'
+                        'Create My Account →'
                       )}
                     </button>
                     

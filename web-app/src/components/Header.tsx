@@ -32,15 +32,27 @@ export default function Header() {
   const router = useRouter()
 
   useEffect(() => {
+    // Get initial user state
     const currentUser = authService.getCurrentUser()
     setUser(currentUser)
+
+    // Listen for auth state changes
+    const unsubscribe = authService.onAuthStateChange((newUser) => {
+      setUser(newUser)
+    })
+
+    // Cleanup listener on unmount
+    return unsubscribe
   }, [])
 
   const handleLogout = async () => {
-    await authService.logout()
-    setUser(null)
-    setShowUserMenu(false)
-    router.push('/')
+    try {
+      await authService.logout()
+      setShowUserMenu(false)
+      router.push('/')
+    } catch (error) {
+      console.error('Logout error:', error)
+    }
   }
 
   const getMembershipBadge = (tier: string) => {

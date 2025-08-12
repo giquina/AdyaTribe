@@ -1,11 +1,8 @@
 {
   "buildCommand": "cd web-app && npm run build",
   "devCommand": "cd web-app && npm run dev",
-  "outputDirectory": "web-app/out",
   "framework": "nextjs",
   "installCommand": "cd web-app && npm install",
-  "trailingSlash": true,
-  "cleanUrls": true,
   "headers": [
     {
       "source": "/(.*)",

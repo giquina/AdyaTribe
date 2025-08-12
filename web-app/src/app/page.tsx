@@ -11,6 +11,7 @@ import Footer from '@/components/Footer'
 export default function Home() {
   return (
     <main className="min-h-screen w-full overflow-x-hidden">
+      {/* Force deployment rebuild - Header should be visible */}
       <Header />
       <div className="pt-16 w-full">
         <Hero />

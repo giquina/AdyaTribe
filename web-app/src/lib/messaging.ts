@@ -5,7 +5,7 @@ import { getImageWithFallback } from '@/lib/profileImages'
 import { RealtimeChannel } from '@supabase/supabase-js'
 
 // Extended ChatRoom interface that combines Supabase Group with additional UI data
-export interface ChatRoom extends Omit<Group, 'id' | 'name' | 'description' | 'is_private' | 'max_members' | 'current_member_count' | 'created_by' | 'image_url' | 'is_active' | 'created_at' | 'updated_at'> {
+export interface ChatRoom extends Omit<Group, 'id' | 'name' | 'description' | 'is_private' | 'max_members' | 'current_member_count' | 'created_by' | 'image_url' | 'is_active' | 'created_at' | 'updated_at' | 'rules' | 'group_type'> {
   id: string
   name: string
   description: string
@@ -987,16 +987,20 @@ export class MessagingService {
   private async fetchUserPresence(roomId: string, callback: (presence: UserPresence[]) => void): Promise<void> {
     try {
       // Get presence for room members only
+      // First get the user IDs from group members
+      const { data: members } = await supabase
+        .from('group_members')
+        .select('user_id')
+        .eq('group_id', roomId)
+        .eq('is_active', true)
+
+      const userIds = members?.map(m => m.user_id) || []
+
+      // Then get presence for those users
       const { data: presence } = await supabase
         .from('user_presence')
         .select('*')
-        .in('user_id', 
-          supabase
-            .from('group_members')
-            .select('user_id')
-            .eq('group_id', roomId)
-            .eq('is_active', true)
-        )
+        .in('user_id', userIds)
 
       const userPresence: UserPresence[] = (presence || []).map(p => ({
         userId: p.user_id,

@@ -9,7 +9,7 @@ import {
   ChevronUpIcon,
   StarIcon
 } from '@heroicons/react/24/outline'
-import { UserProfile, ProfileCompletion, calculateProfileCompletion } from '@/lib/supabase'
+import { UserProfile, ProfileCompletion as ProfileCompletionData, calculateProfileCompletion } from '@/lib/supabase'
 
 interface ProfileCompletionProps {
   userId: string
@@ -19,7 +19,7 @@ interface ProfileCompletionProps {
 
 export default function ProfileCompletion({ userId, profile, onStepClick }: ProfileCompletionProps) {
   const [expanded, setExpanded] = useState(false)
-  const [completionData, setCompletionData] = useState<ProfileCompletion>({
+  const [completionData, setCompletionData] = useState<ProfileCompletionData>({
     percentage: 0,
     completed_steps: [],
     missing_steps: [],

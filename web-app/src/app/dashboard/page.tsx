@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { authService, User } from '@/lib/auth'
 import { useRouter } from 'next/navigation'
+import Header from '@/components/Header'
 import EventImageWithFallback from '@/components/EventImageWithFallback'
 import { 
   Heart, 
@@ -203,8 +204,10 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <Header />
+      
+      {/* Dashboard Content */}
+      <div className="pt-16 bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-4">
@@ -435,9 +438,8 @@ export default function Dashboard() {
                         </div>
                       </div>
                     </div>
-                    ))}
-                  </div>
-                )}
+                  ))}
+                </div>
               </div>
             )}
 

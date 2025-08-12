@@ -1,6 +1,7 @@
 'use client'
 
 import { User } from '@/lib/auth'
+import { supabase } from '@/lib/supabase'
 import { getImageWithFallback } from '@/lib/profileImages'
 
 export interface EventAttendee {
@@ -672,6 +673,56 @@ export class EventService {
     }
 
     return filteredEvents
+  }
+
+  private transformEvent(rawEvent: any, profile?: any): Event {
+    return {
+      id: rawEvent.id,
+      title: rawEvent.title,
+      description: rawEvent.description || '',
+      longDescription: rawEvent.description || '',
+      date: rawEvent.start_datetime ? new Date(rawEvent.start_datetime).toISOString().split('T')[0] : '',
+      time: rawEvent.start_datetime ? new Date(rawEvent.start_datetime).toTimeString().slice(0, 5) : '',
+      endTime: rawEvent.end_datetime ? new Date(rawEvent.end_datetime).toTimeString().slice(0, 5) : '',
+      location: rawEvent.location || '',
+      category: 'General', // Default category
+      address: rawEvent.location || '',
+      tags: rawEvent.tags || [],
+      hostId: rawEvent.created_by || '',
+      hostName: profile ? `${profile.first_name} ${profile.last_name || ''}`.trim() : 'AdyaTribe',
+      hostImage: profile?.profile_picture_url || '',
+      hostBio: profile?.bio || 'Event organized by AdyaTribe',
+      price: rawEvent.price || 0,
+      currency: rawEvent.currency || 'GBP',
+      maxAttendees: rawEvent.max_attendees || 20,
+      currentAttendees: rawEvent.current_attendees || 0,
+      waitlistCount: 0,
+      status: rawEvent.status || 'published',
+      featured: rawEvent.is_featured || false,
+      images: rawEvent.image_url ? [rawEvent.image_url] : [],
+      photos: [],
+      attendees: [],
+      waitlist: [],
+      reviews: [],
+      averageRating: 0,
+      totalReviews: 0,
+      membershipRequired: 'free' as const,
+      whatToBring: [],
+      refundPolicy: '',
+      lastBookingTime: '',
+      createdAt: rawEvent.created_at || new Date().toISOString(),
+      updatedAt: rawEvent.updated_at || new Date().toISOString(),
+      createdBy: rawEvent.created_by || '',
+      isRecurring: false,
+      views: 0,
+      favorites: 0,
+      shares: 0,
+      communityGuidelines: true,
+      verifiedEvent: true,
+      reportCount: 0,
+      allowWaitlist: true,
+      requiresApproval: false
+    }
   }
 
   async getEventById(id: string): Promise<Event | null> {

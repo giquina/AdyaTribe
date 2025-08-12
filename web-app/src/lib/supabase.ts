@@ -181,7 +181,7 @@ export const updateProfile = async (userId: string, updates: Partial<UserProfile
     return { success: true, data }
   } catch (error) {
     console.error('Error updating profile:', error)
-    return { success: false, error: error.message }
+    return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
   }
 }
 
@@ -227,7 +227,7 @@ export const uploadPhoto = async (userId: string, file: File, isProfilePicture: 
     console.error('Error uploading photo:', error)
     return {
       success: false,
-      error: error.message
+      error: error instanceof Error ? error.message : 'Unknown error'
     }
   }
 }
@@ -242,7 +242,7 @@ export const deletePhoto = async (path: string) => {
     return { success: true }
   } catch (error) {
     console.error('Error deleting photo:', error)
-    return { success: false, error: error.message }
+    return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
   }
 }
 

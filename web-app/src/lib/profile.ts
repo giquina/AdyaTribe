@@ -2,6 +2,7 @@
 
 import { supabase, Profile } from '@/lib/supabase'
 import { User, authService } from '@/lib/auth'
+import { UserProfile, connectionService } from '@/lib/connections'
 
 export interface ProfileCompletionStep {
   id: string

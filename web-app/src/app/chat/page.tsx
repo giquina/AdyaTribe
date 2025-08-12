@@ -270,8 +270,8 @@ export default function ChatRoomsPage() {
   const loadChatRooms = async () => {
     setLoading(true)
     try {
-      // Initialize auth first
-      const currentUser = await authService.initializeAuth()
+      // Get current user
+      const currentUser = authService.getCurrentUser()
       if (!currentUser) {
         // Show empty state for non-authenticated users
         setChatRooms([])

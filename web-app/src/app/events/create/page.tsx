@@ -144,8 +144,12 @@ export default function CreateEventPage() {
 
       const newEvent = await eventService.createEvent(eventData, currentUser.id)
       
-      // Redirect to the new event page
-      router.push(`/events/${newEvent.id}`)
+      if (newEvent) {
+        // Redirect to the new event page
+        router.push(`/events/${newEvent.id}`)
+      } else {
+        throw new Error('Failed to create event')
+      }
     } catch (error) {
       console.error('Error creating event:', error)
       alert('Failed to create event. Please try again.')

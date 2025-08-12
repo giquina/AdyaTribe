@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { ArrowLeftIcon, PencilIcon } from '@heroicons/react/24/outline'
+import Header from '@/components/Header'
 import { authService, User } from '@/lib/auth'
 import { UserProfile } from '@/lib/connections'
 import { profileService } from '@/lib/profile'
@@ -146,10 +147,13 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 pt-20">
-        <div className="container-width px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF6B6B]"></div>
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <div className="pt-16">
+          <div className="container-width px-4 sm:px-6 lg:px-8 py-8">
+            <div className="flex items-center justify-center py-12">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF6B6B]"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -158,17 +162,20 @@ export default function ProfilePage() {
 
   if (!profile || !currentUser) {
     return (
-      <div className="min-h-screen bg-gray-50 pt-20">
-        <div className="container-width px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center py-12">
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Profile Not Found</h1>
-            <p className="text-gray-600 mb-4">The profile you're looking for doesn't exist.</p>
-            <button
-              onClick={() => router.push('/profiles')}
-              className="btn-primary"
-            >
-              Browse Profiles
-            </button>
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <div className="pt-16">
+          <div className="container-width px-4 sm:px-6 lg:px-8 py-8">
+            <div className="text-center py-12">
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">Profile Not Found</h1>
+              <p className="text-gray-600 mb-4">The profile you're looking for doesn't exist.</p>
+              <button
+                onClick={() => router.push('/profiles')}
+                className="btn-primary"
+              >
+                Browse Profiles
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -176,7 +183,9 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      <div className="pt-16">
       <div className="container-width px-4 sm:px-6 lg:px-8 py-8">
         {/* Navigation */}
         <motion.div
@@ -249,8 +258,8 @@ export default function ProfilePage() {
                 transition={{ delay: 0.3 }}
               >
                 <ProfileCompletion
-                  stats={profileService.calculateProfileCompletion(currentUser, profile)}
-                  steps={profileService.getProfileSteps(currentUser, profile)}
+                  userId={currentUser.id}
+                  profile={null}
                   onStepClick={handleCompletionStepClick}
                 />
               </motion.div>
@@ -311,6 +320,7 @@ export default function ProfilePage() {
             </motion.div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )

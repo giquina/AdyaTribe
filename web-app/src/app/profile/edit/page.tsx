@@ -11,6 +11,7 @@ import {
   Cog6ToothIcon,
   PhotoIcon
 } from '@heroicons/react/24/outline'
+import Header from '@/components/Header'
 import { getCurrentUser, getCurrentUserProfile, UserProfile, updateProfile } from '@/lib/supabase'
 import ProfileEditForm from '@/components/profile/ProfileEditForm'
 import ProfilePhotoManager from '@/components/profile/ProfilePhotoManager'
@@ -145,11 +146,11 @@ function ProfileEditPageContent() {
           location: profileData.location || '',
           date_of_birth: profileData.date_of_birth || '',
           interests: profileData.interests || [],
-          preferences: profileData.preferences || {
-            looking_for: 'friendship',
-            age_range_min: 28,
-            age_range_max: 45,
-            preferred_locations: []
+          preferences: {
+            looking_for: profileData.preferences?.looking_for || 'friendship',
+            age_range_min: profileData.preferences?.age_range_min || 28,
+            age_range_max: profileData.preferences?.age_range_max || 45,
+            preferred_locations: profileData.preferences?.preferred_locations || []
           },
           privacy_settings: profileData.privacy_settings || {
             show_age: true,
@@ -219,10 +220,13 @@ function ProfileEditPageContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 pt-20">
-        <div className="container-width px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF6B6B]"></div>
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <div className="pt-16">
+          <div className="container-width px-4 sm:px-6 lg:px-8 py-8">
+            <div className="flex items-center justify-center py-12">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF6B6B]"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -231,17 +235,20 @@ function ProfileEditPageContent() {
 
   if (!currentUser) {
     return (
-      <div className="min-h-screen bg-gray-50 pt-20">
-        <div className="container-width px-4 sm:px-6 lg:px-8 py-8">
-          <div className="text-center py-12">
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Access Denied</h1>
-            <p className="text-gray-600 mb-4">Please log in to edit your profile.</p>
-            <button
-              onClick={() => router.push('/login')}
-              className="btn-primary"
-            >
-              Log In
-            </button>
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <div className="pt-16">
+          <div className="container-width px-4 sm:px-6 lg:px-8 py-8">
+            <div className="text-center py-12">
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">Access Denied</h1>
+              <p className="text-gray-600 mb-4">Please log in to edit your profile.</p>
+              <button
+                onClick={() => router.push('/login')}
+                className="btn-primary"
+              >
+                Log In
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -249,7 +256,9 @@ function ProfileEditPageContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      <div className="pt-16">
       <div className="container-width px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <motion.div
@@ -370,6 +379,7 @@ function ProfileEditPageContent() {
             </AnimatePresence>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )

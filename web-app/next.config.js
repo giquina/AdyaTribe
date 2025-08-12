@@ -1,13 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Temporarily disable static export to allow dynamic routes
-  // output: 'export',
+  // Disable static generation to ensure dynamic components render
+  output: 'standalone',
   images: {
-    unoptimized: true
+    unoptimized: false
   },
-  trailingSlash: true,
-  basePath: '',
-  assetPrefix: ''
+  trailingSlash: false,
+  // Force dynamic rendering for all pages
+  experimental: {
+    forceSwcTransforms: true
+  }
 }
 
 module.exports = nextConfig
